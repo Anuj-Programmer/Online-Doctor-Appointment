@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
@@ -13,6 +15,10 @@ import Footer from "../Components/Footer";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  console.log("login");
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -20,13 +26,16 @@ function Login() {
 
   const onfinishHandler = async (values) => {
     try {
+      dispatch(showLoading())
       const res = await axios.post("/api/v1/user/login", values)
+      dispatch(hideLoading())
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         alert("Login Successful")
         setTimeout(() => navigate('/'), 1000); 
       }
     } catch (error) {
+      dispatch(hideLoading())
       alert("Invalid email or password")
     }
   };

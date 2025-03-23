@@ -8,19 +8,24 @@ import eyeIconShow from "../assets/Show.svg";
 import eyeIconHide from "../assets/Hide.svg";
 import axios from "axios";
 import { Link ,useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Footer from "../Components/Footer";
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
   const onFinish = async (values) => {
     try {
+      dispatch(showLoading())
       const res = await axios.post("/api/v1/user/register", values);
+      dispatch(hideLoading())
       if (res.data.success) {
         message.success("Registered Successfully!");
         alert("Registered Successfully!")
@@ -30,6 +35,7 @@ function SignUpPage() {
         alert("User Already Exists!");
       }
     } catch (error) {
+      dispatch(hideLoading())
       console.log(error);
       message.error("Something went wrong.");
     }
