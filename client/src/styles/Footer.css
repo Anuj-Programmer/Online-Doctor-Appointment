@@ -1,7 +1,13 @@
   /* Footer */
   .footer {
-    padding: 1rem;
+    border-top: 0.8px solid #fff;
+    background-color: #f0f0f0;
+    width: 100%;
+    padding: 0.5rem 2rem;
     font-size: 0.9rem;
-    background-color: #f5f5f5;
+    color: #465d7c;
+    font-weight: 400;
     text-align: center;
+    margin-top: auto; /* Push footer to the bottom */
+    margin-top: 30px;
   }

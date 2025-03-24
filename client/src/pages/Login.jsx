@@ -68,7 +68,7 @@ function Login() {
         </div>
       </header> */}
 
-      <main className="main-content">
+      <main className="main-content-login">
         <div className="login-form-container">
           <h1 className="login-title">Login</h1>
 

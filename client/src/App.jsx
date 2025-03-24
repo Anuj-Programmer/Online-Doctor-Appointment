@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux'
 import Spinner from './Components/Spinner'
 import ProtectedRoute from './Components/ProtectedRoute'
 import PublicRoute from './Components/PublicRoute'
+import ApplyDoctor from './pages/ApplyDoctor'
+
 
 function App() {
   const {loading} = useSelector(state => state.alerts)
@@ -23,6 +25,13 @@ function App() {
         element={
         <ProtectedRoute>
         <HomePage/>
+        </ProtectedRoute>
+        } 
+        />
+        <Route path="/applydoctor" 
+        element={
+        <ProtectedRoute>
+        <ApplyDoctor/>
         </ProtectedRoute>
         } 
         />
