@@ -1,4 +1,7 @@
 import "../styles/HomePage.css"
+import Heart from "../assets/Heart.png"
+import Star from "../assets/Star.png"
+import booking from "../assets/calender.png"
 
 function Doctorcard(props){
     return(
@@ -13,14 +16,14 @@ function Doctorcard(props){
   <div className="doctor-card-overlay">
     <div className="doctor-rating">
       <div className="rating-star">
-        <img src="https://cdn.discordapp.com/attachments/841652770389884930/1352917195835048049/Symbol_1.png?ex=67dfc1d3&is=67de7053&hm=e8a877079d12da44785407eb0bc5ae3716829db92ddbbbf4b7508eb5ebf43817&" className="rating-stars"/>
+        <img src={Star} className="rating-stars"/>
       </div>
       <div className="rating-number">
         {props.rating}
       </div>
     </div>
     <button className="favorite-button">
-        <img src="https://cdn.discordapp.com/attachments/841652770389884930/1352974483656540201/Link_2.png?ex=67dff72d&is=67dea5ad&hm=485280e09a010a66a3c6e1c0a40f85e7b9a88731b82bf033549f0541dd4da2e7&" className="favorite-icon"/> 
+        <img src={Heart} className="favorite-icon"/> 
     </button>
   </div>
   <div className="doctor-info">
@@ -57,7 +60,7 @@ function Doctorcard(props){
           <div className="fee-amount">{props.fee}</div>
         </div>
         <button className="book-button">
-            <img src="https://cdn.discordapp.com/attachments/841652770389884930/1352972341239615541/calendar-2.png?ex=67dff52f&is=67dea3af&hm=6d0108ebf4ee8d8793cd3a680cdf85580cf03f7786b5470debed7b06a3a68d8e&" className="book-icon"/>
+            <img src={booking} className="book-icon"/>
           <div className="book-text">Book Now</div>
         </button>
       </div>

@@ -29,10 +29,17 @@ function Login() {
       dispatch(showLoading())
       const res = await axios.post("/api/v1/user/login", values)
       dispatch(hideLoading())
-      if (res.data.success) {
+      if (res.data.success === 'user') {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("author", 'user' );
         alert("Login Successful")
         setTimeout(() => navigate('/'), 1000); 
+      }
+      else if(res.data.success === 'admin'){
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("author", 'admin' );
+        alert("Login Successful")
+        setTimeout(() => navigate('/admin'), 1000); 
       }
     } catch (error) {
       dispatch(hideLoading())

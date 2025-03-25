@@ -4,6 +4,9 @@ import Nav from '../Components/Nav';
 import Footer from '../Components/Footer';
 import Doctorcard from '../Components/Doctor-card';
 import "../styles/HomePage.css"
+import Brain from "../assets/Brain.png"
+import Kidney from "../assets/kidney.png"
+import Neurology from "../assets/Neurology.png"
 
 function HomePage() {
 
@@ -179,7 +182,7 @@ function HomePage() {
             <div className="specialty-card">
               <div className="specialty-icon">
                 <img
-                  src="https://cdn.discordapp.com/attachments/841652770389884930/1352914279929610320/Neurology.png?ex=67dfbf1c&is=67de6d9c&hm=795501ced56c593c85a745ed430a4e5f3fcb059496da41a5364e0d5e5322a4f9&"
+                  src={Neurology}
                   className="specialty-icon-image"
                 />
               </div>
@@ -189,7 +192,7 @@ function HomePage() {
             <div className="specialty-card">
               <div className="specialty-icon">
               <img
-                  src="https://cdn.discordapp.com/attachments/841652770389884930/1352914279602585681/Psychiatry.png?ex=67dfbf1c&is=67de6d9c&hm=cc6692413d69610e27145c461c1705431a8e2b472abac692742075519a2451a1&"
+                  src={Brain}
                   className="specialty-icon-image"
                 />
               </div>
@@ -199,7 +202,7 @@ function HomePage() {
             <div className="specialty-card">
               <div className="specialty-icon">
               <img
-                  src="https://cdn.discordapp.com/attachments/841652770389884930/1352914279271108660/urology.png?ex=67dfbf1c&is=67de6d9c&hm=4d684dc1218f2fd1e0037f36844d445710b5d9974db662c89dacf092c374658e&"
+                  src={Kidney}
                   className="specialty-icon-image"
                 />
               </div>

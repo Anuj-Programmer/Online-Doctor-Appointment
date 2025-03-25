@@ -33,7 +33,21 @@ const loginController = async (req, res) => {
             return res.status(200).send({message: "Invalid email or password", success:false})
         }
         const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {expiresIn: '1d'})
-        res.status(200).send({message: "Login Succesfull", success: true, token})
+
+        if (req.body.email === 'admin@gmail.com' && req.body.password === 'admin') {
+            // Optionally, you can create a flag or return the success message with the URL
+            const token = jwt.sign({ id: user._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: '1d' })
+            return res.status(200).send({ 
+                message: "Admin login successful", 
+                success: 'admin', 
+                token
+              //   redirect: '/admin' custom redirect URL for admin users
+            })
+        }
+        else{
+            res.status(200).send({message: "Login Succesfull", success: 'user', token})
+        }
+
     } catch (error) {
         console.log(error);
         res.status(500).send({success:false, message: `Login Controller: ${error.message}`})

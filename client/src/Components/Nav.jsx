@@ -1,25 +1,26 @@
 import * as React from "react";
 import "../styles/Nav.css"
 import { Link } from "react-router-dom";
+import Notification from "../assets/Notification.png"
 function Nav() {
 return(
     <>
     <div className="nav">
-          <div className="logo-container">
+          <Link to="/" className="logo-container">
             <div className="logo">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/7effc2efc000e217d729b40f023095b493410f06?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
                 className="logo-image"
               />
             </div>
-          </div>
+          </Link>
           <div className="nav-items">
             <div className="nav-links">
               <div className="nav-list">
-                <button className="nav-item active">Home </button>
-                <button className="nav-item">Contact</button>
+                <Link to="/" className="nav-item active">Home </Link>
+                <Link to="/contact" className="nav-item">Contact</Link>
                 <button className="nav-item">Help</button>
-                <button className="nav-item">About</button>
+                <Link to="/about" className="nav-item">About</Link>
               </div>
             </div>
             <div className="user-actions">
@@ -34,21 +35,22 @@ return(
                   <div className="user-name">Apply as Doctor</div>
                 </Link>
               </div>
-              <div className="notification-item">
-                <button className ="notification-button">
-                  <img
-                      src="https://cdn.discordapp.com/attachments/841652770389884930/1352912754192810025/notification-bing.png?ex=67dfbdb0&is=67de6c30&hm=7ad5bad670a1dd92119fa0bfe576650c0715745c717fad2875c931841233fff6&"
-                      className="notification-image"
-                    />
-                  </button>
-              </div>
-              <div className="message-item">
+              
+              {/* <div className="message-item">
                 <div className="message-button">
                 <img
                     src="https://cdn.discordapp.com/attachments/841652770389884930/1352913654307356672/message-text.png?ex=67dfbe87&is=67de6d07&hm=93ed3c00e5581ac0a8c17729a76c307205d9c1d236f43f1201b655fe57e5699d&"
                     className="message-image"
                   />
                 </div>
+              </div> */}
+              <div className="notification-item">
+                <button className ="notification-button">
+                  <img
+                      src={Notification}
+                      className="notification-image"
+                    />
+                  </button>
               </div>
               <div className="avatar-item">
                 <div className="avatar-link">
