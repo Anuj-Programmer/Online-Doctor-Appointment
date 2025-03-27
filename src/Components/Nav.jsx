@@ -3,7 +3,7 @@ import "../Styles/Nav.css";
 import { useNavigate } from "react-router-dom";
 
 function Nav() {
-  const navigate = useNavigate(); // ✅ Use useNavigate hook correctly
+  const navigate = useNavigate();
 
   return (
     <div className="nav">
@@ -19,14 +19,14 @@ function Nav() {
       <div className="nav-items">
         <div className="nav-links">
           <div className="nav-list">
-            <button className="nav-item active" onClick={() => navigate("/")}>
+            <div className="nav-item active" onClick={() => navigate("/")}>
               Home
-            </button>
-            <button className="nav-item">Contact</button>
-            <button className="nav-item">Help</button>
-            <button className="nav-item" onClick={() => navigate("/about")}>
+            </div>
+            <div className="nav-item">Contact</div>
+            <div className="nav-item">Help</div>
+            <div className="nav-item" onClick={() => navigate("/about")}>
               About
-            </button>
+            </div>
           </div>
         </div>
         <div className="user-actions">

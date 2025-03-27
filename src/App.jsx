@@ -5,20 +5,21 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AboutPage from './Components/AboutPage'
 import Homepage from './Components/Homepage'
+import InputDesign from './Components/InputDesign'
+
+
 
 function App() {
 
 
 
   return (
-
-    <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </Router>
-  
+    // <InputDesign/>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/InputDesign" element={<InputDesign />} />
+      <Route path="/about" element={<AboutPage />} />
+    </Routes>
   );
 }
 
