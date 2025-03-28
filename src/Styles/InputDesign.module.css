@@ -4,7 +4,46 @@ html, body {
   margin: 0;
   padding: 0;
 }
+/* Hero Section */
+.heroSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9fbff;
+}
 
+.heroBgLeft,
+.heroBgRight {
+  height: 165px;
+}
+.day{
+  font-family:
+      Inter,
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+  font-weight: bold;
+}
+.dateContainer {
+  display: flex;
+  flex-direction: column; /* Stack date and month vertically */
+  align-items: center; /* Center align */
+}
+.month{
+  font-family:
+      Inter,
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+  font-weight: bold;
+}
+.heroTitle {
+  color: #012047;
+  font-size: 36px;
+  font-weight: 700;
+}
 #root {
   width: 100vw;
   height: 100vh;
@@ -14,7 +53,7 @@ html, body {
 }
 
 .div {
-    background-color: #e4efff;
+    background-color:  #f9fbff;
     flex-direction: column;
     display: flex;
     
@@ -152,9 +191,7 @@ html, body {
   .div22 {
     justify-content: center;
     align-items: center;
-    padding: 40px;
     display: flex;
-    padding: 20px;
     transform: scale(0.8) translateY(-10%); 
   }
 
@@ -410,7 +447,7 @@ html, body {
     color: #999;
     background-color: #fff;
     border-width: 1px;
-    border-color: #000;
+    border: 1px solid grey;
     border-radius: 10px;
     width: 100%;
     height: 40px;

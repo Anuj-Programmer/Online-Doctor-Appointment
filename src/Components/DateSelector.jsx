@@ -31,9 +31,10 @@ function DateSelector() {
             aria-pressed={index === selectedDate}
             tabIndex={0}
           >
-            <span>{date.day}</span>
-            <br />
-            <span>{date.month}</span>
+            <div className={styles.dateContainer}>
+            <div className={styles.day}>{date.day}</div>
+            <div className={styles.month}>{date.month}</div>
+          </div>
           </button>
         ))}
       </div>
