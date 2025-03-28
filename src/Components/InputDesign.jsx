@@ -15,7 +15,7 @@ function InputDesign() {
               alt=""
               className={styles.heroBgLeft}
             />
-            <div className={styles.heroTitle}>Reschedule Appointment</div>
+            <div className={styles.heroTitle}>Book Appointment</div>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/da6e6788e0e2f9bd884c7f51344f95f41687f965"
               alt=""
