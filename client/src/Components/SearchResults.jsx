@@ -307,7 +307,12 @@ const DoctorSearch = () => {
           </div>
         </div>
       </div>
+      
+
+      
     </div>
+
+    
   );
 }
 

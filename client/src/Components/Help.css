@@ -290,6 +290,7 @@
     border-radius: 5px;
     overflow: hidden;
     transition: all 0.3s ease;
+    align-self: flex-start;
   }
   
   .faq-item:hover {

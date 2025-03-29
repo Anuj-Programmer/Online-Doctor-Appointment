@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Help from './Components/Help'
+import SearchResults from './Components/SearchResults'
+import Settings from './Components/Setting'
 function App() {
  
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<Help/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
+        <Route path='/search' element={<SearchResults/>} />
+        <Route path='/settings' element={<Settings/>} />
       </Routes>
      </BrowserRouter>
     </>
