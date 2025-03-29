@@ -1,0 +1,21 @@
+.footer {
+  line-height: 24px;
+  border-top: 0.8px solid #cbd5e1;
+  background-color: #f9f9f9;
+  margin-top: 50px;
+  width: 100%;
+  padding: 16px 20px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #465d7c;
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .footer {
+    max-width: 100%;
+    margin-top: 40px;
+    padding: 16px 20px;
+  }
+}

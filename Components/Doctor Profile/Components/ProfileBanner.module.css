@@ -1,0 +1,324 @@
+.bannerCard {
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0px 4px 14px 0px rgba(226, 237, 255, 0.25);
+  background-color: #fff;
+  width: 1000px;
+  padding: 25px;
+
+}
+
+.bannerContent {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  line-height: normal;
+  width: 50%;
+}
+
+.doctorProfile {
+  display: flex;
+  gap: 20px;
+}
+
+.profileImageColumn {
+  width: 120px;
+  height: 120px;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.profileDetailsColumn {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.availabilityBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ccfbf1;
+  border-radius: 30px;
+  padding: 6px 10px;
+  width: fit-content;
+  color: #16b8a2;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.availabilityDot {
+  font-size: 6px;
+  color: #16b8a2;
+}
+
+.nameSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.doctorName {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.specialtySeparator {
+  color: #4f46e5;
+  font-size: 14px;
+}
+
+.specialtyText {
+  color: #012047;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.qualification {
+  color: #252a30;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.starIcon {
+  color: #ffca18;
+  font-size: 14px;
+}
+
+.ratingValue {
+  color: #252a30;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.reviewsLink {
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  width: 50%;
+  position: relative;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recommendationStat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommendIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.likeIcon {
+  color: #84cc16;
+  font-size: 14px;
+}
+
+.recommendText {
+  font-size: 14px;
+}
+
+.recommendPercent {
+  font-weight: 600;
+}
+
+.recommendLabel {
+  font-weight: 400;
+  color: #252a30;
+}
+
+.hospitalStat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hospitalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.buildingIcon {
+  color: #4f46e5;
+  font-size: 14px;
+}
+
+.hospitalName {
+  font-size: 14px;
+  color: #252a30;
+}
+
+.acceptingPatients {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f0fdf4;
+  padding: 6px 10px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+.acceptingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #059669;
+  color: white;
+}
+
+.checkIcon {
+  font-size: 8px;
+}
+
+.acceptingText {
+  font-size: 12px;
+  font-weight: 500;
+  color: #059669;
+}
+
+.bannerActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.chatButton {
+  border: none;
+  background: none;
+  color: #0e82fd;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.appointmentSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.priceInfo {
+  font-size: 14px;
+  color: #252a30;
+}
+
+.priceLabel {
+  font-weight: 600;
+}
+
+.sessionLabel {
+  font-weight: 400;
+}
+
+.bookButton {
+  background-color: #0e82fd;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (max-width: 991px) {
+  .bannerContent {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .profileInfo,
+  .statsColumn {
+    width: 100%;
+  }
+  
+  .bannerActions {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .appointmentSection {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .acceptingPatients {
+    margin-top: 15px;
+    margin-left: 0;
+    align-self: flex-start;
+  }
+}

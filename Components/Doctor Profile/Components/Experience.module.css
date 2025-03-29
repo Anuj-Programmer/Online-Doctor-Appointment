@@ -1,0 +1,174 @@
+.experienceSection {
+  padding-bottom: 40px;
+  border-bottom: 0.8px solid #cbd5e1;
+  margin-top: 48px;
+  width: 100%;
+}
+
+.sectionTitle {
+  color: #0f172a;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.experienceCard {
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+  padding: 25px 80px 25px 25px;
+  align-items: stretch;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.logoContainer {
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  padding: 5px 6px 6px;
+  width: 111px;
+  height: 111px;
+}
+
+.logoWrapper {
+  align-self: stretch;
+  margin: auto;
+  max-width: 112px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.logoImage {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
+
+.experienceDetails {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-items: stretch;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 400;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  width: fit-content;
+}
+
+.hospitalName {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  align-self: start;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.departmentInfo {
+  display: flex;
+  margin-top: 5px;
+  padding-right: 792px;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.department {
+  align-self: stretch;
+  line-height: 22.5px;
+  margin: auto 0;
+}
+
+.location {
+  align-self: stretch;
+  line-height: 22.5px;
+  margin: auto 0;
+  padding-left: 10px;
+}
+
+.periodInfo {
+  display: flex;
+  margin-top: 10px;
+  padding-right: 625px;
+  align-items: center;
+  gap: 5px;
+  color: #252a30;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.period {
+  align-self: stretch;
+  line-height: 22.5px;
+  margin: auto 0;
+}
+
+.duration {
+  align-self: stretch;
+  line-height: 22.5px;
+  margin: auto 0;
+  padding-left: 10px;
+}
+
+.description {
+  color: #012047;
+  margin-top: 10px;
+  margin-right: 29px;
+  line-height: 22.5px;
+}
+
+@media (max-width: 991px) {
+  .experienceSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .experienceCard {
+    max-width: 100%;
+    padding: 25px 20px;
+  }
+
+  .hospitalName {
+    max-width: 100%;
+  }
+
+  .departmentInfo {
+    max-width: 100%;
+    padding-right: 20px;
+    white-space: initial;
+  }
+
+  .department {
+    white-space: initial;
+  }
+
+  .location {
+    white-space: initial;
+  }
+
+  .periodInfo {
+    max-width: 100%;
+    margin-right: 2px;
+    padding-right: 20px;
+  }
+
+  .description {
+    max-width: 100%;
+    margin-right: 10px;
+  }
+}

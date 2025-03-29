@@ -1,0 +1,348 @@
+.reviewsSection {
+  margin-top: 48px;
+  width: 100%;
+}
+
+.sectionTitle {
+  color: #0f172a;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 21px;
+}
+
+.reviewCard {
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  margin-top: 21px;
+  width: 100%;
+  padding: 25px;
+}
+
+.reviewHeader {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.reviewerInfo {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.avatarContainer {
+  border-radius: 30px;
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: start;
+}
+
+.avatar {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 60px;
+  border-radius: 30px;
+  align-self: stretch;
+  margin: auto 0;
+  max-width: 60px;
+}
+
+.nameRating {
+  display: flex;
+  margin: auto 0;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 16px;
+}
+
+.reviewerName {
+  align-self: start;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  color: #0f172a;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.ratingInfo {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  color: #ffca18;
+  font-weight: 900;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  line-height: 1;
+}
+
+.ratingTime {
+  color: #252a30;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.recommendation {
+  display: flex;
+  margin: auto 0;
+  align-items: stretch;
+  gap: 6px;
+  font-size: 14px;
+  color: #059669;
+}
+
+.recommendIcon {
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.recommendText {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 500;
+  line-height: 21px;
+  flex-basis: auto;
+}
+
+.reviewContent {
+  color: #252a30;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  margin-top: 15px;
+  margin-right: 44px;
+}
+
+.replyAction {
+  display: flex;
+  margin-top: 14px;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #252a30;
+  white-space: nowrap;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.replyIcon {
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.replyText {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+  align-self: stretch;
+  margin: auto 0;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.replyContainer {
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+  padding: 24px;
+  flex-direction: column;
+  align-items: start;
+}
+
+.replyHeader {
+  display: flex;
+  width: 212px;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.replyAvatar {
+  border-radius: 30px;
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: start;
+}
+
+.replyName {
+  margin: auto 0;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.replyContent {
+  color: #252a30;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 16px;
+  line-height: 22.5px;
+}
+
+.pagination {
+  align-self: center;
+  display: flex;
+  margin-top: 15px;
+  width: 388px;
+  max-width: 100%;
+  align-items: start;
+  gap: 9px;
+  font-size: 14px;
+  color: #252a30;
+  white-space: nowrap;
+}
+
+.prevButton {
+  border-radius: 5px;
+  background-color: rgba(248, 250, 252, 1);
+  border: 1px solid rgba(248, 250, 252, 1);
+  display: flex;
+  padding: 6px 11px;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.prevIcon {
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.prevText {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 500;
+  align-self: stretch;
+  margin: auto 0;
+  line-height: 21px;
+}
+
+.pageButton {
+  align-self: stretch;
+  line-height: 21px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(248, 250, 252, 1);
+  width: 30px;
+  padding: 0 10px;
+  height: 30px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.activePage {
+  background-color: rgba(2, 132, 199, 1);
+  color: #ffffff;
+}
+
+.nextButton {
+  border-radius: 5px;
+  background-color: rgba(248, 250, 252, 1);
+  border: 1px solid rgba(248, 250, 252, 1);
+  display: flex;
+  padding: 6px 11px;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nextText {
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 500;
+  align-self: stretch;
+  margin: auto 0;
+  line-height: 21px;
+}
+
+.nextIcon {
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  align-self: stretch;
+  margin: auto 0;
+}
+
+@media (max-width: 991px) {
+  .reviewsSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .sectionTitle {
+    max-width: 100%;
+  }
+
+  .reviewCard {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .reviewHeader {
+    max-width: 100%;
+  }
+
+  .reviewContent {
+    max-width: 100%;
+    margin-right: 10px;
+  }
+
+  .replyAction {
+    white-space: initial;
+  }
+
+  .replyContainer {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .replyContent {
+    max-width: 100%;
+  }
+
+  .pagination {
+    white-space: initial;
+  }
+
+  .prevButton {
+    white-space: initial;
+  }
+
+  .pageButton {
+    white-space: initial;
+  }
+
+  .nextButton {
+    white-space: initial;
+  }
+}

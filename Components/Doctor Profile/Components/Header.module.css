@@ -1,0 +1,263 @@
+.header {
+  padding-bottom: 1px;
+  border-bottom: 0.8px solid #f0f0f0;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerBanner {
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.bannerTitle {
+  font-size: 24px;
+  color: #0f172a;
+}
+
+.bannerLeft {
+  max-width: 20%;
+  height: auto;
+}
+
+.bannerRight {
+  max-width: 20%;
+  height: auto;
+}
+
+.logoContainer {
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: center;
+  justify-content: start;
+  width: 200px;
+}
+
+.logoWrapper {
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 200px;
+  padding: 0 13px;
+  overflow: hidden;
+}
+
+.logo {
+  aspect-ratio: 3.19;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
+
+.navContent {
+  align-self: stretch;
+  display: flex;
+  min-width: 240px;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: center;
+  gap: 40px;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.menuContainer {
+  align-self: stretch;
+  min-width: 240px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000f28;
+  font-weight: 500;
+  line-height: 68px;
+  width: auto;
+}
+
+.menuList {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  justify-content: start;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuItemActive {
+  padding-right: 25px;
+  color: #0e82fd;
+  cursor: pointer;
+}
+
+.menuItem {
+  padding-right: 25px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.userActions {
+  align-self: stretch;
+  display: flex;
+  min-width: 240px;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-items: center;
+  gap: 18px;
+  justify-content: flex-end;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userProfile {
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileWrapper {
+  border-radius: 800px;
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 7px 15px;
+  align-items: center;
+  overflow: hidden;
+  justify-content: start;
+}
+
+.avatarWrapper {
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-right: 4px;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 18px;
+}
+
+.avatar {
+  aspect-ratio: 0.87;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+}
+
+.userName {
+  color: #0e82fd;
+  text-align: center;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.iconItem {
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  min-height: 31px;
+  padding: 4px 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+}
+
+.iconButton {
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #e6e8ee;
+  background-color: #f9f9f9;
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  min-height: 24px;
+  width: 24px;
+  padding: 0 5px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.notificationIcon {
+  align-self: stretch;
+  display: flex;
+  min-height: 14px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 14px;
+}
+
+.messageIcon {
+  align-self: stretch;
+  display: flex;
+  min-height: 14px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 14px;
+}
+
+.iconButtonLarge {
+  align-self: stretch;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 41px;
+  padding-right: 10px;
+  align-items: center;
+  justify-content: start;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.userIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 31px;
+  border-radius: 16px;
+  align-self: stretch;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 31px;
+}
+
+@media (max-width: 991px) {
+  .header {
+    max-width: 100%;
+  }
+
+  .nav {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .navContent {
+    max-width: 100%;
+  }
+
+  .menuItem {
+    white-space: initial;
+  }
+}

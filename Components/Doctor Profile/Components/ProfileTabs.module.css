@@ -1,0 +1,51 @@
+body{
+  font-family: Inter, sans-serif;
+}
+.tabsContainer {
+  padding-bottom: 25px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  border-bottom: 0.8px solid #cbd5e1;
+  display: flex;
+  margin-top: 48px;
+  width: 100%;
+  gap: 15px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.tabButton {
+  align-self: stretch;
+  margin: auto 0;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  padding: 11px 20px;
+  background-color: transparent;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #0f172a;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.activeTab {
+  background-color: #0e82fd;
+  border-color: #0e82fd;
+  color: #ffffff;
+}
+
+@media (max-width: 991px) {
+  .tabsContainer {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .tabButton {
+    white-space: initial;
+  }
+}

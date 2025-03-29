@@ -1,0 +1,138 @@
+.awardsSection {
+  border-bottom: 0.8px solid #cbd5e1;
+  margin-top: 48px;
+  width: 100%;
+  padding-bottom: 19px;
+}
+
+.sectionHeader {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  gap: 20px;
+  white-space: nowrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  color: #0f172a;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: auto 0;
+}
+
+.controlButtons {
+  display: flex;
+  align-items: stretch;
+  gap: 15px;
+  font-family: Font Awesome 5 Free, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1;
+}
+
+.controlButton {
+  align-self: stretch;
+  border-radius: 10px;
+  background-color: rgba(248, 250, 252, 1);
+  min-height: 45px;
+  padding: 0 17px 0 18px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+}
+
+.awardsList {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.awardCard {
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  margin: 0 auto;
+  width: 100%;
+  padding: 16px;
+  flex: 1;
+}
+
+.awardIcon {
+  justify-content: center;
+  align-items: center;
+  border-radius: 11px;
+  background-color: #84cc16;
+  display: flex;
+  min-height: 22px;
+  width: 22px;
+  padding: 6px;
+  height: 22px;
+}
+
+.iconWrapper {
+  align-self: stretch;
+  margin: auto;
+  width: 10px;
+  overflow: hidden;
+  max-width: 22px;
+}
+
+.icon {
+  aspect-ratio: 0.77;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
+
+.awardName {
+  color: #252a30;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+.awardDescription {
+  color: #252a30;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  margin-top: 10px;
+}
+
+@media (max-width: 991px) {
+  .awardsSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .sectionHeader {
+    max-width: 100%;
+    white-space: initial;
+  }
+
+  .controlButtons {
+    white-space: initial;
+  }
+
+  .controlButton {
+    white-space: initial;
+  }
+
+  .awardsList {
+    max-width: 100%;
+    flex-direction: column;
+  }
+
+  .awardCard {
+    margin-top: 24px;
+  }
+}

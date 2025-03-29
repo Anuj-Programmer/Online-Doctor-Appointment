@@ -1,0 +1,35 @@
+.bioSection {
+  padding-bottom: 25px;
+  border-bottom: 0.8px solid #cbd5e1;
+  margin-top: 48px;
+  width: 100%;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.sectionTitle {
+  color: #0f172a;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.bioContent {
+  color: #012047;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  margin-top: 14px;
+}
+
+@media (max-width: 991px) {
+  .bioSection {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+
+  .bioContent {
+    max-width: 100%;
+  }
+}
