@@ -1,39 +1,75 @@
 const Doctor = require('../models/doctorModel');
+const User = require('../models/userModels');
 
 // Apply for doctor account
+/*
 const applyDoctor = async (req, res) => {
     try {
-        // Check if doctor already exists with same email or phone
+        // Check if doctor already exists with same phone number
         const existingDoctor = await Doctor.findOne({
-            $or: [
-                { email: req.body.email },
-                { phone: req.body.phone }
-            ]
+            phoneNumber: req.body.phoneNumber
         });
+         
 
         if (existingDoctor) {
             return res.status(400).json({
                 success: false,
-                message: 'Doctor already exists with this email or phone number'
+                message: 'Doctor already exists with this phone number'
             });
         }
 
-        // If doctor doesn't exist, create new doctor
+        // Parse timeSlots if it's a string, otherwise use it as is
+        let timeSlots;
+        try {
+            timeSlots = typeof req.body.timeSlots === 'string' 
+                ? JSON.parse(req.body.timeSlots)
+                : req.body.timeSlots;
+        } catch (error) {
+            console.log("TimeSlots parsing error:", error);
+            timeSlots = [];
+        }
+
+        // Create new doctor
         const newDoctor = new Doctor({
-            ...req.body,
             userId: req.body.userId,
-            // Make sure timings is passed as an array
-            timings: Array.isArray(req.body.timings) ? req.body.timings : [req.body.timings]
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            address: req.body.address,
+            specialization: req.body.specialization,
+            experience: Number(req.body.experience),
+            fee: Number(req.body.fee),
+            timeSlots: timeSlots || [] // Provide default empty array if timeSlots is undefined
         });
 
         await newDoctor.save();
+
+        // Find admin and update notifications
+        const admin = await User.findOne({ isAdmin: true });
+        console.log("user has registered");
         
+        const notification = admin.notification || [];
+        notification.push({
+            type: "apply-doctor",
+            message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for doctor account`,
+            onClickPath: "/admin/doctors",
+            data: {
+                doctorId: newDoctor._id,
+                name: `${newDoctor.firstName} ${newDoctor.lastName}`
+            },
+            createdAt: new Date()
+        });
+
+        await User.findByIdAndUpdate(req.body.userId, { notification });
+
+        // Send single response
         res.status(201).json({
             success: true,
             message: 'Doctor application submitted successfully',
             data: newDoctor
         });
     } catch (error) {
+        console.error('Apply doctor error:', error);
         res.status(500).json({
             success: false,
             message: 'Error in applying for doctor',
@@ -41,6 +77,87 @@ const applyDoctor = async (req, res) => {
         });
     }
 };
+*/
+
+// Apply for doctor account
+const applyDoctor = async (req, res) => {
+    try {
+        // Check if doctor already exists with the same phone number
+        const existingDoctor = await Doctor.findOne({
+            phoneNumber: req.body.phoneNumber
+        });
+
+        if (existingDoctor) {
+            return res.status(400).json({
+                success: false,
+                message: 'Doctor already exists with this phone number'
+            });
+        }
+
+        // Parse timeSlots if it's a string, otherwise use it as is
+        let timeSlots;
+        try {
+            timeSlots = typeof req.body.timeSlots === 'string' 
+                ? JSON.parse(req.body.timeSlots)
+                : req.body.timeSlots;
+        } catch (error) {
+            console.log("TimeSlots parsing error:", error);
+            timeSlots = [];
+        }
+
+        // Create new doctor
+        const newDoctor = new Doctor({
+            userId: req.body.userId,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            address: req.body.address,
+            specialization: req.body.specialization,
+            experience: Number(req.body.experience),
+            fee: Number(req.body.fee),
+            timeSlots: timeSlots || [] 
+        });
+
+        await newDoctor.save();
+
+        // Find admin and update notifications
+        const admin = await User.findOne({ isAdmin: true });
+        
+        const updatedNotification = admin.notification || [];
+        updatedNotification.push({
+            type: "apply-doctor",
+            message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for doctor account`,
+            onClickPath: "/admin/doctors",
+            data: {
+                doctorId: newDoctor._id,
+                name: `${newDoctor.firstName} ${newDoctor.lastName}`
+            },
+            createdAt: new Date()
+        });
+
+        // Update admin's notifications
+        await User.findByIdAndUpdate(
+            admin._id, 
+            { notification: updatedNotification },
+            { new: true }
+        );
+
+        // Send response
+        res.status(201).json({
+            success: true,
+            message: 'Doctor application submitted successfully',
+            data: newDoctor
+        });
+    } catch (error) {
+        console.error('Apply doctor error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error in applying for doctor',
+            error: error.message
+        });
+    }
+};
+
 
 // Get all doctors
 const getAllDoctors = async (req, res) => {
@@ -95,7 +212,7 @@ const updateDoctor = async (req, res) => {
     try {
         const updateData = { ...req.body };
         // Ensure timings is an array if provided
-        if (updateData.timings && !Array.isArray(updateData.timings)) {
+        if (updateData.timeSlots && !Array.isArray(updateData.timeSlots)) {
             return res.status(400).json({
                 success: false,
                 message: 'Timings must be an array of strings'

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { setUser } from "../redux/features/userSlice";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
@@ -27,34 +28,33 @@ function Login() {
 
   const onfinishHandler = async (values) => {
     try {
-      // dispatch(showLoading())
-      const res = await axios.post("/api/v1/user/login", values)
-      // dispatch(hideLoading())
-      if (res.data.success === 'user') {
+      dispatch(showLoading());
+      const res = await axios.post("/api/v1/user/login", values);
+      dispatch(hideLoading());
+
+      if (res.data.success === 'user' || res.data.success === 'admin') {
+        // Store token and user type
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("author", 'user' );
-        toast.success("Login Successful")
-        // alert("Login Successful")
-        setTimeout(() => navigate('/'), 1000); 
-      }
-      else if(res.data.success === 'admin'){
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("author", 'admin' );
-        toast.success("Login Successful")
-        // alert("Login Successful")
-        setTimeout(() => navigate('/admin'), 1000); 
-      }else{
-        toast.error("Invalid email or password")
-        // alert("Invalid email or password")
+        localStorage.setItem("author", res.data.success);
+        
+        // Set user data in Redux store (works for both user and admin)
+        dispatch(setUser(res.data.data));
+        
+        // Show success message
+        toast.success("Login Successful");
+        
+        // Navigate based on user type
+        setTimeout(() => {
+          navigate(res.data.success === 'admin' ? '/admin' : '/');
+        }, 1000);
+      } else {
+        toast.error("Invalid email or password");
       }
     } catch (error) {
-      toast.error("Invalid email or password")
-      // alert("Invalid email or password")
-      // dispatch(hideLoading())
-      
+      dispatch(hideLoading());
+      toast.error("Invalid email or password");
     }
-  };
-
+};
   return (
     <div className="login-container">
       <Toaster position="top-center"/>

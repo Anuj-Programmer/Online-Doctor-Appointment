@@ -32,20 +32,39 @@ const loginController = async (req, res) => {
         if (!isMatch) {
             return res.status(200).send({message: "Invalid email or password", success:false})
         }
-        const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 
         if (req.body.email === 'admin@gmail.com' && req.body.password === 'admin') {
-            // Optionally, you can create a flag or return the success message with the URL
             const token = jwt.sign({ id: user._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: '1d' })
             return res.status(200).send({ 
                 message: "Admin login successful", 
                 success: 'admin', 
-                token
-              //   redirect: '/admin' custom redirect URL for admin users
+                token,
+                data: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: true,
+                    isDoctor: user.isDoctor,
+                    seenNotication: user.seenNotication,
+                    notification: user.notification
+                }
             })
-        }
-        else{
-            res.status(200).send({message: "Login Succesfull", success: 'user', token})
+        } else {
+            const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {expiresIn: '1d'})
+            res.status(200).send({
+                message: "Login Successful", 
+                success: 'user', 
+                token,
+                data: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: false,
+                    isDoctor: user.isDoctor,
+                    seenNotication: user.seenNotication,
+                    notification: user.notification
+                }
+            })
         }
 
     } catch (error) {
@@ -68,6 +87,10 @@ const authController = async (req, res) => {
                 data: {
                     name: user.name,
                     email: user.email,
+                    isAdmin: user.isAdmin,
+                    isDoctor: user.isDoctor,
+                    seenNotication: user.seenNotication,
+                    notification: user.notification
                 }
             })
         }
@@ -77,4 +100,54 @@ const authController = async (req, res) => {
     }
 };
 
-module.exports = { loginController, registerController, authController }
+const markAllNotifications = async (req, res) => {
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId });
+        const seenNotification = user.seenNotication;
+        const notification = user.notification;
+        
+        seenNotification.push(...notification);
+        user.notification = [];
+        user.seenNotication = seenNotification;
+
+        const updatedUser = await user.save();
+        
+        res.status(200).send({
+            success: true,
+            message: "All notifications marked as read",
+            data: updatedUser,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in notification",
+            success: false,
+            error,
+        });
+    }
+};
+
+const deleteAllNotifications = async (req, res) => {
+    try {
+        const user = await userModel.findOne({ _id: req.body.userId });
+        user.notification = [];
+        user.seenNotication = [];
+        
+        const updatedUser = await user.save();
+        
+        res.status(200).send({
+            success: true,
+            message: "All notifications deleted",
+            data: updatedUser,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in notification",
+            success: false,
+            error,
+        });
+    }
+};
+
+module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications }

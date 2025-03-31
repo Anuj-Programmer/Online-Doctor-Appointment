@@ -14,11 +14,7 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phone: {
-        type: String,
-        required: true
-    },
-    email: {
+    phoneNumber: {
         type: String,
         required: true
     },
@@ -28,20 +24,29 @@ const doctorSchema = new mongoose.Schema({
     },
     specialization: {
         type: String,
-        required: true
+        required: true,
+        enum: ['cardiology', 'dermatology', 'neurology', 'orthopedics', 'pediatrics']
     },
     experience: {
-        type: String,
-        required: true
-    },
-    feePerConsultation: {
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
-    timings: {
-        type: [String],  // Array of strings to hold time slots
-        required: true
+    fee: {
+        type: Number,
+        required: true,
+        min: 0
     },
+    timeSlots: [{
+        startTime: {
+            type: String,
+            required: true
+        },
+        endTime: {
+            type: String,
+            required: true
+        }
+    }],
     status: {
         type: String,
         default: 'pending'

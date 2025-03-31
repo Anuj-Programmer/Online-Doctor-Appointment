@@ -1,39 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../Components/Nav";
-import { Form, Input, Row, Col, message } from "antd";
+import { Form, Input, Row, Col, message, Button, Select } from "antd";
 import "../styles/ApplyDoctor.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+const { Option } = Select;
 
 function ApplyDoctor() {
+
+  const { user } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [timeSlots, setTimeSlots] = useState([{ id: 1 }]);
+
+  useEffect(() => {
+    if (!user) {
+      message.error("Please login first");
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  const addTimeSlot = () => {
+    const newSlot = { id: timeSlots.length + 1 };
+    setTimeSlots([...timeSlots, newSlot]);
+  };
+
+  const removeTimeSlot = (id) => {
+    if (timeSlots.length > 1) {
+      setTimeSlots(timeSlots.filter((slot) => slot.id !== id));
+    }
+  };
 
   const onfinishHandler = async (values) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
+      if (!token || !user?._id) {
         message.error("Please login first");
         navigate("/login");
         return;
       }
-      
-      const response = await axios.post(
-        "/api/v1/doctor/apply",
-        values,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+
+      const doctorData = {
+        userId: user._id,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phoneNumber: values.phoneNumber,
+        address: values.address,
+        specialization: values.specialization,
+        experience: Number(values.experience),
+        fee: Number(values.fee),
+        timeSlots: timeSlots.map(slot => ({
+          startTime: values[`startTime${slot.id}`],
+          endTime: values[`endTime${slot.id}`]
+        }))
+      };
+
+      const response = await axios.post("/api/v1/doctor/apply", doctorData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
 
       if (response.data.success) {
         message.success(response.data.message);
         navigate("/");
       } else {
         message.error(response.data.message);
-        alert("Doctor already applied with this email or phone number");
       }
     } catch (error) {
       console.error("Error details:", error);
@@ -44,118 +79,177 @@ function ApplyDoctor() {
   return (
     <>
       <Nav />
-      <div className="apply-doctor-container">
-        <h1 className="text-center">Apply Doctor</h1>
-        <div className="form-container">
-          <Form 
-            form={form}
-            layout="vertical" 
-            onFinish={onfinishHandler}
-          >
-            <Row gutter={20}>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="firstName" 
-                  label="First Name"
-                  rules={[{ required: true, message: 'Please input your first name!' }]}
+      <div className="doc-register-container">
+        <main className="main-content-apply">
+          <div className="form-container-apply">
+            <h2 className="form-title">Apply as a Doctor</h2>
+            <p className="form-subtitle">
+              Join our network of healthcare professionals
+            </p>
+
+            <Form
+              form={form}
+              layout="vertical"
+              onFinish={onfinishHandler}
+              className="doctor-form"
+            >
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    label="First Name"
+                    name="firstName"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your first name!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="Enter first name" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    label="Last Name"
+                    name="lastName"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your last name!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="Enter last name" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Form.Item
+                label="Phone Number"
+                name="phoneNumber"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your phone number!",
+                  },
+                ]}
+              >
+                <Input addonBefore="+977" placeholder="Enter phone number" />
+              </Form.Item>
+
+              <Form.Item
+                label="Address"
+                name="address"
+                rules={[
+                  { required: true, message: "Please enter your address!" },
+                ]}
+              >
+                <Input.TextArea placeholder="Enter your complete address" />
+              </Form.Item>
+
+              <Form.Item
+                label="Specialization"
+                name="specialization"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select your specialization!",
+                  },
+                ]}
+              >
+                <Select placeholder="Select Specialization">
+                  <Option value="cardiology">Cardiology</Option>
+                  <Option value="dermatology">Dermatology</Option>
+                  <Option value="neurology">Neurology</Option>
+                  <Option value="orthopedics">Orthopedics</Option>
+                  <Option value="pediatrics">Pediatrics</Option>
+                </Select>
+              </Form.Item>
+
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    label="Years of Experience"
+                    name="experience"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your experience!",
+                      },
+                    ]}
+                  >
+                    <Input type="number" min="0" placeholder="Enter years" />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    label="Fee Per Consultation"
+                    name="fee"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter consultation fee!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      prefix="$"
+                      type="number"
+                      min="0"
+                      placeholder="Enter amount"
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {timeSlots.map((slot) => (
+                <div
+                  key={slot.id}
+                  className="time-slot"
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
                 >
-                  <Input placeholder="First Name" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="lastName" 
-                  label="Last Name"
-                  rules={[{ required: true, message: 'Please input your last name!' }]}
-                >
-                  <Input placeholder="Last Name" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="phone" 
-                  label="Phone"
-                  rules={[{ required: true, message: 'Please input your phone number!' }]}
-                >
-                  <Input placeholder="Phone Number" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="email" 
-                  label="Email"
-                  rules={[
-                    { required: true, message: 'Please input your email!' },
-                    { type: 'email', message: 'Please enter a valid email!' }
-                  ]}
-                >
-                  <Input placeholder="Email" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="address" 
-                  label="Address"
-                  rules={[{ required: true, message: 'Please input your address!' }]}
-                >
-                  <Input placeholder="Address" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="specialization" 
-                  label="Specialization"
-                  rules={[{ required: true, message: 'Please input your specialization!' }]}
-                >
-                  <Input placeholder="Specialization" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="experience" 
-                  label="Experience"
-                  rules={[{ required: true, message: 'Please input your experience!' }]}
-                >
-                  <Input placeholder="Experience in years" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="feePerConsultation" 
-                  label="Fee Per Consultation"
-                  rules={[{ required: true, message: 'Please input your consultation fee!' }]}
-                >
-                  <Input type="number" placeholder="Consultation Fee" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item 
-                  name="timings" 
-                  label="Available Timings"
-                  rules={[{ required: true, message: 'Please input your available timings!' }]}
-                >
-                  <Input.TextArea 
-                    placeholder="Enter timings (comma separated) e.g., 9:00 AM - 10:00 AM, 2:00 PM - 3:00 PM"
-                    onChange={(e) => {
-                      // Convert comma-separated string to array before submission
-                      const timingsArray = e.target.value.split(',').map(time => time.trim());
-                      form.setFieldsValue({ timings: timingsArray });
-                    }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <div className="submit-button-container">
-              <button className="submit-button" type="submit">
-                Submit Application
-              </button>
-            </div>
-          </Form>
-        </div>
+                  <Form.Item
+                    name={`startTime${slot.id}`}
+                    rules={[
+                      { required: true, message: "Start time required!" },
+                    ]}
+                  >
+                    <Input type="time" />
+                  </Form.Item>
+                  <span>to</span>
+                  <Form.Item
+                    name={`endTime${slot.id}`}
+                    rules={[{ required: true, message: "End time required!" }]}
+                  >
+                    <Input type="time" />
+                  </Form.Item>
+                  {timeSlots.length > 1 && (
+                    <Button danger onClick={() => removeTimeSlot(slot.id)}>
+                      ×
+                    </Button>
+                  )}
+                </div>
+              ))}
+
+              <Button
+                type="dashed"
+                onClick={addTimeSlot}
+                style={{ marginBottom: 16 }}
+              >
+                + Add Another Time Slot
+              </Button>
+
+              <Form.Item>
+                <button className="apply-btn" type="submit">
+                  Apply Now
+                </button>
+              </Form.Item>
+            </Form>
+          </div>
+        </main>
       </div>
     </>
   );
 }
 
 export default ApplyDoctor;
-  

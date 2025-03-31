@@ -3,6 +3,7 @@ import "../styles/Nav.css"
 import {useState} from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 import Notification from "../assets/Notification.png"
+import { Badge } from "antd";
 
 function Nav() {
   const location = useLocation();
@@ -65,6 +66,7 @@ function Nav() {
                   />
                 </div>
               </div> */}
+              <Badge count={0} color="red"> 
               <div className="notification-item">
                 <button className ="notification-button">
                   <img
@@ -73,6 +75,7 @@ function Nav() {
                     />
                   </button>
               </div>
+              </Badge>
               <div className="avatar-item">
                 <div className="avatar-link" onClick={toggleDropdown}>
                   <img
