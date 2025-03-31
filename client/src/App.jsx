@@ -17,7 +17,8 @@ import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:8080";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
-
+import Help from "./pages/Help";
+  
 function App() {
   const { loading } = useSelector((state) => state.alerts);
 
@@ -49,6 +50,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Contact />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/help"
+              element={
+                <ProtectedRoute>
+                  <Help />
                 </ProtectedRoute>
               }
             />

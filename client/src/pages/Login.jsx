@@ -11,6 +11,7 @@ import registerIcon from "../assets/Register.svg";
 import showPasswordIcon from "../assets/Show.svg";
 import hidePasswordIcon from "../assets/Hide.svg";
 import Footer from "../Components/Footer";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,29 +27,37 @@ function Login() {
 
   const onfinishHandler = async (values) => {
     try {
-      dispatch(showLoading())
+      // dispatch(showLoading())
       const res = await axios.post("/api/v1/user/login", values)
-      dispatch(hideLoading())
+      // dispatch(hideLoading())
       if (res.data.success === 'user') {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("author", 'user' );
-        alert("Login Successful")
+        toast.success("Login Successful")
+        // alert("Login Successful")
         setTimeout(() => navigate('/'), 1000); 
       }
       else if(res.data.success === 'admin'){
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("author", 'admin' );
-        alert("Login Successful")
+        toast.success("Login Successful")
+        // alert("Login Successful")
         setTimeout(() => navigate('/admin'), 1000); 
+      }else{
+        toast.error("Invalid email or password")
+        // alert("Invalid email or password")
       }
     } catch (error) {
-      dispatch(hideLoading())
-      alert("Invalid email or password")
+      toast.error("Invalid email or password")
+      // alert("Invalid email or password")
+      // dispatch(hideLoading())
+      
     }
   };
 
   return (
     <div className="login-container">
+      <Toaster position="top-center"/>
       {/* <header className="header">
         <div className="header-content">
           <div className="logo-container">
@@ -81,12 +90,12 @@ function Login() {
 
           <Form layout="vertical" onFinish={onfinishHandler} className="login-form">
             <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
-              <Input type="email" placeholder="Enter Email" className="form-input" />
+              <Input type="email" placeholder="example@gmail.com" className="form-input" />
             </Form.Item>
 
             <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
               <div className="password-input-container">
-                <Input type={showPassword ? "text" : "password"} placeholder="Enter Password" className="form-input" />
+                <Input type={showPassword ? "text" : "password"} placeholder="example123" className="form-input" />
                 <img
                   src={showPassword ? hidePasswordIcon : showPasswordIcon}
                   alt="Toggle Password"

@@ -1,9 +1,16 @@
 import * as React from "react";
 import "../styles/Nav.css"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Notification from "../assets/Notification.png"
+
 function Nav() {
-return(
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path ? "nav-item active" : "nav-item";
+  };
+
+  return(
     <>
     <div className="nav">
           <Link to="/" className="logo-container">
@@ -17,10 +24,10 @@ return(
           <div className="nav-items">
             <div className="nav-links">
               <div className="nav-list">
-                <Link to="/" className="nav-item active">Home </Link>
-                <Link to="/contact" className="nav-item">Contact</Link>
-                <button className="nav-item">Help</button>
-                <Link to="/about" className="nav-item">About</Link>
+                <Link to="/" className={isActive('/')}>Home</Link>
+                <Link to="/contact" className={isActive('/contact')}>Contact</Link>
+                <Link to="/help" className={isActive('/help')}>Help</Link>
+                <Link to="/about" className={isActive('/about')}>About</Link>
               </div>
             </div>
             <div className="user-actions">
@@ -64,7 +71,7 @@ return(
           </div>
         </div>
     </>
-)
+  );
 }
 
-export default Nav
+export default Nav;

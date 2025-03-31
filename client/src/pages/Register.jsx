@@ -11,6 +11,7 @@ import { Link ,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Footer from "../Components/Footer";
+import toast, { Toaster } from "react-hot-toast";
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,22 +28,24 @@ function SignUpPage() {
       const res = await axios.post("/api/v1/user/register", values);
       dispatch(hideLoading())
       if (res.data.success) {
-        message.success("Registered Successfully!");
-        alert("Registered Successfully!")
+        toast.success("Registered Successfully!");
+        // alert("Registered Successfully!")
         setTimeout(() => navigate("/login"), 1000);
       } else {
-        message.error("User already exists!");
-        alert("User Already Exists!");
+        toast.error("User already exists!");
+        // alert("User Already Exists!");
       }
     } catch (error) {
       dispatch(hideLoading())
       console.log(error);
       message.error("Something went wrong.");
+      toast.error("Something went wrong.");
     }
   };
 
   return (
     <div className="signup-page">
+      <Toaster position="top-center"/>
       {/* Header */}
       {/* <div className="header">
         <div className="nav">
