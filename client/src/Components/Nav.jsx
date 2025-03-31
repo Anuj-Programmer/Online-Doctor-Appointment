@@ -1,13 +1,27 @@
 import * as React from "react";
 import "../styles/Nav.css"
-import { Link, useLocation } from "react-router-dom";
+import {useState} from "react";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import Notification from "../assets/Notification.png"
 
 function Nav() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname === path ? "nav-item active" : "nav-item";
+  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };    
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("author");
+    navigate("/login");
   };
 
   return(
@@ -60,11 +74,19 @@ function Nav() {
                   </button>
               </div>
               <div className="avatar-item">
-                <div className="avatar-link">
+                <div className="avatar-link" onClick={toggleDropdown}>
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9b70f1560e6c8a4c34d55e323bff3606d32b860?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
                     className="avatar-image"
                   />
+                  {isDropdownOpen && (
+                <div className="dropdown">
+                   <div className="dropdown-arrow"></div>
+                  <div className="dropdown-item">Edit Profile</div>
+                  <div className="dropdown-item">My Appointments</div>
+                  <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
+                </div>
+              )}
                 </div>
               </div>
             </div>
