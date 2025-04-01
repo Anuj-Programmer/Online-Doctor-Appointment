@@ -142,6 +142,23 @@ const applyDoctor = async (req, res) => {
             { new: true }
         );
 
+        // Add notification to the user who applied
+        const user = await User.findById(req.body.userId);
+        const userNotification = user.notification || [];
+        userNotification.push({
+            type: "doctor-application",
+            message: "Your doctor application has been submitted and is pending approval",
+            onClickPath: "/doctor/profile",
+            createdAt: new Date()
+        });
+
+        // Update user's notifications
+        await User.findByIdAndUpdate(
+            req.body.userId,
+            { notification: userNotification },
+            { new: true }
+        );
+
         // Send response
         res.status(201).json({
             success: true,

@@ -127,7 +127,8 @@
     align-items: center;
     align-self: stretch;
     margin: auto 0;
-    min-width: 15rem;
+    justify-content: flex-end;
+    /* min-width: 15rem; */
   }
   
   .user-profile {
@@ -758,7 +759,7 @@
     flex-wrap: wrap;
     gap: 1.5rem;
     align-items: flex-start;
-    padding: 0 4rem;
+    /* padding: 0 4rem; */
     margin-right: 0;
   }
   

@@ -4,20 +4,49 @@ import {useState} from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 import Notification from "../assets/Notification.png"
 import { Badge } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { setUser } from "../redux/features/userSlice";
 
 function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   const isActive = (path) => {
     return location.pathname === path ? "nav-item active" : "nav-item";
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setIsNotificationOpen(false); // Close notification when opening dropdown
   };    
+
+  const toggleNotification = () => {
+    setIsNotificationOpen(!isNotificationOpen);
+    setIsDropdownOpen(false); // Close dropdown when opening notification
+  };
+
+  const clearAllNotifications = async () => {
+    try {
+      const res = await axios.post("/api/v1/user/delete-all-notifications", {
+        userId: user._id
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      
+      if (res.data.success) {
+        dispatch(setUser({ ...user, notification: [] }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -38,7 +67,7 @@ function Nav() {
           </Link>
           <div className="nav-items">
             <div className="nav-links">
-              <div className="nav-list">
+              <div className="nav-list justify-content-md-end">
                 <Link to="/" className={isActive('/')}>Home</Link>
                 <Link to="/contact" className={isActive('/contact')}>Contact</Link>
                 <Link to="/help" className={isActive('/help')}>Help</Link>
@@ -46,35 +75,56 @@ function Nav() {
               </div>
             </div>
             <div className="user-actions">
-              <div className="user-profile">
-                <Link to="/applydoctor" className="user-profile-button">
-                  <div className="user-icon">
-                    <img
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f172ea07ecc84439ad6925d72a50ebd53c5fdac?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
-                      className="user-icon-image"
-                    />
-                  </div>
-                  <div className="user-name">Apply as Doctor</div>
-                </Link>
-              </div>
-              
-              {/* <div className="message-item">
-                <div className="message-button">
-                <img
-                    src="https://cdn.discordapp.com/attachments/841652770389884930/1352913654307356672/message-text.png?ex=67dfbe87&is=67de6d07&hm=93ed3c00e5581ac0a8c17729a76c307205d9c1d236f43f1201b655fe57e5699d&"
-                    className="message-image"
-                  />
+              {!user?.isDoctor && (
+                <div className="user-profile">
+                  <Link to="/applydoctor" className="user-profile-button">
+                    <div className="user-icon">
+                      <img
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f172ea07ecc84439ad6925d72a50ebd53c5fdac?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
+                        className="user-icon-image"
+                      />
+                    </div>
+                    <div className="user-name">Apply as Doctor</div>
+                  </Link>
                 </div>
-              </div> */}
-              <Badge count={0} color="red"> 
-              <div className="notification-item">
-                <button className ="notification-button">
-                  <img
+              )}
+              
+              <Badge count={user?.notification?.length || 0} color="red"> 
+                <div className="notification-item">
+                  <button className="notification-button" onClick={toggleNotification}>
+                    <img
                       src={Notification}
                       className="notification-image"
                     />
                   </button>
-              </div>
+                  {isNotificationOpen && (
+                    <div className="notification-modal">
+                      <div className="notification-header">
+                        <h3>Notifications</h3>
+                        <button className="clear-all" onClick={clearAllNotifications}>Clear All</button>
+                      </div>
+                      <div className="notification-content">
+                        {user?.notification?.length > 0 ? (
+                          user.notification.map((notification, index) => (
+                            <div key={index} className="notification-item-content">
+                              <p className="notification-message">{notification.message}</p>
+                              {notification.type === "doctor-application" && (
+                                <p className="notification-status">Status: Pending Approval</p>
+                              )}
+                              <p className="notification-time">
+                                {new Date(notification.createdAt).toLocaleString()}
+                              </p>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="no-notifications">
+                            No new notifications
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </Badge>
               <div className="avatar-item">
                 <div className="avatar-link" onClick={toggleDropdown}>
@@ -83,13 +133,13 @@ function Nav() {
                     className="avatar-image"
                   />
                   {isDropdownOpen && (
-                <div className="dropdown">
-                   <div className="dropdown-arrow"></div>
-                  <div className="dropdown-item">Edit Profile</div>
-                  <div className="dropdown-item">My Appointments</div>
-                  <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
-                </div>
-              )}
+                    <div className="dropdown">
+                      <div className="dropdown-arrow"></div>
+                      <div className="dropdown-item">Edit Profile</div>
+                      <div className="dropdown-item">My Appointments</div>
+                      <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

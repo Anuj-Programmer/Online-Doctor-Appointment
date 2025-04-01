@@ -85,6 +85,7 @@ const authController = async (req, res) => {
             res.status(200).send({
                 success:true,
                 data: {
+                    _id: user._id,
                     name: user.name,
                     email: user.email,
                     isAdmin: user.isAdmin,

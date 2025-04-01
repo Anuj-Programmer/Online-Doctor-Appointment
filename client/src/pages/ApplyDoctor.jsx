@@ -4,21 +4,44 @@ import { Form, Input, Row, Col, message, Button, Select } from "antd";
 import "../styles/ApplyDoctor.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../redux/features/userSlice";
 const { Option } = Select;
 
 function ApplyDoctor() {
 
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [timeSlots, setTimeSlots] = useState([{ id: 1 }]);
 
+  const getUserData = async () => {
+    try {
+      const res = await axios.post('/api/v1/user/getUserData', {}, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      if (res.data.success) {
+        dispatch(setUser(res.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   useEffect(() => {
     if (!user) {
-      message.error("Please login first");
-      navigate("/login");
+      alert("Please login first");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     }
   }, [user, navigate]);
 
@@ -38,7 +61,13 @@ function ApplyDoctor() {
       const token = localStorage.getItem("token");
       if (!token || !user?._id) {
         message.error("Please login first");
-        navigate("/login");
+        console.log(token);
+        console.log(user?._id);
+        
+        alert("Please token first");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
         return;
       }
 
@@ -66,8 +95,12 @@ function ApplyDoctor() {
 
       if (response.data.success) {
         message.success(response.data.message);
-        navigate("/");
+        alert("You have successfully applied as a doctor");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } else {
+        alert("You have already applied as a doctor");
         message.error(response.data.message);
       }
     } catch (error) {

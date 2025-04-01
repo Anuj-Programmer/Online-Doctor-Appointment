@@ -1,4 +1,3 @@
-
 import "../styles/HomePage.css"
 import Heart from "../assets/Heart.png"
 import Star from "../assets/Star.png"
@@ -30,13 +29,13 @@ function Doctorcard(props){
   <div className="doctor-info">
     <div className="doctor-specialty-row">
       <div className="doctor-specialty pediatrician">
-      {props.speciality}
+        {props.speciality}
       </div>
       <div className="doctor-availability">
         <div className="availability-icon"></div>
-        <div className="availability-text">{props.Avaibility}</div>
+        <div className="availability-text">{props.Avaibility || '• Available'}</div>
       </div>
-      <div classNcame="specialty-indicator pediatrician-indicator"></div>
+      <div className="specialty-indicator pediatrician-indicator"></div>
     </div>
     <div className="doctor-details">
       <div className="doctor-details-border">

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../redux/features/userSlice'
@@ -12,6 +12,8 @@ import Neurology from "../assets/Neurology.png"
 
 function HomePage() {
   const dispatch = useDispatch();
+  const [doctors, setDoctors] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     try {
@@ -32,9 +34,51 @@ function HomePage() {
     getUserData()
   }, [])
 
-  
-    return (
-      <div className="homepage">
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.log('No token found, skipping doctor fetch');
+          return;
+        }
+
+        console.log('Fetching doctors...');
+        const response = await axios.get('/api/v1/doctor/get-all-doctors', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          },
+          params: {
+            _t: new Date().getTime()
+          }
+        });
+
+        if (response.data.success) {
+          setDoctors(response.data.data);
+          console.log('Doctors fetched successfully:', response.data.data.length);
+        } else {
+          console.error('Failed to fetch doctors:', response.data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching doctors:', error.response?.data || error.message);
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  return (
+    <div className="homepage">
       <div className="header">
         <Nav/>
       </div>
@@ -218,13 +262,27 @@ function HomePage() {
         <div className="doctors-section">
           <div className="section-heading">Highlighted Doctors</div>
           <div className="doctors-container">
-            
-            <Doctorcard src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"rating ="5.0" speciality="Psychologist" Avaibility="   •  Available" fee="$650" name="Dr. Michael Brwon" location="Minneapolis,MN" time = "30 min"/>
+
+          {/* <Doctorcard src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"rating ="5.0" speciality="Psychologist" Avaibility="   •  Available" fee="$650" name="Dr. Michael Brwon" location="Minneapolis,MN" time = "30 min"/>
             <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/b4d1e415cf0c33bccc695958aafbcaddbf963b66?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Pediatrician" Avaibility="  •  Available" fee="$400" name="Dr. Nicholas Tello" location="Ogden, IA" time = "60 min"/>
             <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/688c14293f8762fae0ae16892a11fb1a5bf95901?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Neurologist" Avaibility="  •  Available" fee="$500" name="Dr. Harold Bryant" location="Winona, MS" time = "30 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/33910551f6aad2ef0cc3687d466e8637d95a33db?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Cardiologist" Avaibility="  •  Available" fee="$550" name="Dr. Sandra Jones" location="Beckley, WV" time = "30 min"/>
-            {/* <Doctorcard/> */}
-            
+            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/33910551f6aad2ef0cc3687d466e8637d95a33db?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Cardiologist" Avaibility="  •  Available" fee="$550" name="Dr. Sandra Jones" location="Beckley, WV" time = "30 min"/> */}
+            {doctors
+              .filter(doctor => doctor.status === 'approved')
+              .slice(0, 4)  // Limit to first 4 doctors
+              .map((doctor) => (
+                <Doctorcard
+                  key={doctor._id}
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
+                  speciality={doctor.specialization}
+                  Avaibility="• Available"
+                  fee={`$${doctor.fee}`}
+                  name={`Dr. ${doctor.firstName} ${doctor.lastName}`}
+                  location={doctor.address}
+                  time={`${doctor.timeSlots[0]?.startTime || '30'} min`}
+                  rating="4.5"
+                />
+              ))}
           </div>
         </div>
         <div className="why-choose-section">
@@ -300,7 +358,7 @@ function HomePage() {
       </div> */}
       <Footer/>
     </div>
-    );
+  );
 }
 
 export default HomePage
