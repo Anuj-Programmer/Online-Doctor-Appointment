@@ -38,9 +38,9 @@ const AboutPage = () => {
 
           <div className={styles.imageColumn}>
             <div className={styles.experienceBox}>
-              <span>Over 25+ Years</span>
+              <span>Trusted and</span>
               <br />
-              <span>Experience</span>
+              <span>Experienced</span>
             </div>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/47f9f7db5bdb866b20006f92a3d6e4c33f831cd5"

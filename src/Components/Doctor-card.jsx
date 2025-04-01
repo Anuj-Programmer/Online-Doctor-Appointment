@@ -75,7 +75,7 @@ function Doctorcard(props) {
                 onClick={() => navigate("/InputDesign")}  // On click, navigate to InputDesign
               >
                 <img
-                  src="https://cdn.discordapp.com/attachments/841652770389884930/1352972341239615541/calendar-2.png?ex=67dff52f&is=67dea3af&hm=6d0108ebf4ee8d8793cd3a680cdf85580cf03f7786b5470debed7b06a3a68d8e&"
+                  src="https://i.imgur.com/HioTelb.png"
                   className="book-icon"
                   alt="calendar icon"
                 />

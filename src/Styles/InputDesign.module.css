@@ -1,5 +1,6 @@
 /* Ensure the html and body cover the full height of the viewport */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -16,13 +17,13 @@ html, body {
 .heroBgRight {
   height: 165px;
 }
-.day{
+.day {
   font-family:
-      Inter,
-      -apple-system,
-      Roboto,
-      Helvetica,
-      sans-serif;
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
   font-weight: bold;
 }
 .dateContainer {
@@ -30,13 +31,13 @@ html, body {
   flex-direction: column; /* Stack date and month vertically */
   align-items: center; /* Center align */
 }
-.month{
+.month {
   font-family:
-      Inter,
-      -apple-system,
-      Roboto,
-      Helvetica,
-      sans-serif;
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
   font-weight: bold;
 }
 .heroTitle {
@@ -53,369 +54,370 @@ html, body {
 }
 
 .div {
-    background-color:  #f9fbff;
-    flex-direction: column;
-    display: flex;
-    
+  background-color: #f9fbff;
+  flex-direction: column;
+  display: flex;
 }
+.div2 {
+  background-color: #fff;
+  border-width: 0.8px;
+  border-color: #f0f0f0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 69px;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: flex;
+}
+@media (width<=991px) {
   .div2 {
-    background-color: #fff;
-    border-width: 0.8px;
-    border-color: #f0f0f0;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 69px;
-    padding-left: 80px;
-    padding-right: 80px;
-    display: flex;
+    padding-left: 40px;
+    padding-right: 40px;
   }
-  @media (width<=991px) {
-    .div2 {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-  }
-  @media (width<=640px) {
-    .div2 {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
-  .div3 {
-    align-items: center;
-    display: flex;
-  }
-  .div4 {
-    justify-content: center;
-    align-items: center;
-    width: 160px;
-    height: 41px;
-    padding-left: 13px;
-    padding-right: 13px;
-    display: flex;
-  }
-  .div5 {
-    align-items: center;
-    gap: 50px;
-    display: flex;
-  }
-  @media (width<=640px) {
-    .div5 {
-      display: none;
-    }
-  }
-  .div6,
-  .div7 {
-    align-items: center;
-    display: flex;
-  }
-  .div8 {
-    color: #0e82fd;
-    padding-right: 25px;
-    font-family: Inter;
-    font-size: 14px;
-    line-height: 68px;
-  }
-  .div9,
-  .div10,
-  .div11 {
-    color: #000f28;
-    padding-right: 25px;
-    font-family: Inter;
-    font-size: 14px;
-    line-height: 68px;
-  }
-  .div12 {
-    align-items: center;
-    gap: 14px;
-    display: flex;
-  }
-  .div13 {
-    align-items: center;
-    height: 32px;
-    display: flex;
-  }
-  .div14 {
-    background-color: linear-gradient(90deg, #0e82fd 0.09%, #06aed4 70.28%);
-    border-radius: 800px;
-    align-items: center;
-    padding: 7px 15px;
-    display: flex;
-  }
-  .div15 {
-    padding-right: 4px;
-    display: flex;
-  }
-  .div16 {
-    color: #fff;
-    text-align: center;
-    font-family: Inter;
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .div17 {
-    align-items: center;
-    height: 32px;
-    display: flex;
-  }
-  .div18 {
-    background-color: #012047;
-    border-width: 1px;
-    border-color: #012047;
-    border-radius: 800px;
-    align-items: center;
-    padding: 7px 15px;
-    display: flex;
-  }
-  .div19 {
-    padding-right: 4px;
-    display: flex;
-  }
-  .div20 {
-    color: #fff;
-    text-align: center;
-    font-family: Inter;
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .div21 {
-    align-items: center;
-    gap: 20px;
-    display: flex;
-  }
-  .i {
-    color: #000f28;
-    font-size: 24px;
-  }
-  .div22 {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    transform: scale(0.8) translateY(-10%); 
-  }
-
-  .div23 {
-    width: 1040px;
-    /* backdrop-filter: blur([8.2px]); */
-    background-color: #fefffa;
-    border-radius: 8px;
-    padding: 40px;
-    box-shadow: 7px 8px 10.4px #00000040;
-  }
-  @media (width<=991px) {
-    .div23 {
-      width: 100%;
-    }
-  }
-  .div24 {
-    flex-direction: column;
-    gap: 40px;
-    display: flex;
-  }
-  .div25 {
-    flex-direction: column;
-    gap: 20px;
-    display: flex;
-  }
-  .div26 {
-    flex-direction: column;
-    gap: 10px;
-    display: flex;
-  }
-  .div27 {
-    font-family: Inter;
-    font-size: 20px;
-  }
-  .span {
-    color: red;
-  }
-  .div28 {
-    gap: 20px;
-    padding-bottom: 10px;
-    display: flex;
-    overflow-x: auto;
-    padding-top: 10px;
 }
-  @media (width<=640px) {
-    .div28 {
-      gap: 10px;
-    }
+@media (width<=640px) {
+  .div2 {
+    padding-left: 20px;
+    padding-right: 20px;
   }
-  button .book-img {
-    width: 30px !important;
-    height: 30px !important; /* Add height if you need to control it */
-    object-fit: contain; /* Ensure it scales properly within the container */
+}
+.div3 {
+  align-items: center;
+  display: flex;
+}
+.div4 {
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 41px;
+  padding-left: 13px;
+  padding-right: 13px;
+  display: flex;
+}
+.div5 {
+  align-items: center;
+  gap: 50px;
+  display: flex;
+}
+@media (width<=640px) {
+  .div5 {
+    display: none;
   }
-  .div29 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-style: solid; 
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),  
-    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.div6,
+.div7 {
+  align-items: center;
+  display: flex;
+}
+.div8 {
+  color: #0e82fd;
+  padding-right: 25px;
+  font-family: Inter;
+  font-size: 14px;
+  line-height: 68px;
+}
+.div9,
+.div10,
+.div11 {
+  color: #000f28;
+  padding-right: 25px;
+  font-family: Inter;
+  font-size: 14px;
+  line-height: 68px;
+}
+.div12 {
+  align-items: center;
+  gap: 14px;
+  display: flex;
+}
+.div13 {
+  align-items: center;
+  height: 32px;
+  display: flex;
+}
+.div14 {
+  background-color: linear-gradient(90deg, #0e82fd 0.09%, #06aed4 70.28%);
+  border-radius: 800px;
+  align-items: center;
+  padding: 7px 15px;
+  display: flex;
+}
+.div15 {
+  padding-right: 4px;
+  display: flex;
+}
+.div16 {
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  line-height: 20px;
+}
+.div17 {
+  align-items: center;
+  height: 32px;
+  display: flex;
+}
+.div18 {
+  background-color: #012047;
+  border-width: 1px;
+  border-color: #012047;
+  border-radius: 800px;
+  align-items: center;
+  padding: 7px 15px;
+  display: flex;
+}
+.div19 {
+  padding-right: 4px;
+  display: flex;
+}
+.div20 {
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  line-height: 20px;
+}
+.div21 {
+  align-items: center;
+  gap: 20px;
+  display: flex;
+}
+.i {
+  color: #000f28;
+  font-size: 24px;
+}
+.div22 {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transform: scale(0.8) translateY(-10%);
+}
+
+.div23 {
+  width: 1040px;
+  /* backdrop-filter: blur([8.2px]); */
+  background-color: #fefffa;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 7px 8px 10.4px #00000040;
+}
+@media (width<=991px) {
+  .div23 {
+    width: 100%;
   }
-  .div29:hover {
-    transform: scale(1.1); /* Scale the element on hover */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Add a soft shadow on hover */
-  }
-  .div30 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div31 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div32 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div33 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div34 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div35 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #06aed4;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div36 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div37 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div38 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div39 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div40 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div41 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 59px;
-    height: 65px;
-    display: flex;
-  }
-  .div42 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .div43 {
-    flex-direction: column;
+}
+.div24 {
+  flex-direction: column;
+  gap: 40px;
+  display: flex;
+}
+.div25 {
+  flex-direction: column;
+  gap: 20px;
+  display: flex;
+}
+.div26 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div27 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.span {
+  color: red;
+}
+.div28 {
+  gap: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  overflow-x: auto;
+  padding-top: 10px;
+}
+@media (width<=640px) {
+  .div28 {
     gap: 10px;
-    display: flex;
   }
-  .div44 {
-    font-family: Inter;
-    font-size: 20px;
-  }
+}
+button .book-img {
+  width: 30px !important;
+  height: 30px !important; /* Add height if you need to control it */
+  object-fit: contain; /* Ensure it scales properly within the container */
+}
+.div29 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.div29:hover {
+  transform: scale(1.1); /* Scale the element on hover */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Add a soft shadow on hover */
+}
+.div30 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div31 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div32 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div33 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div34 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div35 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #06aed4;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div36 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div37 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div38 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div39 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div40 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div41 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 59px;
+  height: 65px;
+  display: flex;
+}
+.div42 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+.div43 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div44 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.div45 {
+  gap: 20px;
+  padding-bottom: 10px;
+  padding-top: 20px; /* Add some top padding if needed to increase height */
+  height: 100px; /* Adjust height to your desired value */
+  display: flex;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
   .div45 {
-    gap: 20px;
-    padding-bottom: 10px;
-    padding-top: 20px; /* Add some top padding if needed to increase height */
-    height: 100px; /* Adjust height to your desired value */
-    display: flex;
-    overflow-x: auto;
+    gap: 10px;
+    height: 150px; /* Adjust height for smaller screens if needed */
   }
-  
-  @media (max-width: 640px) {
-    .div45 {
-      gap: 10px;
-      height: 150px; /* Adjust height for smaller screens if needed */
-    }
-  }
-  
-  .div46,
-  .div47,
-  .div48,
-  .div49,
-  .div50,
-  .div51,
-  .div52,
-  .div53 {
-    flex: shrink;
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #0e82fd;
-    border-radius: 10px;
-    width: 60px;
-    height: 43px;
-    font-size: 18px;
-    font-weight: 600;
-    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),  
+}
+
+.div46,
+.div47,
+.div48,
+.div49,
+.div50,
+.div51,
+.div52,
+.div53 {
+  flex: shrink;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #0e82fd;
+  border-radius: 10px;
+  width: 60px;
+  height: 43px;
+  font-size: 18px;
+  font-weight: 600;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
     box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .div46:hover,
@@ -429,92 +431,104 @@ html, body {
   transform: scale(1.1); /* Scale the element on hover */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Add a soft shadow on hover */
 }
-  .div54 {
-    flex-direction: column;
-    gap: 20px;
-    display: flex;
-  }
-  .div55 {
-    flex-direction: column;
-    gap: 10px;
-    display: flex;
-  }
-  .div56 {
-    font-family: Inter;
-    font-size: 20px;
-  }
-  .input {
-    color: #999;
-    background-color: #fff;
-    border-width: 1px;
-    border: 1px solid grey;
-    border-radius: 10px;
-    width: 100%;
-    height: 40px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-family: Inter;
-    font-size: 18px;
-  }
-  .div57 {
-    flex-direction: column;
-    gap: 10px;
-    display: flex;
-  }
-  .div58 {
-    font-family: Inter;
-    font-size: 20px;
-  }
-  .div59 {
-    flex-direction: column;
-    gap: 10px;
-    display: flex;
-  }
-  .div60 {
-    font-family: Inter;
-    font-size: 20px;
-  }
-  .div61 {
-    flex-direction: column;
-    gap: 10px;
-    display: flex;
-  }
-  .div62 {
-    font-family: Inter;
-    font-size: 20px;
-  }
-  .div63 {
-    justify-content: flex-end;
-    display: flex;
-  }
-  .button {
-    color: #fff;
-    background-color: #012047;
-    border-width: 1px;
-    border-color: #012047;
-    border-radius: 800px;
-    align-items: center;
-    gap: 4px;
-    padding: 7px 15px;
-    font-family: Inter;
-    font-size: 13px;
-    display: flex;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),  
-                box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-  button:hover{
-    transform: scale(1.1);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  .div64 {
-    color: #465d7c;
-    background-color: #e4efff;
-    border-width: 0.8px;
-    border-color: #fff;
-    padding: 16px 0;
-    font-family: Inter;
-    font-size: 16px;
-    text-align: center;
-  }
-  
+.div54 {
+  flex-direction: column;
+  gap: 20px;
+  display: flex;
+}
+.div55 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div56 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.input {
+  color: #999;
+  background-color: #fff;
+  border-width: 1px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: Inter;
+  font-size: 18px;
+}
+.div57 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div58 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.div59 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div60 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.div61 {
+  flex-direction: column;
+  gap: 10px;
+  display: flex;
+}
+.div62 {
+  font-family: Inter;
+  font-size: 20px;
+}
+.div63 {
+  justify-content: flex-end;
+  display: flex;
+}
+.button {
+  color: #fff;
+  background-color: #012047;
+  border-width: 1px;
+  border-color: #012047;
+  border-radius: 800px;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 15px;
+  font-family: Inter;
+  font-size: 13px;
+  display: flex;
+  cursor: pointer;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+.div64 {
+  padding: 16px;
+  color: #465d7c;
+  font-size: 16px;
+  border-top: 0.8px solid #fff;
+  background-color: #f0f0f0;
+}
+
+.footerBottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 0;
+  color: #465d7c;
+  font-size: 16px;
+  font-family: Inter;
+  border-top: 0.8px solid #fff;
+  background-color: #f0f0f0;
+  z-index: 100;
+  text-align: center;
+}
