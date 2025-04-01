@@ -21,6 +21,8 @@ app.use(morgan('dev'));
     
 app.use('/api/v1/user', require("./routes/userRoutes"))
 app.use('/api/v1/doctor', require("./routes/doctorRoutes"))
+
+
 //port 
 const port = process.env.PORT || 8080
 

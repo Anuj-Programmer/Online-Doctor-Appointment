@@ -1,3 +1,4 @@
+
 import "../styles/HomePage.css"
 import Heart from "../assets/Heart.png"
 import Star from "../assets/Star.png"

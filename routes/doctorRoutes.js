@@ -23,6 +23,6 @@ router.get('/:id', authMiddleware, getDoctorById);
 router.put('/update-profile', authMiddleware, updateDoctor);
 
 // Change doctor status (admin only) || PUT
-router.put('/change-status', authMiddleware, changeDoctorStatus);
+router.post('/change-status', authMiddleware, changeDoctorStatus);
 
 module.exports = router; 

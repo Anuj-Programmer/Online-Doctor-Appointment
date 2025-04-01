@@ -87,6 +87,28 @@ function Admin() {
     }
   };
 
+  const handleDoctorAction = async (doctorId, status) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        '/api/v1/doctor/change-status',
+        { doctorId, status },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+      if (response.data.success) {
+        fetchUserData();
+        setIsModalVisible(false);
+      }
+    } catch (error) {
+      console.error('Error updating doctor status:', error);
+    }
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <Space size="large">
@@ -111,12 +133,7 @@ function Admin() {
         onOk={() => setIsModalVisible(false)}
         onCancel={() => setIsModalVisible(false)}
         footer={[
-          <Button key="mark-read" onClick={handleMarkAllRead}>
-            Mark All Read
-          </Button>,
-          <Button key="delete" type="primary" danger onClick={handleDeleteAllNotifications}>
-            Delete All
-          </Button>,
+          <Button key="delete" type="primary" danger onClick={handleDeleteAllNotifications}>Delete All</Button>,
           <Button key="close" onClick={() => setIsModalVisible(false)}>
             Close
           </Button>
@@ -127,10 +144,30 @@ function Admin() {
             key={index}
             style={{ 
               borderBottom: '1px solid #f0f0f0',
-              padding: '10px 0'
+              padding: '10px 0',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px'
             }}
           >
-            {notification.message}
+            <div>{notification.message}</div>
+            {notification.type === "apply-doctor" && (
+              <Space>
+                <Button
+                  type="primary"
+                  onClick={() => handleDoctorAction(notification.data.doctorId, 'approved')}
+                >
+                  Accept
+                </Button>
+                <Button
+                  type="primary"
+                  danger
+                  onClick={() => handleDoctorAction(notification.data.doctorId, 'rejected')}
+                >
+                  Reject
+                </Button>
+              </Space>
+            )}
           </div>
         ))}
         {!user?.notification?.length && (

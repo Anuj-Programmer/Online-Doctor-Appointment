@@ -250,29 +250,43 @@ const updateDoctor = async (req, res) => {
 const changeDoctorStatus = async (req, res) => {
     try {
         const { doctorId, status } = req.body;
+        
+        // Update doctor status
         const doctor = await Doctor.findByIdAndUpdate(
             doctorId,
             { status },
             { new: true }
         );
 
-        if (!doctor) {
-            return res.status(404).json({
-                success: false,
-                message: 'Doctor not found'
-            });
-        }
+        // Find the user associated with the doctor
+        const user = await User.findById(doctor.userId);
+        
+        // Update user's isDoctor status based on approval/rejection
+        user.isDoctor = status === 'approved';
+        await user.save();
+
+        // Add notification for the doctor
+        const notification = {
+            type: "doctor-account-status",
+            message: `Your doctor account has been ${status}`,
+            onClickPath: "/doctor/profile",
+            createdAt: new Date()
+        };
+
+        user.notification.push(notification);
+        await user.save();
 
         res.status(200).json({
             success: true,
-            message: 'Doctor status updated successfully',
+            message: `Doctor status updated to ${status}`,
             data: doctor
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             success: false,
             message: 'Error in changing doctor status',
-            error: error.message
+            error
         });
     }
 };

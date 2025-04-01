@@ -18,7 +18,8 @@ import axios from "axios";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import Help from "./pages/Help";
-  
+import BookingPage from "./pages/BookingPage";
+
 function App() {
   const { loading } = useSelector((state) => state.alerts);
 
@@ -50,6 +51,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Contact />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/book-appointment/:doctorId"
+              element={
+                <ProtectedRoute>
+                  <BookingPage />
                 </ProtectedRoute>
               }
             />
