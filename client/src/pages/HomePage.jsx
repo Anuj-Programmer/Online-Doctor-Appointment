@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../redux/features/userSlice'
 import Nav from '../Components/Nav';
 import Footer from '../Components/Footer';
 import Doctorcard from '../Components/Doctor-card';
@@ -9,6 +11,7 @@ import Kidney from "../assets/kidney.png"
 import Neurology from "../assets/Neurology.png"
 
 function HomePage() {
+  const dispatch = useDispatch();
 
   const getUserData = async () => {
     try {
@@ -17,9 +20,11 @@ function HomePage() {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       })
+      if(res.data.success) {
+        dispatch(setUser(res.data.data))
+      }
     } catch (error) {
       console.log(error);
-      
     }
   }
 
@@ -214,10 +219,10 @@ function HomePage() {
           <div className="section-heading">Highlighted Doctors</div>
           <div className="doctors-container">
             
-            <Doctorcard src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"rating ="5.0" speciality="Psychologist" Avaibility="   •  Available" Fee="$650" name="Dr. Michael Brwon" location="Minneapolis,MN" time = "30 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/b4d1e415cf0c33bccc695958aafbcaddbf963b66?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Pediatrician" Avaibility="  •  Available" Fee="$400" name="Dr. Nicholas Tello" location="Ogden, IA" time = "60 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/688c14293f8762fae0ae16892a11fb1a5bf95901?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Neurologist" Avaibility="  •  Available" Fee="$500" name="Dr. Harold Bryant" location="Winona, MS" time = "30 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/33910551f6aad2ef0cc3687d466e8637d95a33db?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Cardiologist" Avaibility="  •  Available" Fee="$550" name="Dr. Sandra Jones" location="Beckley, WV" time = "30 min"/>
+            <Doctorcard src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"rating ="5.0" speciality="Psychologist" Avaibility="   •  Available" fee="$650" name="Dr. Michael Brwon" location="Minneapolis,MN" time = "30 min"/>
+            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/b4d1e415cf0c33bccc695958aafbcaddbf963b66?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Pediatrician" Avaibility="  •  Available" fee="$400" name="Dr. Nicholas Tello" location="Ogden, IA" time = "60 min"/>
+            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/688c14293f8762fae0ae16892a11fb1a5bf95901?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Neurologist" Avaibility="  •  Available" fee="$500" name="Dr. Harold Bryant" location="Winona, MS" time = "30 min"/>
+            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/33910551f6aad2ef0cc3687d466e8637d95a33db?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Cardiologist" Avaibility="  •  Available" fee="$550" name="Dr. Sandra Jones" location="Beckley, WV" time = "30 min"/>
             {/* <Doctorcard/> */}
             
           </div>

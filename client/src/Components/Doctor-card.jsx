@@ -14,7 +14,7 @@ function Doctorcard(props){
       className="doctor-image"
     />
   </div>
-  <div className="doctor-card-overlay">
+  {/* <div className="doctor-card-overlay">
     <div className="doctor-rating">
       <div className="rating-star">
         <img src={Star} className="rating-stars"/>
@@ -26,7 +26,7 @@ function Doctorcard(props){
     <button className="favorite-button">
         <img src={Heart} className="favorite-icon"/> 
     </button>
-  </div>
+  </div> */}
   <div className="doctor-info">
     <div className="doctor-specialty-row">
       <div className="doctor-specialty pediatrician">
@@ -36,7 +36,7 @@ function Doctorcard(props){
         <div className="availability-icon"></div>
         <div className="availability-text">{props.Avaibility}</div>
       </div>
-      <div className="specialty-indicator pediatrician-indicator"></div>
+      <div classNcame="specialty-indicator pediatrician-indicator"></div>
     </div>
     <div className="doctor-details">
       <div className="doctor-details-border">
