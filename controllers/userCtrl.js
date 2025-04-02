@@ -1,4 +1,6 @@
 const userModel = require("../models/userModels")
+const doctorModel = require("../models/doctorModel")
+const appointmentModel = require("../models/appointmentModel")
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -151,4 +153,115 @@ const deleteAllNotifications = async (req, res) => {
     }
 };
 
-module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications }
+const bookAppointment = async (req, res) => {
+    try {
+        const { doctorId, date, timeSlot, fee } = req.body;
+
+        // Validate required fields
+        if (!doctorId || !date || !timeSlot || !fee) {
+            return res.status(400).send({ 
+                message: "Missing required fields", 
+                success: false 
+            });
+        }
+
+        // Get user information
+        const user = await userModel.findById(req.body.userId);
+        if (!user) {
+            return res.status(404).send({ 
+                message: "User not found", 
+                success: false 
+            });
+        }
+
+        // Check if the doctor exists   
+        const doctor = await doctorModel.findById(doctorId);
+        if (!doctor) {
+            return res.status(404).send({ 
+                message: "Doctor not found", 
+                success: false 
+            });
+        }
+
+        // Check if the time slot is available
+        const isSlotAvailable = doctor.timeSlots.some(slot => 
+            slot.startTime === timeSlot.startTime && 
+            slot.endTime === timeSlot.endTime
+        );
+        if (!isSlotAvailable) {
+            return res.status(400).send({ 
+                message: "Time slot not available", 
+                success: false 
+            });
+        }
+
+        // Create a new appointment
+        const appointment = new appointmentModel({
+            doctorId,
+            userId: req.body.userId,
+            date,
+            timeSlot,
+            fee,
+            doctorInfo: {
+                firstName: doctor.firstName,
+                lastName: doctor.lastName,
+                specialization: doctor.specialization,
+                experience: doctor.experience,
+                address: doctor.address
+            },
+            userInfo: {
+                name: user.name,
+                email: user.email
+            }
+        }); 
+
+        await appointment.save();
+
+        // Send notification to the specific doctor
+        const doctorUser = await userModel.findById(doctor.userId);
+        if (doctorUser) {
+            const notification = doctorUser.notification || [];
+            notification.push({
+                type: "new-appointment",
+                message: `You have a new appointment with ${user.name} on ${date} at ${timeSlot.startTime}`,
+                onClickPath: "/doctor/appointments",
+                data: {
+                    appointmentId: appointment._id,
+                    patientName: user.name,
+                    date: date,
+                    time: timeSlot.startTime
+                }
+            });
+            await userModel.findByIdAndUpdate(doctor.userId, { notification });
+        }
+        const userNotify = await userModel.findById(req.body.userId);
+        userNotify.notification.push({
+            type: "new-appointment",
+            message: `You have a new appointment with ${doctor.firstName} ${doctor.lastName} on ${date} at ${timeSlot.startTime} pending approval`,
+            onClickPath: "/user/appointments",
+            data: {
+                appointmentId: appointment._id,
+                patientName: `${doctor.firstName} ${doctor.lastName}`,
+                date: date,
+                time: timeSlot.startTime
+            }
+        });
+        await userModel.findByIdAndUpdate(req.body.userId, { notification: userNotify.notification });
+
+
+        res.status(200).send({ 
+            message: "Appointment booked successfully", 
+            success: true,
+            data: appointment 
+        });
+    } catch (error) {
+        console.error('Booking error:', error);
+        res.status(500).send({ 
+            message: "Error in booking appointment", 
+            success: false,
+            error: error.message 
+        });
+    }
+}
+
+module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment }

@@ -18,7 +18,8 @@ import axios from "axios";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import Help from "./pages/Help";
-// import BookingPage from "./pages/BookingPage";
+import DoctorDetail from "./pages/DoctorDetail";
+import BookingPage from "./pages/BookingPage";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -94,6 +95,17 @@ function App() {
                 </AdminRoute>
               }
             />
+
+            <Route path="/doctor/:doctorId" element={
+              <ProtectedRoute>
+                <DoctorDetail />
+              </ProtectedRoute>
+              } />
+            <Route path="/booking/:doctorId" element={
+              <ProtectedRoute>
+                <BookingPage />
+              </ProtectedRoute>
+              } /> 
           </Routes>
         )}
       </BrowserRouter>
