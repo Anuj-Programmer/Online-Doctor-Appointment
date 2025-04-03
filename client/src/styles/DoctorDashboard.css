@@ -154,62 +154,41 @@
   
   /* Appointments table styles */
   .appointments-table {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #e6e8ee;
     border-radius: 10px;
     overflow: hidden;
   }
   
   .table-header {
-    display: flex;
+    /* display: flex; */
     padding: 15px 12px;
     background-color: #f8f9fa;
     border-bottom: 1px solid #e6e8ee;
-    gap: 50px;
+    /* gap: 50px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    
   }
   
-  .table-header > div {
-    color: #272b41;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: "Inter", sans-serif;
-  }
   
-  .table-header > div:nth-child(1) {
-    width: 189px;
-    text-align: left;
-  }
-  
-  .table-header > div:nth-child(2) {
-    width: 110px;
-    text-align: left;
-    margin-left: 30px;
-  }
-  
-  .table-header > div:nth-child(3) {
-    width: 133px;
-    text-align: left;
-    margin-left: 39px;
-  }
-  
-  .table-header > div:nth-child(4) {
-    width: 60px;
-    text-align: right;
-    margin-left: 30px;
-  }
   
   .appointment-row {
-    display: flex;
+    /* display: flex; */
     padding: 18px 12px;
     border-bottom: 0.8px solid rgba(0, 0, 0, 0.05);
     align-items: center;
-    gap: 50px;
+    /* gap: 0 50px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
   
   .patient-info {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 189px;
+    /* width: 189px; */
   }
   
   .patient-image {
@@ -237,7 +216,7 @@
   
   .appointment-date {
     width: 110px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
   }
   
   .date {
@@ -258,17 +237,17 @@
   }
   
   .appointment-amount {
-    width: 60px;
+    /* width: 60px; */
     color: #272b41;
     font-size: 15px;
-    text-align: center;
-    margin-left: 30px;
+    /* text-align: center; */
+    /* margin-left: 30px; */
   }
   
   .appointment-actions {
     display: flex;
     gap: 14px;
-    margin-left: 40px;
+    /* margin-left: 40px; */
   }
   
   /* Button styles */
@@ -284,22 +263,22 @@
   
   .btn-accept {
     padding: 4px 8px;
-    border-radius: 3.2px;
+    /* border-radius: 3.2px; */
     font-size: 14px;
     border: none;
     cursor: pointer;
     color: #26af48;
-    background-color: rgba(15, 183, 107, 0.12);
+    background-color: #ffffff;
   }
   
   .btn-cancel {
     padding: 4px 8px;
-    border-radius: 3.2px;
+    /* border-radius: 3.2px; */
     font-size: 14px;
     border: none;
     cursor: pointer;
     color: #e63c3c;
-    background-color: rgba(242, 17, 54, 0.12);
+    background-color: #ffffff;
   }
   
   /* Footer styles */

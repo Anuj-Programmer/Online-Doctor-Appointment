@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../redux/features/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 const { Option } = Select;
 
 function ApplyDoctor() {
@@ -94,24 +95,28 @@ function ApplyDoctor() {
       });
 
       if (response.data.success) {
-        message.success(response.data.message);
-        alert("You have successfully applied as a doctor");
+        toast.success("You have successfully applied as a doctor");
+        // message.success(response.data.message);
+        // alert("You have successfully applied as a doctor");
         setTimeout(() => {
           navigate("/");
         }, 1000);
       } else {
-        alert("You have already applied as a doctor");
-        message.error(response.data.message);
+        toast.error("You have already applied as a doctor");
+        // alert("You have already applied as a doctor");
+        // message.error(response.data.message);
       }
     } catch (error) {
       console.error("Error details:", error);
-      message.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong");
+      // message.error(error.response?.data?.message || "Something went wrong");
     }
   };
 
   return (
     <>
       <Nav />
+      <Toaster />
       <div className="doc-register-container">
         <main className="main-content-apply">
           <div className="form-container-apply">

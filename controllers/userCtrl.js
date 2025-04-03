@@ -332,4 +332,49 @@ const rescheduleAppointment = async (req, res) => {
     }   
 }
 
-module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment }
+const cancelAppointment = async (req, res) => {
+    try {
+        // console.log("Appointment cancelled successfully");
+        const { appointmentId } = req.body;
+        const appointment = await appointmentModel.findById(appointmentId);
+        if (!appointment) { 
+            return res.status(404).send({
+                message: "Appointment not found",
+                success: false
+            });
+        }
+        appointment.status = "cancelled";
+        await appointment.save();   
+        res.status(200).send({
+            message: "Appointment cancelled successfully",
+            success: true
+        });
+        
+        const notifyUser = await userModel.findById(appointment.userId);
+        notifyUser.notification.push({
+            type: "appointment-cancelled",
+            message: "Your appointment has been cancelled",
+            success: true
+        });
+        await userModel.findByIdAndUpdate(appointment.userId, { notification: notifyUser.notification });
+
+        const doctorNotify = await userModel.findById(appointment.doctorId);
+        doctorNotify.notification.push({
+            type: "appointment-cancelled",
+            message: "Your appointment has been cancelled by the patient",
+            success: true
+        });
+        await userModel.findByIdAndUpdate(appointment.doctorId, { notification: doctorNotify.notification });
+
+        
+    } catch (error) {
+        console.log(error); 
+        res.status(500).send({
+            message: "Error in cancelling appointment",
+            success: false
+        });
+    }
+}
+
+
+module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment   }

@@ -42,8 +42,7 @@ const appointmentSchema = new mongoose.Schema({
         address: String
     },
     userInfo: {
-        firstName: String,
-        lastName: String,
+        name: String,
         email: String,
     }
 }, {

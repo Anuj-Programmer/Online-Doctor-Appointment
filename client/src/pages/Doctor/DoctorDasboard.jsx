@@ -61,7 +61,7 @@ useEffect(() => {
         <div className="sidebar">
           <SidebarDoctor activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
-        <div className="main-content">
+        <div className="main-content-dashboard" style={{width: "100%"}}>
           {renderContent()}
         </div>
       </div>

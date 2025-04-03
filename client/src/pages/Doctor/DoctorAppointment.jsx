@@ -117,9 +117,7 @@ function DoctorAppointment() {
           apt._id === appointment._id ? { ...apt, status: 'approved' } : apt
         );
         setAppointments(updatedAppointments);
-        setFilteredAppointments(updatedAppointments.filter(apt => 
-          apt._id !== appointment._id || apt.status === 'pending'
-        ));
+        filterAppointments(updatedAppointments, activeFilter);
       }
     } catch (error) {
       console.error('Error accepting appointment:', error);
@@ -198,37 +196,39 @@ function DoctorAppointment() {
           <section className="appointments-table">
             <div className="table-header">
               <div className="header-patient">Patient Name</div>
+              <div className="header-email">Email</div>
               <div className="header-date">Appt Date</div>
             <div className="header-time">Time Slot</div>
-              <div className="header-purpose">Purpose</div>
               <div className="header-amount">Amount</div>
             <div className="header-status">Status</div>
-              <div className="header-actions"></div>
+              {/* <div className="header-actions"></div> */}
             </div>
             <div className="table-body">
             {filteredAppointments.map((appointment) => (
               <div key={appointment._id} className="appointment-row">
                 <div className="patient-info">
-                  <img
+                  {/* <img
                     src={appointment.userInfo?.photo || "https://cdn.builder.io/api/v1/image/assets/TEMP/bc60d743bb5246bf8383aa7948c134b08df74f0f"}
                     alt="Patient"
                     className="patient-image"
-                  />
+                  /> */}
                   <div className="patient-details">
-                    <div className="patient-name">{appointment.userInfo?.firstName} {appointment.userInfo?.lastName}</div>
-                    <div className="patient-email">{appointment.userInfo?.email}</div>
+                    <div className="patient-name">{appointment.userInfo?.name}</div>
+                    {/* <div className="patient-email">{appointment.userInfo?.email}</div> */}
                   </div>
+                 
                 </div>
+                <div className="patient-email">{appointment.userInfo?.email}</div>
                 <div className="appointment-date">
                   <div className="date">{appointment.date}</div>
                 </div>
                 <div className="appointment-time">
                   <div className="time">{appointment.timeSlot.startTime} - {appointment.timeSlot.endTime}</div>
                 </div>
-                <div className="appointment-purpose">{appointment.doctorInfo?.specialization}</div>
+                {/* <div className="appointment-purpose">{appointment.doctorInfo?.specialization}</div> */}
                 <div className="appointment-amount">${appointment.fee}</div>
                 <div className="appointment-status">
-                  <span className={`status-badge ${appointment.status}`}>{appointment.status}</span>
+                  <span className={`status-badge ${appointment.status} user-status-badge `}>{appointment.status}</span>
                 </div>
                 <div className="appointment-actions">
                   {/* <button 
@@ -236,7 +236,7 @@ function DoctorAppointment() {
                     onClick={() => handleViewAppointment(appointment)}
                   >
                     <img src={viewIcon} alt="View" className="action-icon" />
-                    <span className="action-text">View</span>
+                    <span className="action-text">View</span> 
                   </button> */}
                   {appointment.status === 'pending' && (
                     <>
@@ -252,7 +252,7 @@ function DoctorAppointment() {
                         onClick={() => handleCancelAppointment(appointment)}
                       >
                     <img src={cancelIcon} alt="Cancel" className="action-icon" />
-                    <span className="action-text">Cancel</span>
+                    <span className="action-text ">Cancel</span>
                   </button>
                     </>
                   )}

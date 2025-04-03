@@ -85,7 +85,7 @@
 
 .user-table-header {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 15px 20px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
@@ -94,13 +94,14 @@
 }
 
 .user-table-body {
-  display: flex;
+  display: grid;
+  /* display: flex; */
   flex-direction: column;
 }
 
 .user-appointment-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 15px 20px;
   border-bottom: 1px solid #dee2e6;
   align-items: center;
@@ -193,3 +194,16 @@
 .user-appointment-error {
   color: #dc3545;
 } 
+
+.cancel-button {
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #ff1a1a;
+}

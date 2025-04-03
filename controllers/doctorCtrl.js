@@ -363,7 +363,7 @@ const updateAppointmentStatus = async (req, res) => {
         const notifyUser = await User.findById(appointment.userId);
         notifyUser.notification.push({
             type: "appointment-status",
-            message: `Your appointment has been ${status}`,
+            message: `Your appointment has been ${status} by the doctor`,
             onClickPath: "/doctor/appointments",
             createdAt: new Date()
         }); 

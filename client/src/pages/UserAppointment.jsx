@@ -100,6 +100,37 @@ function UserAppointment() {
     filterAppointments(appointments, filter);
   };
 
+  const handleCancelAppointment = async (appointmentId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(`/api/v1/user/cancel-appointment`, {
+        appointmentId
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      if (response.data.success) {
+        console.log("Appointment cancelled successfully");
+  
+        // Update the local state without refreshing
+        const updatedAppointments = appointments.map((apt) =>
+          apt._id === appointmentId ? { ...apt, status: 'cancelled' } : apt
+        );
+        setAppointments(updatedAppointments);
+  
+        // Re-filter the list to reflect changes immediately
+        filterAppointments(updatedAppointments, activeFilter);
+      }
+    } catch (error) {
+      console.error('Error cancelling appointment:', error);
+      setError('Failed to cancel appointment');
+    }
+  };
+  
+  
+
   if (loading) {
     return <div className="user-appointment-loading">Loading appointments...</div>;
   }
@@ -148,39 +179,45 @@ function UserAppointment() {
           </div>
         </header>
         <section className="user-appointments-table">
-          <div className="user-table-header">
-            <div className="user-header-doctor">Doctor Name</div>
-            <div className="user-header-date">Appt Date</div>
-            <div className="user-header-time">Time Slot</div>
-            <div className="user-header-specialization">Specialization</div>
-            <div className="user-header-amount">Amount</div>
-            <div className="user-header-status">Status</div>
+  <div className="user-table-header">
+    <div className="user-header-doctor">Doctor Name</div>
+    <div className="user-header-date">Appt Date</div>
+    <div className="user-header-time">Time Slot</div>
+    <div className="user-header-specialization">Specialization</div>
+    <div className="user-header-amount">Amount</div>
+    <div className="user-header-status">Status</div>
+    {/* <div className="user-header-cancel">Cancel</div> */}
+  </div>
+  <div className="user-table-body">
+    {filteredAppointments.map((appointment) => (
+      <div key={appointment._id} className="user-appointment-row">
+        <div className="user-doctor-info">
+          <div className="user-doctor-details">
+            <div className="user-doctor-name">Dr. {appointment.doctorInfo?.firstName} {appointment.doctorInfo?.lastName}</div>
           </div>
-          <div className="user-table-body">
-            {filteredAppointments.map((appointment) => (
-              <div key={appointment._id} className="user-appointment-row">
-                <div className="user-doctor-info">
-                  {/* <img
-                    src={appointment.doctorInfo?.photo || "https://cdn.builder.io/api/v1/image/assets/TEMP/bc60d743bb5246bf8383aa7948c134b08df74f0f"}
-                    alt="Doctor"
-                    className="user-doctor-image"
-                  /> */}
-                  <div className="user-doctor-details">
-                    <div className="user-doctor-name">Dr. {appointment.doctorInfo?.firstName} {appointment.doctorInfo?.lastName}</div>
-                    {/* <div className="user-doctor-specialization">{appointment.doctorInfo?.specialization}</div> */}
-                  </div>
-                </div>
-                <div className="user-appointment-date">{appointment.date}</div>
-                <div className="user-appointment-time">{appointment.timeSlot.startTime} - {appointment.timeSlot.endTime}</div>
-                <div className="user-doctor-specialization">{appointment.doctorInfo?.specialization}</div>
-                <div className="user-appointment-amount">${appointment.fee}</div>
-                <div className="user-appointment-status">
-                  <span className={`user-status-badge ${appointment.status}`}>{appointment.status}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        </div>
+        <div className="user-appointment-date">{appointment.date}</div>
+        <div className="user-appointment-time">{appointment.timeSlot.startTime} - {appointment.timeSlot.endTime}</div>
+        <div className="user-doctor-specialization">{appointment.doctorInfo?.specialization}</div>
+        <div className="user-appointment-amount">${appointment.fee}</div>
+        <div className="user-appointment-status">
+          <span className={`user-status-badge ${appointment.status}`}>{appointment.status}</span>
+        </div>
+        <div className="user-appointment-cancel">
+          {appointment.status !== 'cancelled' && (
+            <button 
+              className="cancel-button" 
+              onClick={() => handleCancelAppointment(appointment._id)}
+            >
+              Cancel Appointment
+            </button>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
       </main>
       <Footer />
     </>
