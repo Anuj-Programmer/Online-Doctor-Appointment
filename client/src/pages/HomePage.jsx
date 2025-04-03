@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../redux/features/userSlice'
 import Nav from '../Components/Nav';
 import Footer from '../Components/Footer';
@@ -9,11 +9,12 @@ import "../styles/HomePage.css"
 import Brain from "../assets/Brain.png"
 import Kidney from "../assets/kidney.png"
 import Neurology from "../assets/Neurology.png"
+import DoctorDasboard from './Doctor/DoctorDasboard';
 
 function HomePage() {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const [doctors, setDoctors] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     try {
@@ -73,10 +74,12 @@ function HomePage() {
     fetchDoctors();
   }, []);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  // If user is a doctor, show doctor dashboard
+  if (user?.isDoctor) {
+    return <DoctorDasboard />;
+  }
 
+  // Regular homepage content for non-doctor users
   return (
     <div className="homepage">
       <div className="header">
@@ -262,11 +265,6 @@ function HomePage() {
         <div className="doctors-section">
           <div className="section-heading">Highlighted Doctors</div>
           <div className="doctors-container">
-
-          {/* <Doctorcard src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"rating ="5.0" speciality="Psychologist" Avaibility="   •  Available" fee="$650" name="Dr. Michael Brwon" location="Minneapolis,MN" time = "30 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/b4d1e415cf0c33bccc695958aafbcaddbf963b66?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Pediatrician" Avaibility="  •  Available" fee="$400" name="Dr. Nicholas Tello" location="Ogden, IA" time = "60 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/688c14293f8762fae0ae16892a11fb1a5bf95901?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Neurologist" Avaibility="  •  Available" fee="$500" name="Dr. Harold Bryant" location="Winona, MS" time = "30 min"/>
-            <Doctorcard src= "https://cdn.builder.io/api/v1/image/assets/TEMP/33910551f6aad2ef0cc3687d466e8637d95a33db?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44" rating ="4.6" speciality="Cardiologist" Avaibility="  •  Available" fee="$550" name="Dr. Sandra Jones" location="Beckley, WV" time = "30 min"/> */}
             {doctors
               .filter(doctor => doctor.status === 'approved')
               .slice(0, 4)  // Limit to first 4 doctors
@@ -352,11 +350,6 @@ function HomePage() {
           </div>
         </div>
       </div>
-      {/* <div className="footer">
-        <div className="footer-content">
-          Copyright © 2025 Curely. All Rights Reserved
-        </div>
-      </div> */}
       <Footer/>
     </div>
   );

@@ -90,12 +90,12 @@ function Login() {
 
           <Form layout="vertical" onFinish={onfinishHandler} className="login-form">
             <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
-              <Input type="email" placeholder="example@gmail.com" className="form-input" />
+              <Input type="email" placeholder="example@gmail.com" className="form-input" id="email"/>
             </Form.Item>
 
             <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
               <div className="password-input-container">
-                <Input type={showPassword ? "text" : "password"} placeholder="example123" className="form-input" />
+                <Input type={showPassword ? "text" : "password"} placeholder="example123" className="form-input password" id="password"/>
                 <img
                   src={showPassword ? hidePasswordIcon : showPasswordIcon}
                   alt="Toggle Password"

@@ -1,0 +1,195 @@
+.user-appointment-main {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.user-appointment-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.user-appointment-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.user-filter-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.user-filter-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.user-filter-tab:hover {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.user-filter-tab.active {
+  background-color: #3498db;
+  color: #fff;
+  border-color: #3498db;
+}
+
+.user-search-container {
+  position: relative;
+  max-width: 300px;
+}
+
+.user-search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.user-search-input:focus {
+  border-color: #3498db;
+}
+
+.user-search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.user-appointments-table {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.user-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.user-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-appointment-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 15px 20px;
+  border-bottom: 1px solid #dee2e6;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.user-appointment-row:hover {
+  background-color: #f8f9fa;
+}
+
+.user-doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-doctor-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-doctor-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-doctor-name {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.user-doctor-specialization {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.user-appointment-date,
+.user-appointment-time,
+.user-appointment-specialization,
+.user-appointment-amount {
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.user-date,
+.user-time {
+  font-weight: 500;
+}
+
+.user-appointment-status {
+  display: flex;
+  /* justify-content: center; */
+}
+
+.user-status-badge {
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.user-status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.user-status-badge.approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.user-status-badge.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.user-appointment-loading,
+.user-appointment-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.user-appointment-error {
+  color: #dc3545;
+} 

@@ -230,7 +230,8 @@ const bookAppointment = async (req, res) => {
                     patientName: user.name,
                     date: date,
                     time: timeSlot.startTime
-                }
+                },
+                createdAt: new Date()
             });
             await userModel.findByIdAndUpdate(doctor.userId, { notification });
         }
@@ -244,7 +245,8 @@ const bookAppointment = async (req, res) => {
                 patientName: `${doctor.firstName} ${doctor.lastName}`,
                 date: date,
                 time: timeSlot.startTime
-            }
+            },
+            createdAt: new Date()
         });
         await userModel.findByIdAndUpdate(req.body.userId, { notification: userNotify.notification });
 
@@ -264,4 +266,70 @@ const bookAppointment = async (req, res) => {
     }
 }
 
-module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment }
+const searchDoctor = async (req, res) => {
+    try {
+        const { query } = req.query;
+        const doctors = await doctorModel.find({
+            $text: { $search: query }
+        });
+        res.status(200).send({
+            success: true,
+            message: "Doctors found",
+            data: doctors
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error in searching doctors",
+            error
+        });
+    }
+}      
+
+const getUserAppointments = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.body.userId);
+        const appointments = await appointmentModel.find({ userId: user._id });
+        res.status(200).send({
+            success: true,
+            message: "Appointments found",
+            data: appointments
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error in getting appointments",
+            error
+        });
+    }
+}      
+
+const rescheduleAppointment = async (req, res) => {
+    try {
+        const { appointmentId, newDate, newTimeSlot } = req.body;
+        const appointment = await appointmentModel.findById(appointmentId);
+        if (!appointment) {
+            return res.status(404).send({
+                message: "Appointment not found",
+                success: false
+            });
+        }
+        appointment.date = newDate;
+        appointment.timeSlot = newTimeSlot;
+        await appointment.save();
+        res.status(200).send({
+            message: "Appointment rescheduled successfully",
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in rescheduling appointment",
+            success: false
+        });
+    }   
+}
+
+module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment }

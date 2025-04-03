@@ -136,7 +136,11 @@ function Nav() {
                     <div className="dropdown">
                       <div className="dropdown-arrow"></div>
                       <div className="dropdown-item">Edit Profile</div>
-                      <div className="dropdown-item">My Appointments</div>
+
+                      {!user?.isDoctor && (
+                        <Link to="/appointment" className="dropdown-item">My Appointments</Link>
+                      )}
+
                       <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
                     </div>
                   )}

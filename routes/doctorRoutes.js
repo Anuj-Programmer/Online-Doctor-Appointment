@@ -4,7 +4,9 @@ const {
     getAllDoctors,
     getDoctorById,
     updateDoctor,
-    changeDoctorStatus
+    changeDoctorStatus,
+    getDoctorAppointments,
+    updateAppointmentStatus,
 } = require('../controllers/doctorCtrl');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -24,5 +26,13 @@ router.put('/update-profile', authMiddleware, updateDoctor);
 
 // Change doctor status (admin only) || PUT
 router.post('/change-status', authMiddleware, changeDoctorStatus);
+
+// Get doctor appointments || GET
+router.get('/get-doctor-appointments/:id', authMiddleware, getDoctorAppointments);
+
+// Update appointment status || PUT
+router.post('/update-appointment-status', authMiddleware, updateAppointmentStatus);
+
+ 
 
 module.exports = router; 

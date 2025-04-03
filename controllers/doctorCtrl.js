@@ -1,5 +1,6 @@
 const Doctor = require('../models/doctorModel');
 const User = require('../models/userModels');
+const Appointment = require('../models/appointmentModel');
 
 // Apply for doctor account
 /*
@@ -308,10 +309,83 @@ const changeDoctorStatus = async (req, res) => {
     }
 };
 
+// Get all appointments for a doctor
+const getDoctorAppointments = async (req, res) => {
+    try {
+        const doctor = await Doctor.findById(req.params.id)
+            .populate('userId');    
+
+        if (!doctor) {
+            return res.status(404).json({
+                success: false,
+                message: 'Doctor not found'
+            });
+        }           
+
+        const appointments = await Appointment.find({ doctorId: doctor._id })
+            .populate('userId')
+            .populate('doctorId');
+
+        res.status(200).json({
+            success: true,
+            message: 'Doctor appointments fetched successfully',
+            data: appointments
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: 'Error in getting doctor appointments',
+            error
+        });
+    }
+};
+
+// Update appointment status
+const updateAppointmentStatus = async (req, res) => {
+    try {
+
+
+        const { appointmentId, status } = req.body;     
+
+        const appointment = await Appointment.findByIdAndUpdate(
+            appointmentId,
+            { status },
+            { new: true }
+        );              
+
+        res.status(200).json({
+            success: true,
+            message: 'Appointment status updated successfully',
+            data: appointment
+        });
+
+        const notifyUser = await User.findById(appointment.userId);
+        notifyUser.notification.push({
+            type: "appointment-status",
+            message: `Your appointment has been ${status}`,
+            onClickPath: "/doctor/appointments",
+            createdAt: new Date()
+        }); 
+
+        await notifyUser.save();
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: 'Error in updating appointment status',
+            error
+        });
+    }
+};  
+
 module.exports = {
     applyDoctor,
     getAllDoctors,
     getDoctorById,
     updateDoctor,
-    changeDoctorStatus
+    changeDoctorStatus,
+    getDoctorAppointments,
+    updateAppointmentStatus
 }; 
