@@ -280,7 +280,7 @@ function HomePage() {
                   fee={`$${doctor.fee}`}
                   name={`Dr. ${doctor.firstName} ${doctor.lastName}`}
                   location={doctor.address}
-                  time={`${doctor.timeSlots[0]?.startTime || '30'} min`}
+                  time={`${doctor.timeSlots[0]?.startTime || '30'} am`}
                   rating="4.5"
                 />
               ))}

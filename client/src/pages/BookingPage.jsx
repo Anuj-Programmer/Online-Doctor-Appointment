@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../redux/features/userSlice';
 // import 'antd/dist/reset.css';
 import { toast, Toaster } from 'react-hot-toast';
+import Nav from '../Components/Nav';
+import Footer from '../Components/Footer';
+import '../styles/BookingPage.css';
 
 function BookingPage() {
     const { user } = useSelector((state) => state.user);
@@ -108,70 +111,90 @@ function BookingPage() {
     
     
     return (
-        <div className="container mx-auto px-4 py-8">
-            <Toaster position="top-center"/>
-            <h1 className="text-3xl font-bold mb-8">Book Appointment</h1>
+        <div className='booking-page'>      
+            <Nav />
+            <div className="contact-header">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e1edb01272473b09182df3664c04c400ee218d87?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-left-image"
+            alt="Decorative left element"
+          />
+          <h1 className="contact-title">Book an Appointment</h1>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/29ce334b1048cc85e046bf85f7135b7e959c4508?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-right-image"
+            alt="Decorative right element"
+          />
+        </div>
+            <div className="booking-container">
+                <Toaster position="top-center"/>
+                {/* <div className="booking-header">
+                    <h1>Book Appointment</h1>
+                </div> */}
+                 
 
-            {doctor && (
-                <div className="bg-white rounded-lg shadow-md p-6">
-                    <div className="mb-6">
-                        <h2 className="text-2xl font-semibold mb-2">
-                            Dr. {doctor.firstName} {doctor.lastName}
-                        </h2>
-                        <p className="text-gray-600 mb-1">
-                            Specialization: {doctor.specialization}
-                        </p>
-                        <p className="text-gray-600 mb-1">
-                            Experience: {doctor.experience} years
-                        </p>
-                        <p className="text-gray-600 mb-1">
-                            Address: {doctor.address}
-                        </p>
-                        <p className="text-gray-600 mb-4">
-                            Fee: ${doctor.fee}
-                        </p>
-                    </div>
-
-                    <form>
-                        <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Select Appointment Date
-                            </label>
-                            <DatePicker
-                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                onChange={(date, dateString) => setSelectedDate(dateString)}
-                                format="YYYY-MM-DD"
-                            />
+                {doctor && (
+                    <div className="doctor-card-booking">
+                        <div className="doctor-info-booking">
+                            <h2 className="doctor-name-booking">
+                                Dr. {doctor.firstName} {doctor.lastName}
+                            </h2>
+                            <p className="doctor-details-booking">
+                                Specialization: {doctor.specialization}
+                            </p>
+                            <p className="doctor-details-booking">
+                                Experience: {doctor.experience} years
+                            </p>
+                            <p className="doctor-details-booking">
+                                Address: {doctor.address}
+                            </p>
+                            <p className="doctor-fee-booking">
+                                Fee: ${doctor.fee}
+                            </p>
                         </div>
 
-                        <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Select Time Slot
-                            </label>
-                            <select
-                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                value={selectedSlot}
-                                onChange={(e) => setSelectedSlot(e.target.value)}
+                        <div className="booking-form">
+                            <div className="form-group">
+                                <label className="form-label">
+                                    Select Appointment Date
+                                </label>
+                                <DatePicker
+                                    className="form-control"
+                                    onChange={(date, dateString) => setSelectedDate(dateString)}
+                                    format="YYYY-MM-DD"
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">
+                                    Select Time Slot
+                                </label>
+                                <select
+                                    className="form-control"
+                                    value={selectedSlot}
+                                    onChange={(e) => setSelectedSlot(e.target.value)}
+                                >
+                                    <option value="">Choose a time slot</option>
+                                    {doctor.timeSlots && doctor.timeSlots.map((slot, index) => (
+                                        <option key={index} value={JSON.stringify(slot)}>
+                                            {slot.startTime} - {slot.endTime}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="booking-button"
+                                onClick={handleBookAppointment}
                             >
-                                <option value="">Choose a time slot</option>
-                                {doctor.timeSlots && doctor.timeSlots.map((slot, index) => (
-                                    <option key={index} value={JSON.stringify(slot)}>
-                                        {slot.startTime} - {slot.endTime}
-                                    </option>
-                                ))}
-                            </select>
+                                Book Appointment
+                            </button>
                         </div>
-
-                        <button
-                            type="button"
-                            className="w-full bg-blue-500 text-black py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-                            onClick={handleBookAppointment}
-                        >
-                            Book Appointment
-                        </button>
-                    </form>
-                </div>
-            )}
+                    </div>
+                )}
+            </div>
+            <Footer />
         </div>
     );
 }
