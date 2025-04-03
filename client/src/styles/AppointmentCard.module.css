@@ -1,0 +1,169 @@
+.card {
+    background-color: #fff;
+    border: 1px solid #b5b5b5;
+    border-radius: 22px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    display: flex;
+  }
+  
+  @media (width<=640px) {
+    .card {
+      text-align: center;
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  
+  .doctorInfo {
+    align-items: center;
+    gap: 15px;
+    display: flex;
+  }
+  
+  .doctorPhoto {
+    border-radius: 13px;
+    width: 53px;
+    height: 58px;
+    object-fit: cover;
+  }
+  
+  .doctorDetails {
+    flex-direction: column;
+    gap: 6px;
+    display: flex;
+  }
+  
+  .appointmentId {
+    color: #0e82fd;
+    font-size: 13px;
+  }
+  
+  .doctorName {
+    color: #383838;
+    font-size: 15px;
+  }
+  
+  .appointmentDetails {
+    flex-direction: column;
+    gap: 10px;
+    display: flex;
+  }
+  
+  .dateTime {
+    color: #999;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    display: flex;
+  }
+  
+  .visitType {
+    color: #383838;
+    font-size: 15px;
+  }
+  
+  .separator {
+    color: #999;
+    margin: 0 10px;
+  }
+  
+  .contactInfo {
+    color: #999;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+    display: flex;
+  }
+  
+  .emailContainer,
+  .phoneContainer {
+    align-items: center;
+    gap: 8px;
+    display: flex;
+  }
+  
+  .actionButtons {
+    gap: 15px;
+    display: flex;
+  }
+  
+  @media (width<=640px) {
+    .actionButtons {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  
+  .rescheduleButton {
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(96deg, #0e84fb 0.94%, #02c2ed 99.06%);
+    /* background: linear-gradient(96deg, #012047 0.94% 99.06%); */
+    border: none;
+    border-radius: 800px;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 15px;
+    font-size: 13px;
+    display: flex;
+  }
+  
+  .blueButton {
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(96deg, #0e84fb 0.94%, #02c2ed 99.06%);
+    border: none;
+    border-radius: 800px;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 15px;
+    font-size: 13px;
+    display: flex;
+  }
+  
+  .cancelButton {
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(96deg, #012047 0.94% 99.06%);
+    /* background: linear-gradient(96deg, #0e84fb 0.94%, #02c2ed 99.06%); */
+    border: none;
+    border-radius: 800px;
+    gap: 4px;
+    padding: 7px 15px;
+    font-size: 13px;
+  }
+  .messageIcon{
+    width: 12px;
+    height: 13.064px;
+  }
+  .calenderIcon{
+    display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  }
+  .timeIcon{
+    height: 13.042px;
+    flex-shrink: 0;
+  }
+  .mailIcon{
+    width: 12px;
+  height: 10.887px;
+  }
+  .cancelIcon {
+    margin-right: 8px !important;  /* Add !important to enforce the margin */
+  }
+  
+  @media (width<=640px) {
+    .rescheduleButton,
+    .blueButton,
+    .cancelButton {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+      

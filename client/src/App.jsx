@@ -13,13 +13,30 @@ import PublicRoute from "./Components/PublicRoute";
 import ApplyDoctor from "./pages/ApplyDoctor";
 import Admin from "./pages/Admin/Admin";
 import AdminRoute from "./Components/AdminRoute";
+import AppointmentsDashboard from "./pages/MyAppointments/AppointmentsDashboard";
 import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:8080";
 import Contact from "./pages/Contact";
 import AboutPage from "./pages/AboutPage";
 import Help from "./pages/Help";
+import InputDesign from "./pages/Booking/InputDesign";
+import ReschedulePage from "./pages/Reschedule/ReschedulePage";
   
 function App() {
+  // const { loading } = useSelector((state) => state.alerts);
+
+  // // If loading is true, render the Spinner
+  // if (loading) {
+  //   return <Spinner />;
+  // }
+
+  // return (
+  //   <BrowserRouter>  {/* Wrap AppointmentsDashboard inside BrowserRouter */}
+  //     <ReschedulePage />
+  //     {/* <AppointmentsDashboard/> */}
+  //   </BrowserRouter>
+  // );
+  
   const { loading } = useSelector((state) => state.alerts);
 
   return (
@@ -93,7 +110,32 @@ function App() {
                 </AdminRoute>
               }
             />
+            <Route
+              path="/appointments"
+              element={
+                <ProtectedRoute>
+                  <AppointmentsDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking"
+              element={
+                <ProtectedRoute>
+                  <InputDesign />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reschedule"
+              element={
+                <ProtectedRoute>
+                  <ReschedulePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
+          
         )}
       </BrowserRouter>
     </>

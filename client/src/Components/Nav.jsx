@@ -86,7 +86,9 @@ function Nav() {
                 <div className="dropdown">
                    <div className="dropdown-arrow"></div>
                   <div className="dropdown-item">Edit Profile</div>
-                  <div className="dropdown-item">My Appointments</div>
+                  <div className="dropdown-item">
+                  <Link to="/appointments" className={isActive('/appointments')}>My Appointments</Link>
+                  </div>
                   <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
                 </div>
               )}

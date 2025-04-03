@@ -778,7 +778,10 @@
     background-color: var(--color-white);
     box-shadow: var(--shadow-sm);
   }
-  
+  .book-button a {
+    display: inline-block;
+    width: 100%;
+  }
   .doctor-image-container {
     overflow: hidden;
     z-index: 0;
