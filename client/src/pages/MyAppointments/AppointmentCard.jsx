@@ -60,7 +60,7 @@ function AppointmentCard({ appointment, isFirst }) {
           <div>
             <img src="https://i.imgur.com/NSfS7LH.png" className={styles.calenderIcon}/>
           </div>
-          <Link to="/reschedule" className={isActive('/reschedule')}>Reschedule</Link>
+          <Link to="/reschedule" className={isActive('/reschedule')}style={{ display: "contents" }}>Reschedule</Link>
         </button>
 
         {/* Conditionally render the Cancel button only for non-cancelled appointments */}
