@@ -6,16 +6,19 @@ import "../styles/UserAppointment.css";
 import Nav from '../Components/Nav';
 import Footer from '../Components/Footer';
 import { setUser } from '../redux/features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 function UserAppointment() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeFilter, setActiveFilter] = useState('upcoming');
+  const [doctor, setDoctor] = useState([]);
 
   const getUserData = async () => {
     try {
@@ -43,6 +46,8 @@ function UserAppointment() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
+        console.log("User ID", user?._id);
+        
         const token = localStorage.getItem("token");
         if (!token || !user?._id) return;
 
@@ -68,6 +73,24 @@ function UserAppointment() {
 
     fetchAppointments();
   }, [user?._id]);
+
+  const fetchDoctorData = async () => {
+    try {
+      const res = await axios.get(`/api/v1/doctor/get-all-doctors`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      if (res.data.success) {
+        setDoctor(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDoctorData();
+  }, []);
+  
 
   const filterAppointments = (appointmentsList, filter) => {
     const today = new Date();
@@ -128,16 +151,8 @@ function UserAppointment() {
       setError('Failed to cancel appointment');
     }
   };
-  
-  
 
-  if (loading) {
-    return <div className="user-appointment-loading">Loading appointments...</div>;
-  }
 
-  if (error) {
-    return <div className="user-appointment-error">{error}</div>;
-  }
 
   return (
     <>
@@ -203,15 +218,22 @@ function UserAppointment() {
         <div className="user-appointment-status">
           <span className={`user-status-badge ${appointment.status}`}>{appointment.status}</span>
         </div>
-        <div className="user-appointment-cancel">
+        <div className="user-appointment-buttons">
+        {appointment.status !== 'cancelled' && (
+            <button className="reschedule-button" onClick={() => navigate(`/reschedule/${appointment.doctorId}`)}>
+                Reschedule
+                </button>
+          )}
+
           {appointment.status !== 'cancelled' && (
             <button 
               className="cancel-button" 
               onClick={() => handleCancelAppointment(appointment._id)}
             >
-              Cancel Appointment
+              Cancel 
             </button>
           )}
+          
         </div>
       </div>
     ))}
@@ -219,7 +241,7 @@ function UserAppointment() {
 </section>
 
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 }

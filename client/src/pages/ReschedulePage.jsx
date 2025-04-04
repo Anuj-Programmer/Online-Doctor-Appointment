@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { DatePicker } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +11,7 @@ import Nav from "../Components/Nav";
 import Footer from "../Components/Footer";
 import "../styles/BookingPage.css";
 
-function BookingPage() {
+function ReschedulePage() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -21,6 +22,8 @@ function BookingPage() {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [appointmentData, setAppointmentData] = useState([]);      
+       
 
   // const [loading, setLoading] = useState(false);
   const getUserData = async () => {
@@ -41,6 +44,27 @@ function BookingPage() {
       console.log(error);
     }
   };
+ 
+
+  const fetchAppointmentData = async () => {
+    try {
+        console.log("User ID", user?._id);
+      const res = await axios.post(`/api/v1/user/get-user-appointments`, {
+        userId: user._id,
+      }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      if (res.data.success) {
+        setAppointmentData(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointmentData();
+  }, [user?._id]);
 
   const getBookingDoctorData = async () => {
     try {
@@ -58,54 +82,67 @@ function BookingPage() {
     }
   };
 
-  const handleBookAppointment = async () => {
+  useEffect(() => {
+    getBookedSlots();
+  }, [selectedDate]);
+
+  useEffect(() => {
+    getBookingDoctorData();
+  }, [doctorId]);
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  
+
+  const handleRescheduleAppointment = async (
+    appointmentId,
+    newDate,
+    newTimeSlot
+  ) => {
     try {
-      if (!selectedDate || !selectedSlot) {
+        // console.log(newTimeSlot);
+       
+        
+        // console.log('hello232');
+      if (!appointmentId) {
+        toast.error("No appointment selected for rescheduling.");
+        return;
+      }
+
+      if (!newDate || !newTimeSlot) {
         toast.error("Please select both date and time slot");
         return;
       }
-      console.log(selectedSlot);
-      
+    console.log(newTimeSlot); // working
 
-      const parsedTimeSlot = JSON.parse(selectedSlot);
-      // Remove _id from timeSlot if it exists
+      const parsedTimeSlot = JSON.parse(newTimeSlot);
       const { _id, ...cleanTimeSlot } = parsedTimeSlot;
-
-      const res = await axios.post(
-        "/api/v1/user/book-appointment",
+      const token = localStorage.getItem("token");
+    
+      const response = await axios.post(
+        `/api/v1/user/reschedule-appointment`,
         {
-          doctorId,
-          date: selectedDate,
-          timeSlot: cleanTimeSlot,
-          fee: doctor.fee,
+          appointmentId,
+          newDate,
+          timeSlot: cleanTimeSlot,  // Make sure cleanTimeSlot is correctly populated
         },
         {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      if (res.data.success) {
-        toast.success("Appointment booked successfully");
+      if (response.data.success) {
+        toast.success("Appointment rescheduled successfully, waiting for doctor approval");
       } else {
-        toast.error(res.data.message);
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.error("Booking error:", error);
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        toast.error(
-          error.response.data.message || "Failed to book appointment"
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        toast.error("No response from server");
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        toast.error("Error setting up appointment request");
-      }
+      console.error(" sdfsad fsda Error rescheduling appointment:", error);
+      toast.error(" kjklsdfjkls Failed to reschedule appointment");
     }
   };
 
@@ -125,28 +162,19 @@ function BookingPage() {
         setBookedSlots([]); // Reset if request fails
         toast.error(res.data.message || "Failed to fetch booked slots");
       }
-
     } catch (error) {
       console.log(error);
       setBookedSlots([]);
-      toast.error(error.response.data.message || "Failed to fetch booked slots");
+      toast.error(
+        error.response.data.message || "Failed to fetch booked slots"
+      );
     }
   };
 
-  useEffect(() => {
-    getBookedSlots();
-  }, [selectedDate]);
+ 
 
-  useEffect(() => {
-    getBookingDoctorData();
-  }, [doctorId]);
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
-  // console.log("Doctor ID", doctorId);
-  // console.log("User ID", user?.email);
+//   console.log("Doctor ID", doctorId);
+//   console.log("User ID", user?.email);
 
   return (
     <div className="booking-page">
@@ -158,7 +186,7 @@ function BookingPage() {
           className="header-left-image"
           alt="Decorative left element"
         />
-        <h1 className="contact-title">Book an Appointment</h1>
+        <h1 className="contact-title">Reschedule Appointment</h1>
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/29ce334b1048cc85e046bf85f7135b7e959c4508?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
           className="header-right-image"
@@ -244,12 +272,30 @@ function BookingPage() {
               </div>
 
               <button
-                type="button"
-                className="booking-button"
-                onClick={handleBookAppointment}
-              >
-                Book Appointment
-              </button>
+  type="button"
+  className="booking-button"
+  onClick={() => {
+    // Ensure appointmentData is not empty and contains an item with _id
+    if (!appointmentData.length || !appointmentData[0]._id) {
+      toast.error("No appointment found to reschedule.");
+      return;
+    }
+
+    if (!selectedDate || !selectedSlot) {
+      toast.error("Please select both date and time slot.");
+      return;
+    }
+
+    // Proceed with rescheduling the appointment
+    handleRescheduleAppointment(
+      appointmentData[0]._id, // Access the _id of the first appointment item
+      selectedDate,
+      selectedSlot
+    );
+  }}
+>
+  Reschedule Appointment
+</button>
             </div>
           </div>
         )}
@@ -259,4 +305,4 @@ function BookingPage() {
   );
 }
 
-export default BookingPage;
+export default ReschedulePage;

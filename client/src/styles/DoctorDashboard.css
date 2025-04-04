@@ -118,7 +118,7 @@
   }
   
   .doctor-filter-tab.active {
-    background-color: #007bff;
+    background: linear-gradient(96deg, #0E84FB 0.94%, #02C2ED 99.06%);
     color: white;
     font-weight: 800;
   }

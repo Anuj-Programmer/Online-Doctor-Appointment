@@ -188,10 +188,10 @@ function DoctorAppointment() {
               All
             </div>
             </div>
-            <div className="search-container-doctor">
+            {/* <div className="search-container-doctor">
               <input type="text" placeholder="Enter name" className="search-input-doctor" />
               <img src={searchIcon} alt="Search" className="search-icon-doctor" />
-            </div>
+            </div> */}
           </header>
           <section className="appointments-table">
             <div className="table-header">

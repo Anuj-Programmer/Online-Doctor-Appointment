@@ -41,8 +41,13 @@
   color: #2c3e50;
 }
 
+
+
+
+
+
 .user-filter-tab.active {
-  background-color: #3498db;
+  background: linear-gradient(96deg, #0E84FB 0.94%, #02C2ED 99.06%);
   color: #fff;
   border-color: #3498db;
 }
@@ -197,7 +202,7 @@
 
 .cancel-button {
   padding: 5px 10px;
-  background-color: #ff4d4d;
+  background-color: #012047;
   color: white;
   border: none;
   border-radius: 25px;
@@ -205,5 +210,20 @@
 }
 
 .cancel-button:hover {
-  background-color: #ff1a1a;
+  background-color: #002859;
 }
+
+.reschedule-button {
+  padding: 5px 10px;
+  background: linear-gradient(96deg, #0E84FB 0.94%, #02C2ED 99.06%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.user-appointment-buttons {
+  display: flex;
+  gap: 10px;
+}
+

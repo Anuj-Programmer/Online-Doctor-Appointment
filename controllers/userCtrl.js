@@ -195,6 +195,20 @@ const bookAppointment = async (req, res) => {
             });
         }
 
+        // const existingAppointment = await appointmentModel.findOne({
+        //    doctorId,
+        //     date,
+        //     timeSlot,
+        //     status: "approved"
+        // });
+        // if (existingAppointment) {
+        //     return res.status(400).send({
+        //         message: "Time slot already booked",
+        //         success: false
+        //     });
+        // }   
+        
+
         // Create a new appointment
         const appointment = new appointmentModel({
             doctorId,
@@ -308,7 +322,17 @@ const getUserAppointments = async (req, res) => {
 
 const rescheduleAppointment = async (req, res) => {
     try {
-        const { appointmentId, newDate, newTimeSlot } = req.body;
+        const { appointmentId, newDate, timeSlot } = req.body;
+
+        // Validate input data
+        if (!appointmentId || !newDate || !timeSlot) {
+            return res.status(400).send({
+                message: "Missing required fields",
+                success: false
+            });
+        }
+
+        // Fetch the appointment
         const appointment = await appointmentModel.findById(appointmentId);
         if (!appointment) {
             return res.status(404).send({
@@ -316,21 +340,75 @@ const rescheduleAppointment = async (req, res) => {
                 success: false
             });
         }
+
+        // Update the appointment with the new date and time slot
         appointment.date = newDate;
-        appointment.timeSlot = newTimeSlot;
+        appointment.timeSlot = timeSlot;
+        appointment.status = "pending";
         await appointment.save();
-        res.status(200).send({
-            message: "Appointment rescheduled successfully",
-            success: true
+
+        // Notify user
+        const notifyUser = await userModel.findById(appointment.userId);
+        if (!notifyUser) {
+            return res.status(404).send({
+                message: "User not found for notification",
+                success: false
+            });
+        }
+        notifyUser.notification.push({
+            type: "appointment-rescheduled",
+            message: `Your appointment has been rescheduled to ${newDate} at ${timeSlot.startTime} waiting for doctor approval`,
+            success: true,
+            data: {
+                appointmentId: appointment._id,
+                patientName: notifyUser.name,
+                date: newDate,
+                time: timeSlot.startTime
+            },
+            createdAt: new Date()
         });
+        await userModel.findByIdAndUpdate(appointment.userId, { notification: notifyUser.notification });
+
+        // Notify doctor
+        // const notifyDoctor = await userModel.findById(doctor.userId);
+        // if (!notifyDoctor) {
+        //     return res.status(404).send({
+        //         message: "Doctor not found for notification",
+        //         success: false
+        //     });
+        // }
+        // notifyDoctor.notification.push({
+        //     type: "appointment-rescheduled",
+        //     message: `Patient ${notifyUser.name} has rescheduled appointment to ${newDate} at ${timeSlot.startTime} waiting for your approval`,
+        //     success: true,
+        //     createdAt: new Date()
+        // });
+        // await userModel.findByIdAndUpdate(doctor.userId, { notification: notifyDoctor.notification });
+
+        // Send success response
+        res.status(200).send({
+            message: "Appointment rescheduled successfully, waiting for doctor approval",
+            success: true,
+            data: {
+                appointmentId: appointment._id,
+                patientName: notifyUser.name,
+                date: newDate,
+                time: timeSlot.startTime
+            },
+            createdAt: new Date()
+        });
+
     } catch (error) {
         console.log(error);
+        // Send generic error response (don't expose internal error details in production)
         res.status(500).send({
             message: "Error in rescheduling appointment",
             success: false
         });
-    }   
+    }
 }
+
+
 
 const cancelAppointment = async (req, res) => {
     try {
@@ -344,7 +422,8 @@ const cancelAppointment = async (req, res) => {
             });
         }
         appointment.status = "cancelled";
-        await appointment.save();   
+        await appointment.save(); 
+
         res.status(200).send({
             message: "Appointment cancelled successfully",
             success: true
@@ -354,17 +433,19 @@ const cancelAppointment = async (req, res) => {
         notifyUser.notification.push({
             type: "appointment-cancelled",
             message: "Your appointment has been cancelled",
-            success: true
+            success: true,
+            createdAt: new Date()
         });
         await userModel.findByIdAndUpdate(appointment.userId, { notification: notifyUser.notification });
 
-        const doctorNotify = await userModel.findById(appointment.doctorId);
-        doctorNotify.notification.push({
-            type: "appointment-cancelled",
-            message: "Your appointment has been cancelled by the patient",
-            success: true
-        });
-        await userModel.findByIdAndUpdate(appointment.doctorId, { notification: doctorNotify.notification });
+        // const doctorNotify = await userModel.findById(appointment.doctorId);
+        // doctorNotify.notification.push({
+        //     type: "appointment-cancelled",
+        //     message: "Your appointment has been cancelled by the patient",
+        //     success: true,
+        //     createdAt: new Date()
+        // });
+        // await userModel.findByIdAndUpdate(appointment.doctorId, { notification: doctorNotify.notification });
 
         
     } catch (error) {
@@ -377,4 +458,69 @@ const cancelAppointment = async (req, res) => {
 }
 
 
-module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment   }
+const getBookedSlots = async (req, res) => {
+    try {
+        const { doctorId, date } = req.body;
+        const doctor = await doctorModel.findById(doctorId);
+        if (!doctor) {
+            return res.status(404).send({
+                message: "Doctor not found",
+                success: false
+            });
+        }
+        const appointments = await appointmentModel.find({ doctorId, date, status: "approved" });   
+        const bookedSlots = appointments.map(appointment => appointment.timeSlot);
+        res.status(200).send({
+            success: true,
+            message: "Booked slots found",
+            data: bookedSlots
+        });
+    } catch (error) {
+        console.log(error); 
+        res.status(500).send({
+            message: "Error in getting booked slots",
+            success: false
+        });
+    }
+}
+
+// const getAppointment = async (req, res) => {
+//     try {
+//         const { userId } = req.body;
+//         const appointment = await appointmentModel.find({ userId });
+//         res.status(200).send({
+//             success: true,
+//             message: "Appointment data found",
+//             data: appointment
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send({
+//             message: "Error in getting appointment data",
+//             success: false
+//         });
+//     }   
+// }
+
+// const getAppointmentData = async (req, res) => {
+//     try {
+//         const { userId } = req.body;
+//         const appointment = await appointmentModel.find({ userId });
+//         res.status(200).send({
+//             success: true,
+//             message: "Appointment data found",
+//             data: appointment
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send({
+//             message: "Error in getting appointment data",
+//             success: false
+//         });
+//     }
+// }
+
+
+
+
+module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment, getBookedSlots }

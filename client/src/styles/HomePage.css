@@ -544,7 +544,7 @@
     flex-grow: 1;
     flex-shrink: 1;
     width: 127px;
-    overflow: hidden;  /* Prevents image from overflowing */
+    overflow: hidden; 
   }
   
   .specialty-input {
