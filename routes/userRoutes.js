@@ -23,7 +23,7 @@ router.post('/delete-all-notifications', authMiddleware, deleteAllNotifications)
 router.post('/book-appointment', authMiddleware, bookAppointment);
 
 //Search Doctor || GET
-router.get('/search-doctor', searchDoctor);
+router.get('/search', searchDoctor);
 
 //Get User Appointments || POST
 router.post('/get-user-appointments', authMiddleware, getUserAppointments);

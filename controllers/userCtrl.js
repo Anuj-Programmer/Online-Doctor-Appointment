@@ -282,10 +282,41 @@ const bookAppointment = async (req, res) => {
 
 const searchDoctor = async (req, res) => {
     try {
-        const { query } = req.query;
-        const doctors = await doctorModel.find({
-            $text: { $search: query }
-        });
+        const { name, location, specialization } = req.query;
+        console.log(name, location, specialization);
+        
+        // Initialize the filter object
+        let filter = {};
+
+        // If 'name' is provided, search by first and last name
+        if (name) {
+            const nameParts = name.split(' ');
+            if (nameParts.length === 1) {
+                // If only one name is provided, search by firstName or lastName
+                filter.$or = [
+                    { firstName: { $regex: nameParts[0], $options: 'i' } },
+                    { lastName: { $regex: nameParts[0], $options: 'i' } }
+                ];
+            } else if (nameParts.length === 2) {
+                // If both firstName and lastName are provided, search by both fields
+                filter.firstName = { $regex: nameParts[0], $options: 'i' };
+                filter.lastName = { $regex: nameParts[1], $options: 'i' };
+            }
+        }
+
+        // If 'location' is provided, search by address (location)
+        if (location) {
+            filter.address = { $regex: location, $options: 'i' };
+        }
+
+        // If 'specialization' is provided, search by specialization
+        if (specialization) {
+            filter.specialization = { $regex: specialization, $options: 'i' };
+        }
+
+        // Search for doctors using the filter
+        const doctors = await doctorModel.find(filter);
+
         res.status(200).send({
             success: true,
             message: "Doctors found",
@@ -299,7 +330,8 @@ const searchDoctor = async (req, res) => {
             error
         });
     }
-}      
+};
+  
 
 const getUserAppointments = async (req, res) => {
     try {

@@ -23,6 +23,7 @@ import BookingPage from "./pages/BookingPage";
 import DoctorDasboard from "./pages/Doctor/DoctorDasboard";
 import UserAppointment from "./pages/UserAppointment";
 import ReschedulePage from "./pages/ReschedulePage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -124,6 +125,11 @@ function App() {
                 <ReschedulePage />
               </ProtectedRoute>
               } />
+            <Route path="/search" element={
+              <ProtectedRoute>  
+              <SearchPage/>
+              </ProtectedRoute>
+            }/>
           </Routes>
         )}
       </BrowserRouter>

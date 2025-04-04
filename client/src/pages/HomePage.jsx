@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
+import { Select, Form, Input, Button } from 'antd';
 import { setUser } from '../redux/features/userSlice'
+import { useNavigate } from 'react-router-dom';
 import Nav from '../Components/Nav';
 import Footer from '../Components/Footer';
 import Doctorcard from '../Components/Doctor-card';
@@ -10,11 +12,18 @@ import Brain from "../assets/Brain.png"
 import Kidney from "../assets/kidney.png"
 import Neurology from "../assets/Neurology.png"
 import DoctorDasboard from './Doctor/DoctorDasboard';
+const { Option } = Select;
 
 function HomePage() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [doctors, setDoctors] = useState([]);
+  const [searchParams, setSearchParams] = useState({
+    name: '',
+    location: '',
+    specialization: ''
+  });
+  const navigate = useNavigate();
 
   const getUserData = async () => {
     try {
@@ -73,6 +82,59 @@ function HomePage() {
 
     fetchDoctors();
   }, []);
+
+  const handleSearch = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert('Please login to search for doctors');
+        return;
+      }
+
+      // Validate at least one search parameter is provided
+      if (!searchParams.name && !searchParams.location && !searchParams.specialization) {
+        alert('Please provide at least one search criteria');
+        return;
+      }
+
+      console.log('Search parameters:', {
+        name: searchParams.name || undefined,
+        location: searchParams.location || undefined,
+        specialization: searchParams.specialization || undefined
+      });
+
+      const response = await axios.get('/api/v1/user/search', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        params: {
+          name: searchParams.name || undefined,
+          location: searchParams.location || undefined,
+          specialization: searchParams.specialization || undefined
+        }
+      });
+
+      console.log('Search response:', response.data);
+
+      if (response.data.success) {
+        if (response.data.data.length === 0) {
+          alert('No doctors found matching your criteria');
+        } else {
+          navigate('/search', { state: { doctors: response.data.data } });
+        }
+      } else {
+        alert('Failed to search doctors: ' + response.data.message);
+      }
+    } catch (error) {
+      console.error('Error searching doctors:', error);
+      if (error.response?.data?.message) {
+        alert('Search error: ' + error.response.data.message);
+      } else {
+        alert('An error occurred while searching for doctors');
+      }
+    }
+  }
 
   // If user is a doctor, show doctor dashboard
   if (user?.isDoctor) {
@@ -148,7 +210,11 @@ function HomePage() {
                     <div className="search-form">
                       <div className="search-input-container">
                         <div className="search-input">
-                        <div className="input-text-doctor" contenteditable="true" ></div>
+                        <div 
+                          className="input-text-doctor" 
+                          contentEditable="true"
+                          onInput={(e) => setSearchParams({...searchParams, name: e.target.textContent})}
+                        ></div>
 
                         </div>
                         <div className="input-divider"></div>
@@ -161,7 +227,11 @@ function HomePage() {
                       </div>
                       <div className="location-input-container">
                         <div className="location-input">
-                          <div className="input-text-location" contenteditable="true"></div>
+                          <div 
+                            className="input-text-location" 
+                            contentEditable="true"
+                            onInput={(e) => setSearchParams({...searchParams, location: e.target.textContent})}
+                          ></div>
                         </div>
                         <div className="location-icon">
                           <img
@@ -172,18 +242,33 @@ function HomePage() {
                         <div className="input-divider"></div>
                       </div>
                       <div className="specialty-input-container">
-                        <div className="specialty-input">
-                          <div className="input-text-specialty" contenteditable="true"></div>
-                        
-                        <div className="specialty-icon1">
-                          <img
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/63251fb083c5a36bca58be6b7638131e88b4aa1d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
-                            className="specialty-icon-image1"
-                          />
-                          </div>
-                        </div>
+                        <Form.Item
+                label=""
+                name="specialization"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select your specialization!",
+                  },
+                ]}
+              >
+                <Select 
+                  placeholder="Select Specialization"
+                  onChange={(value) => setSearchParams({...searchParams, specialization: value})}
+                >
+                  <Option value="cardiology">Cardiology</Option>
+                  <Option value="dermatology">Dermatology</Option>
+                  <Option value="neurology">Neurology</Option>
+                  <Option value="orthopedics">Orthopedics</Option>
+                  <Option value="pediatrics">Pediatrics</Option>
+                </Select>
+              </Form.Item>
                       </div>
-                      <button className="search-button-container">
+                      <button 
+                        className="search-button-container"
+                        disabled={!localStorage.getItem("token")}
+                        onClick={handleSearch}
+                      >
                         <div className="search-button">
                           <div className="search-button-icon">
                             <img
