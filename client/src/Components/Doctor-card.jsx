@@ -9,7 +9,8 @@ function Doctorcard(props) {
   
     <div className="doctor-card">
       <div className="doctor-card-content">
-        <Link to={`/doctor/${props.doctorId}`}>
+        {/* <Link to={`/doctor/${props.doctorId}`}> */}
+        <Link to={`/booking/${props.doctorId}`}>
         <div className="doctor-image-container">
             <img src={props.src} className="doctor-image" />
           </div>
