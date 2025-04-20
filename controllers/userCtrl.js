@@ -193,22 +193,8 @@ const bookAppointment = async (req, res) => {
                 message: "Time slot not available", 
                 success: false 
             });
-        }
-
-        // const existingAppointment = await appointmentModel.findOne({
-        //    doctorId,
-        //     date,
-        //     timeSlot,
-        //     status: "approved"
-        // });
-        // if (existingAppointment) {
-        //     return res.status(400).send({
-        //         message: "Time slot already booked",
-        //         success: false
-        //     });
-        // }   
+        } 
         
-
         // Create a new appointment
         const appointment = new appointmentModel({
             doctorId,

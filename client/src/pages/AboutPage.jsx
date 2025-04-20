@@ -1,3 +1,5 @@
+
+ 
 import React from "react";
 import Nav from "../Components/Nav.jsx"
 import styles from"../Styles/AboutPage.module.css";
@@ -80,7 +82,7 @@ const AboutPage = () => {
           <div className={styles.featureCard}>
           <div className={styles.featureIcon}>
               <img 
-                src="https://cdn.discordapp.com/attachments/841652770389884930/1353737703182569482/choose-image.png?ex=67e2bdfb&is=67e16c7b&hm=77636320154823cf6e4f5f6c0076e9e51c19208119d5dfaf4765f5c65904921c&" 
+                src="https://i.imgur.com/fOKLKVh.png" 
                 className={styles.featureImg} // Use styles from CSS module
                 alt="Icon"
               />
@@ -97,7 +99,7 @@ const AboutPage = () => {
 
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>
-              <img src="https://cdn.discordapp.com/attachments/841652770389884930/1353737702977044540/choose-image_1.png?ex=67e2bdfb&is=67e16c7b&hm=43d9db020336349f2d9bbe4d880bec5713a2573aba44a5f2a7e92832a1543078&" className={styles.featureImg} // Use styles from CSS module
+              <img src="https://i.imgur.com/ElHSHkQ.png" className={styles.featureImg} // Use styles from CSS module
                 alt="Icon"/>
             </div>
             <div className={styles.featureTitle}>24 Hours Service</div>
@@ -109,7 +111,7 @@ const AboutPage = () => {
 
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>
-              <img src="https://cdn.discordapp.com/attachments/841652770389884930/1353737702570463252/choose-image_2.png?ex=67e2bdfb&is=67e16c7b&hm=fa81e2069aa4b76210aca20597ef5867a31c942957422c67612add17c06a381a&" className={styles.featureImg} // Use styles from CSS module
+              <img src="https://i.imgur.com/WFUQC9r.png" className={styles.featureImg} // Use styles from CSS module
                 alt="Icon"/>
             </div>
             <div className={styles.featureTitle}>Patient-Centered Approach</div>
@@ -121,7 +123,7 @@ const AboutPage = () => {
 
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>
-              <img src="https://cdn.discordapp.com/attachments/841652770389884930/1353737702222204928/choose-image_3.png?ex=67e2bdfb&is=67e16c7b&hm=2a68056e76e3510a716721434396291b70bca99cec3076a440183932a8c4717a&"className={styles.featureImg} // Use styles from CSS module
+              <img src="https://i.imgur.com/WFUQC9r.png"className={styles.featureImg} // Use styles from CSS module
                 alt="Icon"/>
             </div>
             <div className={styles.featureTitle}>Follow-Up Care</div>
