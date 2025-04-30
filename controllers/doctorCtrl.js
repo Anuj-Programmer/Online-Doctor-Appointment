@@ -97,7 +97,7 @@ const applyDoctor = async (req, res) => {
 
         // Parse timeSlots if it's a string, otherwise use it as is
         let timeSlots;
-        try {
+        try {   
             timeSlots = typeof req.body.timeSlots === 'string' 
                 ? JSON.parse(req.body.timeSlots)
                 : req.body.timeSlots;
@@ -380,6 +380,74 @@ const updateAppointmentStatus = async (req, res) => {
     }
 };  
 
+const updateDoctorTimeSlot = async (req, res) => {
+    try {
+        const { doctorId } = req.body;
+        let timeSlots = req.body.timeSlots;
+
+        // Parse if timeSlots is a string
+        if (typeof timeSlots === 'string') {
+            try {
+                timeSlots = JSON.parse(timeSlots);
+            } catch (error) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Invalid timeSlots JSON format',
+                });
+            }
+        }
+
+        // Validate timeSlots is an array
+        if (!Array.isArray(timeSlots)) {
+            return res.status(400).json({
+                success: false,
+                message: 'timeSlots must be an array'
+            });
+        }
+
+        // Validate each timeSlot object
+        for (const slot of timeSlots) {
+            if (
+                typeof slot.startTime !== 'string' ||
+                typeof slot.endTime !== 'string'
+            ) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Each timeSlot must have startTime and endTime as strings'
+                });
+            }
+        }
+
+        // Update doctor's timeSlots
+        const updatedDoctor = await Doctor.findByIdAndUpdate(
+            doctorId,
+            { timeSlots },
+            { new: true }
+        );
+
+        if (!updatedDoctor) {
+            return res.status(404).json({
+                success: false,
+                message: 'Doctor not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Doctor timeSlots updated successfully',
+            data: updatedDoctor
+        });
+    } catch (error) {
+        console.error('Error updating doctor timeSlots:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error updating doctor timeSlots',
+            error: error.message
+        });
+    }
+};
+
+
 module.exports = {
     applyDoctor,
     getAllDoctors,
@@ -387,5 +455,6 @@ module.exports = {
     updateDoctor,
     changeDoctorStatus,
     getDoctorAppointments,
-    updateAppointmentStatus
-}; 
+    updateAppointmentStatus,
+    updateDoctorTimeSlot
+};
