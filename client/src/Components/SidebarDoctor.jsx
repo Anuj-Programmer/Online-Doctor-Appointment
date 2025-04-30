@@ -7,11 +7,12 @@ import "../styles/DoctorDashboard.css"
 import "../styles/Sidebar.css"
 
 import dashboardIcon from "../assets/dashboard.svg";
-import appointmentsIcon from "../assets/Appointments.svg";
+import appointmentsIcon from "../assets/appointment.png";
 import scheduleIcon from "../assets/Schedule.svg";
 import reviewIcon from "../assets/review.svg";
 import settingsIcon from "../assets/settings.svg";
 import logoutIcon from "../assets/logout.svg";
+
 
 function SidebarDoctor({ activeTab, setActiveTab }) {
   const { user } = useSelector((state) => state.user);

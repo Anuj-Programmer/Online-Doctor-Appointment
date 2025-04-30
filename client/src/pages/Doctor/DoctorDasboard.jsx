@@ -8,6 +8,8 @@ import DoctorAppointment from './DoctorAppointment';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/features/userSlice';
+import DoctorSchedule from './DoctorSchedule';
+import Footer from '../../Components/Footer';
 
 function DoctorDasboard() {
   const { user } = useSelector((state) => state.user);
@@ -40,7 +42,7 @@ useEffect(() => {
       case 'dashboard':
         return <div>Dashboard Content</div>;
       case 'schedule':
-        return <div>Schedule Content</div>;
+        return <DoctorSchedule />
       case 'reviews':
         return <div>Reviews Content</div>;
       case 'settings':
@@ -65,9 +67,7 @@ useEffect(() => {
           {renderContent()}
         </div>
       </div>
-      <footer className="dashboard-footer">
-        Copyright © 2025 Curely. All Rights Reserved
-      </footer>
+      <Footer/>
     </>
   );
 }

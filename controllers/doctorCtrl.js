@@ -447,6 +447,97 @@ const updateDoctorTimeSlot = async (req, res) => {
     }
 };
 
+const getTimeSlots = async (req, res) => {
+    try {
+        const doctor = await Doctor.findOne({ userId: req.params.doctorId });
+        
+        if (!doctor) {
+            return res.status(404).json({
+                success: false,
+                message: 'Doctor not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Time slots fetched successfully',
+            data: doctor.timeSlots || []
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error in getting time slots',
+            error: error.message
+        });
+    }
+};
+
+const updateTimeSlots = async (req, res) => {
+    try {
+        let timeSlots = req.body.timeSlots;
+
+        // Parse if timeSlots is a string
+        if (typeof timeSlots === 'string') {
+            try {
+                timeSlots = JSON.parse(timeSlots);
+            } catch (error) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Invalid timeSlots JSON format',
+                });
+            }
+        }
+
+        // Validate timeSlots is an array
+        if (!Array.isArray(timeSlots)) {
+            return res.status(400).json({
+                success: false,
+                message: 'timeSlots must be an array'
+            });
+        }
+
+        // Validate each timeSlot object
+        for (const slot of timeSlots) {
+            if (
+                typeof slot.startTime !== 'string' ||
+                typeof slot.endTime !== 'string'
+            ) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Each timeSlot must have startTime and endTime as strings'
+                });
+            }
+        }
+
+        const doctor = await Doctor.findOne({ userId: req.params.doctorId });
+        
+        if (!doctor) {
+            return res.status(404).json({
+                success: false,
+                message: 'Doctor not found'
+            });
+        }
+
+        // Update doctor's timeSlots
+        const updatedDoctor = await Doctor.findOneAndUpdate(
+            { userId: req.params.doctorId },
+            { timeSlots },
+            { new: true }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: 'Time slots updated successfully',
+            data: updatedDoctor.timeSlots
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error in updating time slots',
+            error: error.message
+        });
+    }
+};
 
 module.exports = {
     applyDoctor,
@@ -456,5 +547,7 @@ module.exports = {
     changeDoctorStatus,
     getDoctorAppointments,
     updateAppointmentStatus,
-    updateDoctorTimeSlot
+    updateDoctorTimeSlot,
+    getTimeSlots,
+    updateTimeSlots
 };

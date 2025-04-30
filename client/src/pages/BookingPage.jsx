@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Nav from "../Components/Nav";
 import Footer from "../Components/Footer";
 import "../styles/BookingPage.css";
+import dayjs from "dayjs";
 
 function BookingPage() {
   const { user } = useSelector((state) => state.user);
@@ -21,6 +22,7 @@ function BookingPage() {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
 
   // const [loading, setLoading] = useState(false);
   const getUserData = async () => {
@@ -54,7 +56,7 @@ function BookingPage() {
       }
     } catch (error) {
       console.log(error);
-      // toast.error('Failed to fetch doctor details');
+      toast.error('Failed to fetch doctor details');
     }
   };
 
@@ -64,11 +66,8 @@ function BookingPage() {
         toast.error("Please select both date and time slot");
         return;
       }
-      console.log(selectedSlot);
-      
 
       const parsedTimeSlot = JSON.parse(selectedSlot);
-      // Remove _id from timeSlot if it exists
       const { _id, ...cleanTimeSlot } = parsedTimeSlot;
 
       const res = await axios.post(
@@ -94,22 +93,19 @@ function BookingPage() {
     } catch (error) {
       console.error("Booking error:", error);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        toast.error(
-          error.response.data.message || "Failed to book appointment"
-        );
+        toast.error(error.response.data.message || "Failed to book appointment");
       } else if (error.request) {
-        // The request was made but no response was received
         toast.error("No response from server");
       } else {
-        // Something happened in setting up the request that triggered an Error
         toast.error("Error setting up appointment request");
       }
     }
   };
 
   const getBookedSlots = async () => {
+    if (!selectedDate) return;
+    
+    setLoadingSlots(true);
     try {
       const res = await axios.post(
         "/api/v1/user/get-booked-slots",
@@ -120,16 +116,17 @@ function BookingPage() {
       );
 
       if (res.data.success) {
-        setBookedSlots(res.data.data || []); // Ensure bookedSlots updates correctly
+        setBookedSlots(res.data.data || []);
       } else {
-        setBookedSlots([]); // Reset if request fails
+        setBookedSlots([]);
         toast.error(res.data.message || "Failed to fetch booked slots");
       }
-
     } catch (error) {
       console.log(error);
       setBookedSlots([]);
-      toast.error(error.response.data.message || "Failed to fetch booked slots");
+      toast.error(error.response?.data?.message || "Failed to fetch booked slots");
+    } finally {
+      setLoadingSlots(false);
     }
   };
 
@@ -149,6 +146,7 @@ function BookingPage() {
   // console.log("User ID", user?.email);
 
   return (
+    <>
     <div className="booking-page">
       <Nav />
       {/* <Toaster position="top-center" /> */}
@@ -194,59 +192,81 @@ function BookingPage() {
                 <label className="form-label">Select Appointment Date</label>
                 <DatePicker
                   className="form-control"
-                  onChange={(date, dateString) => setSelectedDate(dateString)}
+                  onChange={(date, dateString) => {
+                    const selectedDateObj = dayjs(date);
+                    const today = dayjs().startOf('day');
+                    
+                    if (selectedDateObj.isBefore(today)) {
+                      toast.error("Cannot select a past date");
+                      setSelectedDate(null);
+                      setSelectedSlot("");
+                      return;
+                    }
+                    setSelectedDate(dateString);
+                    setSelectedSlot(""); // Reset selected slot when date changes
+                  }}
                   format="YYYY-MM-DD"
+                  disabledDate={(current) => {
+                    return current && current < dayjs().startOf('day');
+                  }}
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Select Time Slot</label>
-                <select
-                  className="form-control"
-                  value={selectedSlot}
-                  onChange={(e) => {
-                    const selected = JSON.parse(e.target.value);
-                    const isBooked = bookedSlots.some(
-                      (slot) =>
-                        slot.startTime === selected.startTime &&
-                        slot.endTime === selected.endTime
-                    );
+              {selectedDate && (
+                <div className="form-group">
+                  <label className="form-label">Select Time Slot</label>
+                  {loadingSlots ? (
+                    <div className="loading-slots">Loading available time slots...</div>
+                  ) : (
+                    <select
+                      className="form-control"
+                      value={selectedSlot}
+                      onChange={(e) => {
+                        const selected = JSON.parse(e.target.value);
+                        const isBooked = bookedSlots.some(
+                          (slot) =>
+                            slot.startTime === selected.startTime &&
+                            slot.endTime === selected.endTime
+                        );
 
-                    if (isBooked) {
-                      toast.error("This slot is already booked!");
-                    } else {
-                      setSelectedSlot(e.target.value);
-                    }
-                  }}
-                >
-                  <option value="">Choose a time slot</option>
-                  {doctor.timeSlots &&
-                    doctor.timeSlots.map((slot, index) => {
-                      const isBooked = bookedSlots.some(
-                        (booked) =>
-                          booked.startTime === slot.startTime &&
-                          booked.endTime === slot.endTime
-                      );
+                        if (isBooked) {
+                          toast.error("This slot is already booked!");
+                        } else {
+                          setSelectedSlot(e.target.value);
+                        }
+                      }}
+                    >
+                      <option value="">Choose a time slot</option>
+                      {doctor.timeSlots &&
+                        doctor.timeSlots.map((slot, index) => {
+                          const isBooked = bookedSlots.some(
+                            (booked) =>
+                              booked.startTime === slot.startTime &&
+                              booked.endTime === slot.endTime
+                          );
 
-                      return (
-                        <option
-                          key={index}
-                          value={JSON.stringify(slot)}
-                          disabled={isBooked}
-                          style={isBooked ? { backgroundColor: "#ccc" } : {}}
-                        >
-                          {slot.startTime} - {slot.endTime}{" "}
-                          {isBooked ? "(Booked)" : ""}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
+                          return (
+                            <option
+                              key={index}
+                              value={JSON.stringify(slot)}
+                              disabled={isBooked}
+                              style={isBooked ? { backgroundColor: "#ccc" } : {}}
+                            >
+                              {slot.startTime} - {slot.endTime}{" "}
+                              {isBooked ? "(Booked)" : ""}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  )}
+                </div>
+              )}
 
               <button
                 type="button"
                 className="booking-button"
                 onClick={handleBookAppointment}
+                disabled={!selectedDate || !selectedSlot}
               >
                 Book Appointment
               </button>
@@ -254,8 +274,10 @@ function BookingPage() {
           </div>
         )}
       </div>
-      <Footer />
+      
     </div>
+    <Footer />
+    </>
   );
 }
 
