@@ -66,6 +66,7 @@ function AppointmentCard({ appointment, isFirst }) {
         {/* Conditionally render the Cancel button only for non-cancelled appointments */}
         {!isCancelled && (
           <button className={styles.cancelButton}>
+            {/* https://i.imgur.com/DCXCGsi.png */}
             <FontAwesomeIcon icon={faXmark} className="cancelIcon" style={{ display: "contents" }} />
             Cancel
           </button>

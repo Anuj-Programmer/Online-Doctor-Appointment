@@ -38,17 +38,17 @@ const Help = () => {
       answer:
         "Your personal information is protected with advanced security measures and we comply with all data protection regulations.",
     },
-    {
-      question:
-        "How can I change my password or update my account information?",
-      answer:
-        "You can update your account details in the 'My Account' section after logging in. Password changes require verification.",
-    },
-    {
-      question: "Can I cancel or reschedule my appointment?",
-      answer:
-        "Yes, you can cancel or reschedule appointments up to 24 hours before the scheduled time through your account dashboard.",
-    },
+    // {
+    //   question:
+    //     "How can I change my password or update my account information?",
+    //   answer:
+    //     "You can update your account details in the 'My Account' section after logging in. Password changes require verification.",
+    // },
+    // {
+    //   question: "Can I cancel or reschedule my appointment?",
+    //   answer:
+    //     "Yes, you can cancel or reschedule appointments up to 24 hours before the scheduled time through your account dashboard.",
+    // },
   ];
 
   const toggleFAQ = (index) => {
@@ -60,11 +60,26 @@ const Help = () => {
         <div className="header">
             <Nav/>
         </div>
+
+        <div className="contact-header">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e1edb01272473b09182df3664c04c400ee218d87?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-left-image"
+            alt="Decorative left element"
+          />
+          <h1 className="contact-title">Frequently Asked Questions</h1>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/29ce334b1048cc85e046bf85f7135b7e959c4508?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-right-image"
+            alt="Decorative right element"
+          />
+        </div>
       
 
       <main className="faq-main">
         <div className="faq-container">
-          <h1>Frequently Asked Questions</h1>
+          {/* <h1>Frequently Asked Questions</h1> */}
+          
 
           <div className="faq-grid">
             {faqItems.map((item, index) => (

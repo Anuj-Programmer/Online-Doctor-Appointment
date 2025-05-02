@@ -1,0 +1,113 @@
+.container {
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Inter, sans-serif;
+  }
+  
+  @media (width <= 991px) {
+    .container {
+      max-width: 991px;
+    }
+  }
+  
+  @media (width <= 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+  
+  .header {
+    background-color: #fff;
+    border-bottom: 0.8px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .headerContent {
+    width: 100%;
+    padding: 0 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @media (width <= 991px) {
+    .headerContent {
+      padding: 0 40px;
+    }
+  }
+  
+  @media (width <= 640px) {
+    .headerContent {
+      padding: 0 20px;
+    }
+  }
+  
+  .logo {
+    width: 134px;
+    height: 41px;
+  }
+  
+  .navigation {
+    display: flex;
+    gap: 40px;
+  }
+  
+  @media (width <= 640px) {
+    .navigation {
+      display: none;
+    }
+  }
+  
+  .navLink {
+    color: #000f28;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 68px;
+  }
+  
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  
+  @media (width <= 640px) {
+    .headerActions {
+      gap: 10px;
+    }
+  }
+  
+  .applyButton {
+    color: #0e82fd;
+    border: 1px solid #0e82fd;
+    border-radius: 800px;
+    padding: 7px 15px;
+    font-size: 13px;
+    font-weight: 500;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .notificationIcon {
+    background-color: #f9f9f9;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    width: 24px;
+    height: 24px;
+    margin-right: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+    font-weight: 900;
+  }
+  
+  .notificationBadge {
+    background-color: #ff3c00;
+    border: radius 10px;
+  }

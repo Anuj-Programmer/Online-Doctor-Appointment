@@ -1,0 +1,139 @@
+.booking-page {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.booking-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.doctor-card-booking {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.doctor-info-booking {
+    margin-bottom: 2rem;
+}
+
+.doctor-name-booking {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-details-booking {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.doctor-fee-booking {
+    font-weight: bold;
+    color: #ea580c;
+    font-size: 1.2rem;
+}
+
+.booking-form {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.booking-button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.booking-button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-container {
+        padding: 1rem;
+    }
+
+    .booking-header h1 {
+        font-size: 2rem;
+    }
+
+    .doctor-card-booking,
+    .booking-form {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation for form elements */
+.form-control,
+.booking-button {
+    transition: all 0.3s ease;
+}
+
+/* Custom styles for DatePicker */
+.ant-picker {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+}
+
+/* Custom styles for Select dropdown */
+.ant-select {
+    width: 100%;
+}
+
+.ant-select-selector {
+    height: 40px !important;
+    border-radius: 8px !important;
+}

@@ -1,0 +1,31 @@
+.search-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.search-results {
+  /* padding: 2rem; */
+  max-width: 1296px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.results-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* .doctors-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+} */
+
+.no-results {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-top: 2rem;
+}

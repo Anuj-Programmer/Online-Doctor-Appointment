@@ -1,134 +1,169 @@
 import React, { useState } from "react";
 import "../styles/RegisterStyles.css";
 import { Form, Input, Button, message } from "antd";
-// import logo from "./assets/Logo.png";
-// import loginIcon from "./assets/Login.svg";
-// import registerIcon from "./assets/Register.svg";
-import eyeIconShow from "../assets/Show.svg";
-import eyeIconHide from "../assets/Hide.svg";
 import axios from "axios";
-import { Link ,useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Footer from "../Components/Footer";
 import toast, { Toaster } from "react-hot-toast";
+import eyeIconShow from "../assets/Show.svg";
+import eyeIconHide from "../assets/Hide.svg";
+
+const BASE_URL = 'http://localhost:8080';
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
   const onFinish = async (values) => {
     try {
-      dispatch(showLoading())
-      const res = await axios.post("/api/v1/user/register", values);
-      dispatch(hideLoading())
+      const res = await axios.post(`${BASE_URL}/api/v1/user/register`, values);
+
       if (res.data.success) {
         toast.success("Registered Successfully!");
-        // alert("Registered Successfully!")
-        setTimeout(() => navigate("/login"), 1000);
+
+        const otpRes = await axios.post(`${BASE_URL}/api/v1/user/send-otp`, {
+          email: values.email,
+          name: values.name,
+        });
+
+        if (otpRes.data.success) {
+          setOtpSent(true);
+          setUserData(values);
+          message.success("OTP sent to your email!");
+        } else {
+          toast.error("Error sending OTP.");
+        }
       } else {
         toast.error("User already exists!");
-        // alert("User Already Exists!");
       }
     } catch (error) {
-      dispatch(hideLoading())
-      console.log(error);
-      message.error("Something went wrong.");
-      toast.error("Something went wrong.");
+      if (error.response) {
+        console.error('Error Response:', error.response.data);
+        toast.error(error.response.data.message || 'Something went wrong.');
+      } else {
+        console.error('Error:', error.message);
+        toast.error('Network error, please try again later.');
+      }
+    }
+  };
+
+  const verifyOtp = async () => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/v1/user/verify-otp`, {
+        email: userData.email,
+        otp,
+      });
+
+      if (res.data.success) {
+        toast.success("OTP verified successfully!");
+        navigate("/login");
+      } else {
+        toast.error("Invalid OTP.");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error('Error Response:', error.response.data);
+        toast.error(error.response.data.message || 'Something went wrong.');
+      } else {
+        console.error('Error:', error.message);
+        toast.error('Network error, please try again later.');
+      }
     }
   };
 
   return (
     <div className="signup-page">
-      <Toaster position="top-center"/>
-      {/* Header */}
-      {/* <div className="header">
-        <div className="nav">
-          <div className="logo-container">
-            <div className="logo-wrapper">
-              <img src={logo} className="logo" alt="Logo" />
-            </div>
-          </div>
-          <div className="nav-items">
-            <div className="nav-list">
-              <div className="nav-item active">Home</div>
-              <div className="nav-item">Contact</div>
-              <div className="nav-item">Help</div>
-              <div className="nav-item">About</div>
-            </div>
-            <div className="auth-buttons">
-              <div className="login-button">
-                <img src={loginIcon} className="icon" alt="Login icon" />
-                <div className="button-text">Login</div>
-              </div>
-              <div className="register-button">
-                <img src={registerIcon} className="icon" alt="Register icon" />
-                <div className="button-text">Register</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      <Toaster position="top-center" />
 
-      {/* Form */}
       <div className="form-container">
-        <div className="form-title">Sign Up</div>
-        <Form layout="vertical" onFinish={onFinish} className="form-content">
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter your name!' }]}> 
-            <Input placeholder="Enter your name" />
-          </Form.Item>
+        <div className="form-title1">Sign Up</div>
 
-          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}> 
-            <Input type="email" placeholder="Enter your email" />
-          </Form.Item>
+        {!otpSent ? (
+          <Form layout="vertical" onFinish={onFinish} className="form-content">
+            <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter your name!' }]}>
+              <Input placeholder="Enter your name" />
+            </Form.Item>
 
-          <Form.Item label="New Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}> 
-            <div className="password-input-container">
-              <Input type={showPassword ? "text" : "password"} placeholder="Enter your password" />
-              <img
-                src={showPassword ? eyeIconHide : eyeIconShow}
-                className="password-toggle"
-                alt="Toggle password visibility"
-                onClick={togglePasswordVisibility}
-              />
-            </div>
-          </Form.Item>
+            <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
+              <div className="password-input-container">
+                <Input type="email" placeholder="Enter your email" />
+              </div>
+            </Form.Item>
 
-          <Form.Item label="Confirm Password" name="confirmPassword" dependencies={["password"]} rules={[{ required: true, message: 'Please confirm your password!' }, ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error("Passwords do not match!"));
-            },
-          })]}> 
-            <div className="password-input-container">
-              <Input type={showConfirmPassword ? "text" : "password"} placeholder="Confirm your password" />
-              <img
-                src={showConfirmPassword ? eyeIconHide : eyeIconShow}
-                className="password-toggle"
-                alt="Toggle password visibility"
-                onClick={toggleConfirmPasswordVisibility}
-              />
-            </div>
-          </Form.Item>
+            <Form.Item label="New Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
+              <div className="password-input-container">
+                <Input type={showPassword ? "text" : "password"} placeholder="Enter your password" />
+                <img
+                  src={showPassword ? eyeIconHide : eyeIconShow}
+                  className="password-toggle"
+                  alt="Toggle password visibility"
+                  onClick={togglePasswordVisibility}
+                />
+              </div>
+            </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="create-account-button">Create Account</Button>
-          </Form.Item>
-        </Form>
+            <Form.Item
+              label="Confirm Password"
+              name="confirmPassword"
+              dependencies={["password"]}
+              rules={[
+                { required: true, message: 'Please confirm your password!' },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error("Passwords do not match!"));
+                  },
+                }),
+              ]}
+            >
+              <div className="password-input-container">
+                <Input type={showConfirmPassword ? "text" : "password"} placeholder="Confirm your password" />
+                <img
+                  src={showConfirmPassword ? eyeIconHide : eyeIconShow}
+                  className="password-toggle"
+                  alt="Toggle password visibility"
+                  onClick={toggleConfirmPasswordVisibility}
+                />
+              </div>
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="create-account-button">
+                Send OTP
+              </Button>
+            </Form.Item>
+          </Form>
+        ) : (
+          <div className="otp-form">
+            <h3 className="heading2" >Enter OTP sent to your email</h3>
+            <Input
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              placeholder="Enter OTP"
+              className="otp-input"
+            />
+            <Button onClick={verifyOtp} type="primary" className="verify-otp-button">
+              Verify OTP
+            </Button>
+          </div>
+        )}
+
         <div className="login-link">
           Already have an account? <Link to="/login" className="login-text">Login</Link>
         </div>
       </div>
 
-      {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
