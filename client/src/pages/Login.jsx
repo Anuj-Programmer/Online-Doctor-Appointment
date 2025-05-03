@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { setUser } from "../redux/features/userSlice";
@@ -16,17 +16,15 @@ import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false); // State to toggle forgot password form visibility
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  console.log("login");
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const onfinishHandler = async (values) => {
+  const onFinishHandler = async (values) => {
     try {
       dispatch(showLoading());
       const res = await axios.post("/api/v1/user/login", values);
@@ -54,66 +52,82 @@ function Login() {
       dispatch(hideLoading());
       toast.error("Invalid email or password");
     }
-};
+  };
+
   return (
     <div className="login-container">
       <Toaster position="top-center"/>
-      {/* <header className="header">
-        <div className="header-content">
-          <div className="logo-container">
-            <img src={logo} alt="Logo" className="logo" />
-          </div>
-          <div className="nav-container">
-            <nav className="main-nav">
-              <div className="nav-item">Home</div>
-              <div className="nav-item">Contact</div>
-              <div className="nav-item">Help</div>
-              <div className="nav-item">About</div>
-            </nav>
-            <div className="auth-buttons">
-              <div className="login-button">no
-                <img src={loginIcon} alt="Login Icon" className="icon" />
-                <span>Login</span>
-              </div>
-              <div className="register-button">
-                <img src={registerIcon} alt="Register Icon" className="icon" />
-                <span>Register</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header> */}
 
       <main className="main-content-login">
-        <div className="login-form-container">
-          <h1 className="login-title">Login</h1>
+        {/* Main container that holds the forms */}
+        <div className={`login-form-container ${forgotPassword ? 'forgot-password-active' : ''}`}>
+          {/* Login form */}
+          {!forgotPassword ? (
+            <>
+              <h1 className="login-title">Login</h1>
+              <Form layout="vertical" onFinish={onFinishHandler} className="login-form">
+                <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
+                  <Input 
+                    type="email" 
+                    placeholder="example@gmail.com" 
+                    className="form-input" 
+                    id="email"
+                  />
+                </Form.Item>
 
-          <Form layout="vertical" onFinish={onfinishHandler} className="login-form">
-            <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
-              <Input type="email" placeholder="example@gmail.com" className="form-input" id="email"/>
-            </Form.Item>
+                <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
+                  <div className="password-input-container">
+                    <Input 
+                      type={showPassword ? "text" : "password"} 
+                      placeholder="example123" 
+                      className="form-input password" 
+                      id="password"
+                    />
+                    <img
+                      src={showPassword ? hidePasswordIcon : showPasswordIcon}
+                      alt="Toggle Password"
+                      className="password-toggle"
+                      onClick={togglePasswordVisibility}
+                    />
+                  </div>
+                </Form.Item>
 
-            <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}>
-              <div className="password-input-container">
-                <Input type={showPassword ? "text" : "password"} placeholder="example123" className="form-input password" id="password"/>
-                <img
-                  src={showPassword ? hidePasswordIcon : showPasswordIcon}
-                  alt="Toggle Password"
-                  className="password-toggle"
-                  onClick={togglePasswordVisibility}
-                />
-              </div>
-            </Form.Item>
+                <button className="login-submit-button" type="submit">Login</button>
+              </Form>
+            </>
+          ) : (
+            // Forgot Password form
+            <div className="forgot-password-form">
+              <h3>Enter your email to reset your password</h3>
+              <Form layout="vertical" className="forgot-password-form-content">
+                <Form.Item 
+                  label="Email" 
+                  name="email" 
+                  rules={[{ required: true, message: 'Please enter your email!' }]}>
+                  <Input
+                    placeholder="Enter your email"
+                    className="form-input"
+                  />
+                </Form.Item>
 
-            <button className="login-submit-button" type="submit">Login</button>
-          </Form>
+                <Button type="primary" className="forgot-password-button">
+                  Send Reset Link
+                </Button>
+              </Form>
+            </div>
+          )}
+          {/* Forgot Password Link */}
+        {!forgotPassword && (
+          <div className="t" onClick={() => setForgotPassword(true)}>Forgot Password?</div>
+        )}
 
-          <div className="signup-prompt">
-            <span>Don't have an account? </span>
-            <Link to="/register" className="signup-link">Sign Up</Link>
-          </div>
+        <div className="signup-prompt">
+          <span>Don't have an account? </span>
+          <Link to="/register" className="signup-link">Sign Up</Link>
+        </div>
         </div>
       </main>
+
       <Footer/>
     </div>
   );
