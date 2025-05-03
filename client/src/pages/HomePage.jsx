@@ -25,6 +25,10 @@ function HomePage() {
   });
   const navigate = useNavigate();
 
+  const capitalizeFirstLetter = (string) => {
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || '';
+  };
+
   const getUserData = async () => {
     try {
       const res = await axios.post('/api/v1/user/getUserData', {}, {
@@ -361,7 +365,7 @@ function HomePage() {
                   speciality={doctor.specialization}
                   Avaibility="• Available"
                   fee={`$${doctor.fee}`}
-                  name={`Dr. ${doctor.firstName} ${doctor.lastName}`}
+                  name={`Dr. ${capitalizeFirstLetter(doctor.firstName)} ${capitalizeFirstLetter(doctor.lastName)}`}
                   location={doctor.address}
                   time={`${doctor.timeSlots[0]?.startTime || '30'} am`}
                   rating="4.5"

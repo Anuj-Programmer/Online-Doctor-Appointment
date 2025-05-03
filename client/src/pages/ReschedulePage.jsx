@@ -97,6 +97,9 @@ function ReschedulePage() {
     getUserData();
   }, []);
 
+  console.log(doctor);
+  
+
   const handleRescheduleAppointment = async (
     appointmentId,
     newDate,

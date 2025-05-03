@@ -1,0 +1,419 @@
+/* === General Layout === */
+.doctorDetail {
+    /* background-color: #fff; */
+    padding: 72px;
+    box-sizing: border-box; /* This will include padding inside the container's width */
+    width: 100%; /* Ensure it doesn't overflow */
+    position: relative; /* Ensure proper layout context */
+  }
+
+.availabilitySection {
+    /* border-bottom: 0.8px solid #cbd5e1; */
+    margin-top: 48px;
+    width: 100%;
+    padding-bottom: 25px;
+  }
+
+.BioSection {
+    border-bottom: 0.8px solid #cbd5e1;
+    margin-top: 48px;
+    width: 100%;
+    padding-bottom: 25px;
+  }
+  
+  .sectionHeader {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 40px 100px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .sectionTitle {
+    color: #0f172a;
+    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: auto 0;
+  }
+  
+  .controlButtons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: "Font Awesome 5 Free", -apple-system, Roboto, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #000;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1;
+  }
+  
+  .controlButton {
+    border-radius: 10px;
+    background-color: #f8fafc;
+    width: 45px;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* === Time Slots === */
+  .timeSlots {
+    display: flex;
+    margin-top: 15px;
+    align-items: flex-start;
+    gap: 24px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+    text-align: center;
+  }
+  
+  .timeSlot {
+    /* align-items: center; */
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 164px; /* Fixed width */
+    flex: 0 0 auto; /* Prevent shrinking or growing */
+  }
+  
+  
+  .slotDate {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+  }
+  
+  .slotTime {
+    color: #252a30;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 5px;
+  }
+  
+  /* === Banner Card === */
+  .bannerCard {
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0px 4px 14px rgba(226, 237, 255, 0.25);
+    background-color: #fff;
+    width: 100%; /* Ensure the bannerCard fits within the parent container */
+    max-width: 1200px; /* You can still limit the max-width if needed */
+    padding: 25px;
+  }
+  
+  .bannerContent {
+    width: 100%;
+    display: flex;
+    gap: 40px;
+  }
+  
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  .doctorProfile {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .profileImageColumn,
+  .profileImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .profileDetailsColumn {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .profileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .availabilityBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #ccfbf1;
+    border-radius: 30px;
+    padding: 6px 10px;
+    color: #16b8a2;
+    font-size: 12px;
+    font-weight: 500;
+    width: fit-content;
+  }
+  
+  .availabilityDot {
+    font-size: 6px;
+    color: #16b8a2;
+  }
+  
+  .nameSection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .doctorName {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .specialtySeparator {
+    color: #4f46e5;
+    font-size: 14px;
+  }
+  
+  .specialtyText {
+    color: #012047;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .qualification {
+    color: #252a30;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
+  
+  .ratingSection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .starIcon {
+    color: #ffca18;
+    font-size: 14px;
+  }
+  
+  .ratingValue {
+    color: #252a30;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .reviewsLink {
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  
+  /* === Stats Column === */
+  .statsColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    width: 50%;
+  }
+  
+  .statsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .recommendationStat,
+  .hospitalStat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .recommendIcon,
+  .hospitalIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+  }
+  
+  .likeIcon {
+    color: #0E82FD;
+    font-size: 14px;
+  }
+  
+  .buildingIcon {
+    color: #0E82FD;
+    font-size: 14px;
+  }
+  
+  .recommendText,
+  .hospitalName {
+    font-size: 14px;
+    color: #252a30;
+  }
+  
+  .recommendPercent {
+    font-weight: 600;
+  }
+  
+  .recommendLabel {
+    font-weight: 400;
+  }
+  
+  /* === Accepting Patients === */
+  .acceptingPatients {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f0fdf4;
+    padding: 6px 10px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-top: auto;
+  }
+  
+  .acceptingIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #059669;
+    color: white;
+  }
+  
+  .checkIcon {
+    font-size: 8px;
+  }
+  
+  .acceptingText {
+    font-size: 12px;
+    font-weight: 500;
+    color: #059669;
+  }
+  
+  /* === Actions Section === */
+  .bannerActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  
+  .chatButton {
+    border: none;
+    background: none;
+    color: #0e82fd;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .appointmentSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .priceInfo {
+    font-size: 14px;
+    color: #252a30;
+  }
+  
+  .priceLabel {
+    font-weight: 600;
+  }
+  
+  .sessionLabel {
+    font-weight: 400;
+  }
+  
+  .bookButton {
+    background-color: #0e82fd;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  /* === Responsive Media Queries === */
+  @media (max-width: 991px) {
+    .availabilitySection {
+      margin-top: 40px;
+    }
+  
+    .sectionHeader {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .bannerContent {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .profileInfo,
+    .statsColumn {
+      width: 100%;
+    }
+  
+    .bannerActions {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+  
+    .appointmentSection {
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .acceptingPatients {
+      margin-top: 15px;
+      margin-left: 0;
+      align-self: flex-start;
+    }
+  }
+  
