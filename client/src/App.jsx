@@ -9,6 +9,7 @@ import Register from './pages/Register'
 import Help from './Components/Help'
 import SearchResults from './Components/SearchResults'
 import Settings from './Components/Setting'
+import BookingPage from './pages/BookingPage.jsx'
 function App() {
  
 
@@ -16,10 +17,12 @@ function App() {
     <>
      <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Help/>} />
+        <Route path="/a" element={<Help/>} />
+        <Route path="/b" element={<BookingPage/>} />
+
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
-        <Route path='/search' element={<SearchResults/>} />
+        <Route path='/' element={<SearchResults/>} />
         <Route path='/settings' element={<Settings/>} />
       </Routes>
      </BrowserRouter>

@@ -12,6 +12,7 @@ const DoctorSearch = () => {
       id: '1',
       name: 'Dr. Michael Blue',
       specialty: 'Psychologist',
+      experience: '12 years experience',
       location: 'Minneapolis, MN',
       rating: 5.0,
       duration: '30 Min',
@@ -23,6 +24,7 @@ const DoctorSearch = () => {
       id: '2',
       name: 'Dr. Madison Rose',
       specialty: 'Gynecologist',
+      experience: '10 years experience',
       location: 'Minneapolis, MN',
       rating: 5.0,
       duration: '30 Min',
@@ -34,6 +36,7 @@ const DoctorSearch = () => {
       id: '3',
       name: 'Dr. Michael Brown',
       specialty: 'Psychologist',
+      experience: '8 years experience',
       location: 'Chicago, IL',
       rating: 4.8,
       duration: '45 Min',
@@ -45,6 +48,7 @@ const DoctorSearch = () => {
       id: '4',
       name: 'Dr. Olivia Carter',
       specialty: 'Dermatologist',
+      experience: '15 years experience',
       location: 'San Francisco, CA',
       rating: 4.9,
       duration: '40 Min',
@@ -56,6 +60,7 @@ const DoctorSearch = () => {
       id: '5',
       name: 'Dr. Ethan Wilson',
       specialty: 'Cardiologist',
+      experience: '13 years experience',
       location: 'New York, NY',
       rating: 4.7,
       duration: '30 Min',
@@ -67,6 +72,7 @@ const DoctorSearch = () => {
       id: '6',
       name: 'Dr. Sophia Martinez',
       specialty: 'Pediatrician',
+      experience: '9 years experience',
       location: 'Los Angeles, CA',
       rating: 5.0,
       duration: '50 Min',
@@ -78,6 +84,7 @@ const DoctorSearch = () => {
       id: '7',
       name: 'Dr. Liam Anderson',
       specialty: 'Neurologist',
+      experience: '11 years experience',
       location: 'Seattle, WA',
       rating: 4.6,
       duration: '60 Min',
@@ -89,6 +96,7 @@ const DoctorSearch = () => {
       id: '8',
       name: 'Dr. Ava Thomas',
       specialty: 'Endocrinologist',
+      experience: '7 years experience',
       location: 'Houston, TX',
       rating: 4.8,
       duration: '45 Min',
@@ -100,6 +108,7 @@ const DoctorSearch = () => {
       id: '9',
       name: 'Dr. Noah Harris',
       specialty: 'Orthopedic Surgeon',
+      experience: '14 years experience',
       location: 'Boston, MA',
       rating: 4.9,
       duration: '50 Min',
@@ -111,6 +120,7 @@ const DoctorSearch = () => {
       id: '10',
       name: 'Dr. Emma White',
       specialty: 'Ophthalmologist',
+      experience: '6 years experience',
       location: 'Denver, CO',
       rating: 5.0,
       duration: '35 Min',
@@ -258,6 +268,9 @@ const DoctorSearch = () => {
           >
             {currentDoctors.map((doctor) => (
               <div key={doctor.id} className="doctor-card">
+                 <div className="hover-info">
+                   <b><p>{doctor.experience}</p></b>
+                  </div>
                 <div className="doctor-image-container">
                   <img
                     src={doctor.image}

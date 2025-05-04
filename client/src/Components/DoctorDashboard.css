@@ -1,0 +1,487 @@
+/* Base styles and fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #272b41;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Sidebar styles - copied from DocAppointment */
+.sidebar-container {
+  width: 310px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  border: none;
+}
+
+.doctor-profile {
+  padding: 20px;
+  border-bottom: 0.8px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-image-wrapper {
+  width: 136px;
+  height: 136px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 68px;
+  background-color: #f7f7f7;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.doctor-name {
+  color: #272b41;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.doctor-specialty {
+  color: #757575;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  padding: 16px 20px;
+  gap: 14px;
+  color: #757575;
+  font-size: 14px;
+  border-bottom: 0.8px solid #f0f0f0;
+  cursor: pointer;
+  align-items: center;
+}
+
+.nav-item.active {
+  color: #007bff;
+}
+
+.nav-item:hover {
+  background-color: rgb(225, 225, 225);
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Main content styles - Updated to match image */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.content-header {
+  margin-bottom: 30px;
+}
+
+.page-title {
+  color: #272b41;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* Overview cards */
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.overview-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon-progress {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.card-icon-progress img {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-icon-progress.pink {
+  background: conic-gradient(#FF4081 0% 75%, #FFE0EB 75% 100%);
+}
+
+.card-icon-progress.pink::before {
+  content: '';
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  background: white;
+  border-radius: 50%;
+}
+
+.card-icon-progress.green {
+  background: conic-gradient(#00E0C7 0% 65%, #E0F8F7 65% 100%);
+}
+
+.card-icon-progress.green::before {
+  content: '';
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  background: white;
+  border-radius: 50%;
+}
+
+.card-icon-progress.blue {
+  background: conic-gradient(#2196F3 0% 45%, #E3F2FD 45% 100%);
+}
+
+.card-icon-progress.blue::before {
+  content: '';
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  background: white;
+  border-radius: 50%;
+}
+
+.card-details {
+  flex: 1;
+}
+
+.card-title {
+  color: #757575;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card-count {
+  color: #272B41;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card-date {
+  color: #757575;
+  font-size: 13px;
+}
+
+/* Appointments section */
+.appointments-section {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  color: #272b41;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.filter-tab {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+  color: #757575;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.filter-tab:hover {
+  background: rgba(33, 150, 243, 0.1);
+  color: #2196F3;
+}
+
+.filter-tab.active {
+  background: #2196F3;
+  color: white;
+}
+
+.filter-tab.active:hover {
+  background: #1976D2;
+}
+
+/* Appointments table */
+.appointments-table {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: minmax(250px, 2fr) minmax(180px, 1.5fr) minmax(120px, 1fr) minmax(100px, 1fr) minmax(180px, 1.5fr);
+  padding: 12px 20px;
+  background: #F8F9FA;
+  border-bottom: 1px solid #E6E6E6;
+  font-weight: 500;
+  color: #333;
+}
+
+.table-body .appointment-row {
+  display: grid;
+  grid-template-columns: minmax(250px, 2fr) minmax(180px, 1.5fr) minmax(120px, 1fr) minmax(100px, 1fr) minmax(180px, 1.5fr);
+  padding: 12px 20px;
+  align-items: center;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+}
+
+.patient-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.patient-name {
+  font-weight: 500;
+  color: #272B41;
+  font-size: 14px;
+}
+
+.patient-id {
+  color: #757575;
+  font-size: 13px;
+}
+
+.appointment-date {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 160px;
+}
+
+.date {
+  color: #272B41;
+  font-size: 14px;
+}
+
+.time {
+  color: #2196F3;
+  font-size: 13px;
+}
+
+.appointment-purpose {
+  min-width: 100px;
+}
+
+.appointment-amount {
+  min-width: 80px;
+}
+
+.appointment-actions {
+  display: flex;
+  gap: 6px;
+  min-width: 160px;
+}
+
+/* Button Styles */
+.btn-view,
+.btn-upcoming,
+.btn-declined,
+.btn-accept,
+.btn-cancel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-view {
+  background: #E5F7F7;
+  color: #00D0C5;
+}
+
+.btn-upcoming {
+  background: #E5F7F7;
+  color: #00D0C5;
+}
+
+.btn-declined {
+  background: #FFE5E5;
+  color: #FF0000;
+}
+
+.btn-accept {
+  background: #E8F8F0;
+  color: #00CC52;
+}
+
+.btn-cancel {
+  background: #FFE5E5;
+  color: #FF0000;
+}
+
+.action-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Update other text elements to use Inter */
+.card-title,
+.card-count,
+.card-date,
+.patient-name,
+.patient-id,
+.date,
+.time,
+.appointment-purpose,
+.appointment-amount,
+.btn-view,
+.btn-upcoming,
+.btn-declined,
+.btn-accept,
+.btn-cancel {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Footer styles */
+.dashboard-footer {
+  padding: 16px;
+  text-align: center;
+  color: #465d7c;
+  font-size: 16px;
+  border-top: 0.8px solid #fff;
+  background-color: #f0f0f0;
+  font-family: "Inter", sans-serif;
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .overview-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .overview-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .appointments-table {
+    overflow-x: auto;
+  }
+
+  .table-header,
+  .appointment-row {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-tabs {
+    flex-wrap: wrap;
+  }
+
+  .filter-tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .appointment-actions {
+    flex-direction: column;
+  }
+
+  .btn-view,
+  .btn-upcoming,
+  .btn-declined,
+  .btn-accept,
+  .btn-cancel {
+    width: 100%;
+    justify-content: center;
+  }
+}
