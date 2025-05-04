@@ -41,9 +41,9 @@ const AboutPage = () => {
 
           <div className={styles.imageColumn}>
             <div className={styles.experienceBox}>
-              <span>Over 25+ Years</span>
+              <span>Trusted and</span>
               <br />
-              <span>Experience</span>
+              <span>Experienced</span>
             </div>
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/47f9f7db5bdb866b20006f92a3d6e4c33f831cd5"
@@ -148,7 +148,7 @@ const AboutPage = () => {
               alt="John Doe"
               className={styles.testimonialImage}
             />
-            <div className={styles.testimonialName}>John Doe</div>
+            <div className={styles.testimonialName}>Ankit Tamrakar</div>
             <div className={styles.testimonialLocation}>Kathmandu</div>
           </div>
           <div className={styles.testimonialText}>

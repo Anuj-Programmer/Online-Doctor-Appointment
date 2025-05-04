@@ -54,6 +54,15 @@ function Nav() {
     navigate("/login");
   };
 
+  const handleNotificationClick = () => {
+    setIsNotificationOpen(false);
+    if (user?.isDoctor) {
+      navigate('/doctordashboard', { state: { activeTab: 'appointments' } });
+    } else {
+      navigate('/appointment');
+    }
+  };
+
   return(
     <>
     <div className="nav">
@@ -106,7 +115,12 @@ function Nav() {
                       <div className="notification-content">
                         {user?.notification?.length > 0 ? (
                           user.notification.map((notification, index) => (
-                            <div key={index} className="notification-item-content">
+                            <div 
+                              key={index} 
+                              className="notification-item-content"
+                              onClick={handleNotificationClick}
+                              style={{ cursor: 'pointer' }}
+                            >
                               <p className="notification-message">{notification.message}</p>
                               {notification.type === "doctor-application" && (
                                 <p className="notification-status">Status: Pending Approval</p>
@@ -135,7 +149,7 @@ function Nav() {
                   {isDropdownOpen && (
                     <div className="dropdown">
                       <div className="dropdown-arrow"></div>
-                      <div className="dropdown-item">Edit Profile</div>
+                      <Link to="/profile" className="dropdown-item">Edit Profile</Link>
 
                       {!user?.isDoctor && (
                         <Link to="/appointment" className="dropdown-item">My Appointments</Link>
