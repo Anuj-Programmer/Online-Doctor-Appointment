@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SidebarDoctor from '../../Components/SidebarDoctor'
 import "../../styles/DoctorDashboard.css"
-
+import { useLocation } from 'react-router-dom';
 
 import Nav from '../../Components/Nav';
 import DoctorAppointment from './DoctorAppointment';
@@ -11,29 +11,37 @@ import { setUser } from '../../redux/features/userSlice';
 import DoctorSchedule from './DoctorSchedule';
 import Footer from '../../Components/Footer';
 
-function DoctorDasboard() {
+function DoctorDashboard() {
   const { user } = useSelector((state) => state.user);
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'dashboard');
   const dispatch = useDispatch();
 
-const getUserData = async () => {
-  try {
-    const res = await axios.post('/api/v1/user/getUserData', {}, {
-      headers:{
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-      })
-    if(res.data.success) {
-      dispatch(setUser(res.data.data))
+  // Add effect to handle location state changes
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
     }
-  } catch (error) {
-    console.log(error);
-  }
-}
+  }, [location.state]);
 
-useEffect(() => {
-  getUserData()
-}, [])
+  const getUserData = async () => {
+    try {
+      const res = await axios.post('/api/v1/user/getUserData', {}, {
+        headers:{
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+        })
+      if(res.data.success) {
+        dispatch(setUser(res.data.data))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
 
   const renderContent = () => {
     switch (activeTab) {
@@ -72,4 +80,4 @@ useEffect(() => {
   );
 }
 
-export default DoctorDasboard
+export default DoctorDashboard

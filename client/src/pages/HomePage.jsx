@@ -11,7 +11,7 @@ import "../styles/HomePage.css"
 import Brain from "../assets/Brain.png"
 import Kidney from "../assets/kidney.png"
 import Neurology from "../assets/Neurology.png"
-import DoctorDasboard from './Doctor/DoctorDasboard';
+import DoctorDashboard from './Doctor/DoctorDashboard';
 const { Option } = Select;
 
 function HomePage() {
@@ -142,7 +142,7 @@ function HomePage() {
 
   // If user is a doctor, show doctor dashboard
   if (user?.isDoctor) {
-    return <DoctorDasboard />;
+    return <DoctorDashboard />;
   }
 
   // Regular homepage content for non-doctor users
