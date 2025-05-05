@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Nav from "../Components/Nav";
 import Footer from "../Components/Footer";
 import "../styles/BookingPage.css";
+import dayjs from "dayjs";
 
 function ReschedulePage() {
   const { user } = useSelector((state) => state.user);
@@ -17,13 +18,12 @@ function ReschedulePage() {
 
   const { doctorId } = useParams();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [doctor, setDoctor] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
-  const [appointmentData, setAppointmentData] = useState([]);      
-       
+  const [appointmentData, setAppointmentData] = useState([]);
 
   // const [loading, setLoading] = useState(false);
   const getUserData = async () => {
@@ -44,16 +44,19 @@ function ReschedulePage() {
       console.log(error);
     }
   };
- 
 
   const fetchAppointmentData = async () => {
     try {
-        console.log("User ID", user?._id);
-      const res = await axios.post(`/api/v1/user/get-user-appointments`, {
-        userId: user._id,
-      }, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      });
+      console.log("User ID", user?._id);
+      const res = await axios.post(
+        `/api/v1/user/get-user-appointments`,
+        {
+          userId: user._id,
+        },
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
       if (res.data.success) {
         setAppointmentData(res.data.data);
       }
@@ -78,7 +81,7 @@ function ReschedulePage() {
       }
     } catch (error) {
       console.log(error);
-      // toast.error('Failed to fetch doctor details');
+      toast.error("Failed to fetch doctor details");
     }
   };
 
@@ -94,6 +97,7 @@ function ReschedulePage() {
     getUserData();
   }, []);
 
+  console.log(doctor);
   
 
   const handleRescheduleAppointment = async (
@@ -102,10 +106,6 @@ function ReschedulePage() {
     newTimeSlot
   ) => {
     try {
-        // console.log(newTimeSlot);
-       
-        
-        // console.log('hello232');
       if (!appointmentId) {
         toast.error("No appointment selected for rescheduling.");
         return;
@@ -115,18 +115,26 @@ function ReschedulePage() {
         toast.error("Please select both date and time slot");
         return;
       }
-    console.log(newTimeSlot); // working
+
+      // Validate that the selected date is not in the past
+      const selectedDateObj = dayjs(newDate);
+      const today = dayjs().startOf("day");
+
+      if (selectedDateObj.isBefore(today)) {
+        toast.error("Cannot reschedule to a past date");
+        return;
+      }
 
       const parsedTimeSlot = JSON.parse(newTimeSlot);
       const { _id, ...cleanTimeSlot } = parsedTimeSlot;
       const token = localStorage.getItem("token");
-    
+
       const response = await axios.post(
         `/api/v1/user/reschedule-appointment`,
         {
           appointmentId,
           newDate,
-          timeSlot: cleanTimeSlot,  // Make sure cleanTimeSlot is correctly populated
+          timeSlot: cleanTimeSlot,
         },
         {
           headers: {
@@ -136,13 +144,16 @@ function ReschedulePage() {
       );
 
       if (response.data.success) {
-        toast.success("Appointment rescheduled successfully, waiting for doctor approval");
+        toast.success(
+          "Appointment rescheduled successfully, waiting for doctor approval"
+        );
+        // Optionally navigate to appointments page or show success message
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.error(" sdfsad fsda Error rescheduling appointment:", error);
-      toast.error(" kjklsdfjkls Failed to reschedule appointment");
+      console.error("Error rescheduling appointment:", error);
+      toast.error("Failed to reschedule appointment");
     }
   };
 
@@ -157,26 +168,25 @@ function ReschedulePage() {
       );
 
       if (res.data.success) {
-        setBookedSlots(res.data.data || []); // Ensure bookedSlots updates correctly
+        setBookedSlots(res.data.data || []);
       } else {
-        setBookedSlots([]); // Reset if request fails
+        setBookedSlots([]);
         toast.error(res.data.message || "Failed to fetch booked slots");
       }
     } catch (error) {
       console.log(error);
       setBookedSlots([]);
       toast.error(
-        error.response.data.message || "Failed to fetch booked slots"
+        error.response?.data?.message || "Failed to fetch booked slots"
       );
     }
   };
 
- 
-
-//   console.log("Doctor ID", doctorId);
-//   console.log("User ID", user?.email);
+  //   console.log("Doctor ID", doctorId);
+  //   console.log("User ID", user?.email);
 
   return (
+    <>
     <div className="booking-page">
       <Nav />
       {/* <Toaster position="top-center" /> */}
@@ -222,86 +232,101 @@ function ReschedulePage() {
                 <label className="form-label">Select Appointment Date</label>
                 <DatePicker
                   className="form-control"
-                  onChange={(date, dateString) => setSelectedDate(dateString)}
+                  onChange={(date, dateString) => {
+                    const selectedDateObj = dayjs(date);
+                    const today = dayjs().startOf("day");
+
+                    if (selectedDateObj.isBefore(today)) {
+                      toast.error("Cannot select a past date");
+                      setSelectedDate(null);
+                      return;
+                    }
+                    setSelectedDate(dateString);
+                  }}
                   format="YYYY-MM-DD"
+                  disabledDate={(current) => {
+                    return current && current < dayjs().startOf("day"); // ✅ This is the corrected version
+                  }}
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Select Time Slot</label>
-                <select
-                  className="form-control"
-                  value={selectedSlot}
-                  onChange={(e) => {
-                    const selected = JSON.parse(e.target.value);
-                    const isBooked = bookedSlots.some(
-                      (slot) =>
-                        slot.startTime === selected.startTime &&
-                        slot.endTime === selected.endTime
-                    );
-
-                    if (isBooked) {
-                      toast.error("This slot is already booked!");
-                    } else {
-                      setSelectedSlot(e.target.value);
-                    }
-                  }}
-                >
-                  <option value="">Choose a time slot</option>
-                  {doctor.timeSlots &&
-                    doctor.timeSlots.map((slot, index) => {
+              {selectedDate && (
+                <div className="form-group">
+                  <label className="form-label">Select Time Slot</label>
+                  <select
+                    className="form-control"
+                    value={selectedSlot}
+                    onChange={(e) => {
+                      const selected = JSON.parse(e.target.value);
                       const isBooked = bookedSlots.some(
-                        (booked) =>
-                          booked.startTime === slot.startTime &&
-                          booked.endTime === slot.endTime
+                        (slot) =>
+                          slot.startTime === selected.startTime &&
+                          slot.endTime === selected.endTime
                       );
 
-                      return (
-                        <option
-                          key={index}
-                          value={JSON.stringify(slot)}
-                          disabled={isBooked}
-                          style={isBooked ? { backgroundColor: "#ccc" } : {}}
-                        >
-                          {slot.startTime} - {slot.endTime}{" "}
-                          {isBooked ? "(Booked)" : ""}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
+                      if (isBooked) {
+                        toast.error("This slot is already booked!");
+                      } else {
+                        setSelectedSlot(e.target.value);
+                      }
+                    }}
+                  >
+                    <option value="">Choose a time slot</option>
+                    {doctor.timeSlots &&
+                      doctor.timeSlots.map((slot, index) => {
+                        const isBooked = bookedSlots.some(
+                          (booked) =>
+                            booked.startTime === slot.startTime &&
+                            booked.endTime === slot.endTime
+                        );
+
+                        return (
+                          <option
+                            key={index}
+                            value={JSON.stringify(slot)}
+                            disabled={isBooked}
+                            style={isBooked ? { backgroundColor: "#ccc" } : {}}
+                          >
+                            {slot.startTime} - {slot.endTime}{" "}
+                            {isBooked ? "(Booked)" : ""}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+              )}
 
               <button
-  type="button"
-  className="booking-button"
-  onClick={() => {
-    // Ensure appointmentData is not empty and contains an item with _id
-    if (!appointmentData.length || !appointmentData[0]._id) {
-      toast.error("No appointment found to reschedule.");
-      return;
-    }
+                type="button"
+                className="booking-button"
+                onClick={() => {
+                  if (!appointmentData.length || !appointmentData[0]._id) {
+                    toast.error("No appointment found to reschedule.");
+                    return;
+                  }
 
-    if (!selectedDate || !selectedSlot) {
-      toast.error("Please select both date and time slot.");
-      return;
-    }
+                  if (!selectedDate || !selectedSlot) {
+                    toast.error("Please select both date and time slot.");
+                    return;
+                  }
 
-    // Proceed with rescheduling the appointment
-    handleRescheduleAppointment(
-      appointmentData[0]._id, // Access the _id of the first appointment item
-      selectedDate,
-      selectedSlot
-    );
-  }}
->
-  Reschedule Appointment
-</button>
+                  handleRescheduleAppointment(
+                    appointmentData[0]._id,
+                    selectedDate,
+                    selectedSlot
+                  );
+                }}
+              >
+                Reschedule Appointment
+              </button>
             </div>
           </div>
         )}
       </div>
-      <Footer />
+      
     </div>
+    <Footer />
+    </>
   );
 }
 

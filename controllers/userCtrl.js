@@ -538,7 +538,109 @@ const getBookedSlots = async (req, res) => {
 //     }
 // }
 
+const changeEmail = async (req, res) => {
+    try {
+        const { newEmail, currentPassword } = req.body;
+        const user = await userModel.findById(req.body.userId);
 
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found",
+                success: false
+            });
+        }
 
+        // Verify current password
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(401).send({
+                message: "Current password is incorrect",
+                success: false
+            });
+        }
 
-module.exports = { loginController, registerController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment, getBookedSlots }
+        // Check if new email already exists
+        const existingUser = await userModel.findOne({ email: newEmail });
+        if (existingUser) {
+            return res.status(400).send({
+                message: "Email already in use",
+                success: false
+            });
+        }
+
+        // Update email
+        user.email = newEmail;
+        await user.save();
+
+        res.status(200).send({
+            message: "Email updated successfully",
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in changing email",
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+const changePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const user = await userModel.findById(req.body.userId);
+
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        // Verify current password
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(401).send({
+                message: "Current password is incorrect",
+                success: false
+            });
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        // Update password
+        user.password = hashedPassword;
+        await user.save();
+
+        res.status(200).send({
+            message: "Password updated successfully",
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in changing password",
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+module.exports = { 
+    loginController, 
+    registerController, 
+    authController, 
+    markAllNotifications, 
+    deleteAllNotifications, 
+    bookAppointment, 
+    searchDoctor, 
+    getUserAppointments, 
+    rescheduleAppointment, 
+    cancelAppointment, 
+    getBookedSlots,
+    changeEmail,
+    changePassword 
+};

@@ -1,5 +1,5 @@
 const express = require('express');
-const {registerController, loginController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment, getBookedSlots } = require('../controllers/userCtrl');
+const {registerController, loginController, authController, markAllNotifications, deleteAllNotifications, bookAppointment, searchDoctor, getUserAppointments, rescheduleAppointment, cancelAppointment, getBookedSlots, changeEmail, changePassword} = require('../controllers/userCtrl');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -38,7 +38,12 @@ router.post('/cancel-appointment', authMiddleware, cancelAppointment);
 // router.get('/get-appointment/:appointmentId', authMiddleware, getAppointment);
 
 //Get Booked Slots || POST
-router.post('/get-booked-slots', authMiddleware, getBookedSlots);   
+router.post('/get-booked-slots', authMiddleware, getBookedSlots);
 
+//Change Email || POST
+router.post('/change-email', authMiddleware, changeEmail);
+
+//Change Password || POST
+router.post('/change-password', authMiddleware, changePassword);
 
 module.exports = router;

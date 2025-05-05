@@ -89,7 +89,17 @@ function Login() {
           <h1 className="login-title">Login</h1>
 
           <Form layout="vertical" onFinish={onfinishHandler} className="login-form">
-            <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}>
+            <Form.Item 
+              label="Email" 
+              name="email" 
+              rules={[
+                { required: true, message: 'Please enter your email!' },
+                { 
+                  pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
+                  message: 'Please enter a valid Gmail address!'
+                }
+              ]}
+            >
               <Input type="email" placeholder="example@gmail.com" className="form-input" id="email"/>
             </Form.Item>
 

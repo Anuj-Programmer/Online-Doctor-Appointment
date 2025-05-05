@@ -83,7 +83,17 @@ function SignUpPage() {
             <Input placeholder="Enter your name" />
           </Form.Item>
 
-          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please enter your email!' }]}> 
+          <Form.Item 
+            label="Email" 
+            name="email" 
+            rules={[
+              { required: true, message: 'Please enter your email!' },
+              { 
+                pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
+                message: 'Please enter a valid Gmail address!'
+              }
+            ]}
+          > 
             <Input type="email" placeholder="Enter your email" />
           </Form.Item>
 

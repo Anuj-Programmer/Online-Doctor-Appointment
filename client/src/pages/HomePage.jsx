@@ -11,7 +11,7 @@ import "../styles/HomePage.css"
 import Brain from "../assets/Brain.png"
 import Kidney from "../assets/kidney.png"
 import Neurology from "../assets/Neurology.png"
-import DoctorDasboard from './Doctor/DoctorDasboard';
+import DoctorDashboard from './Doctor/DoctorDashboard';
 const { Option } = Select;
 
 function HomePage() {
@@ -24,6 +24,10 @@ function HomePage() {
     specialization: ''
   });
   const navigate = useNavigate();
+
+  const capitalizeFirstLetter = (string) => {
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || '';
+  };
 
   const getUserData = async () => {
     try {
@@ -138,7 +142,7 @@ function HomePage() {
 
   // If user is a doctor, show doctor dashboard
   if (user?.isDoctor) {
-    return <DoctorDasboard />;
+    return <DoctorDashboard />;
   }
 
   // Regular homepage content for non-doctor users
@@ -361,7 +365,7 @@ function HomePage() {
                   speciality={doctor.specialization}
                   Avaibility="• Available"
                   fee={`$${doctor.fee}`}
-                  name={`Dr. ${doctor.firstName} ${doctor.lastName}`}
+                  name={`Dr. ${capitalizeFirstLetter(doctor.firstName)} ${capitalizeFirstLetter(doctor.lastName)}`}
                   location={doctor.address}
                   time={`${doctor.timeSlots[0]?.startTime || '30'} am`}
                   rating="4.5"

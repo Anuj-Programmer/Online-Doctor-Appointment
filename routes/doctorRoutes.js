@@ -7,8 +7,12 @@ const {
     changeDoctorStatus,
     getDoctorAppointments,
     updateAppointmentStatus,
+    updateDoctorTimeSlot,
+    getTimeSlots,
+    updateTimeSlots
 } = require('../controllers/doctorCtrl');
 const authMiddleware = require('../middlewares/authMiddleware');
+const { isAdmin } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
@@ -33,6 +37,11 @@ router.get('/get-doctor-appointments/:id', authMiddleware, getDoctorAppointments
 // Update appointment status || PUT
 router.post('/update-appointment-status', authMiddleware, updateAppointmentStatus);
 
- 
+// Update Doctor Time Slot || PUT
+router.put('/update-doctor-timeslot', updateDoctorTimeSlot)
+
+// Time slots routes
+router.get('/time-slots/:doctorId', authMiddleware, getTimeSlots);
+router.put('/time-slots/:doctorId', authMiddleware, updateTimeSlots);
 
 module.exports = router; 

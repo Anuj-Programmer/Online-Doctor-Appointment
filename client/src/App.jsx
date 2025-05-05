@@ -20,10 +20,13 @@ import AboutPage from "./pages/AboutPage";
 import Help from "./pages/Help";
 import DoctorDetail from "./pages/DoctorDetail";
 import BookingPage from "./pages/BookingPage";
-import DoctorDasboard from "./pages/Doctor/DoctorDasboard";
+import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import UserAppointment from "./pages/UserAppointment";
 import ReschedulePage from "./pages/ReschedulePage";
 import SearchPage from "./pages/SearchPage";
+import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
+import UserProfile from "./pages/UserProfile";
+import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -112,12 +115,22 @@ function App() {
               } /> 
             <Route path="/doctordashboard" element={
               <ProtectedRoute>
-                <DoctorDasboard />
+                <DoctorDashboard />
+              </ProtectedRoute> 
+              } />  
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <UserProfile/>
               </ProtectedRoute> 
               } />  
             <Route path="/appointment" element={
               <ProtectedRoute>
                 <UserAppointment />
+              </ProtectedRoute>
+              } />
+            <Route path="/doctor/appointment" element={
+              <ProtectedRoute>
+                <DoctorAppointment/>
               </ProtectedRoute>
               } />
             <Route path="/reschedule/:doctorId" element={
@@ -128,6 +141,11 @@ function App() {
             <Route path="/search" element={
               <ProtectedRoute>  
               <SearchPage/>
+              </ProtectedRoute>
+            }/>
+            <Route path="/doctor/schedule/:id" element={
+              <ProtectedRoute>
+                <DoctorSchedule />
               </ProtectedRoute>
             }/>
           </Routes>
