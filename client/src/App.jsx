@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -38,8 +39,11 @@ function App() {
           <Spinner />
         ) : (
           <Routes>
+            {/* Landing page as the default route */}
+            <Route path="/" element={<LandingPage />} />
+            
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRoute>
                   <HomePage />
