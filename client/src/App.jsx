@@ -12,6 +12,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import ApplyDoctor from "./pages/ApplyDoctor";
 import Admin from "./pages/Admin/Admin";
+import AdminAppointment from "./pages/Admin/AdminAppointment";
 import AdminRoute from "./Components/AdminRoute";
 import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:8080";
@@ -103,7 +104,14 @@ function App() {
                 </AdminRoute>
               }
             />
-
+            <Route
+              path="/admin-appointment"
+              element={
+                <AdminRoute>
+                  <AdminAppointment />
+                </AdminRoute>
+              }
+            />
             <Route path="/doctor/:doctorId" element={
               <ProtectedRoute>
                 <DoctorDetail />

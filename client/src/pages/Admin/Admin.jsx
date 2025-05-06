@@ -126,6 +126,11 @@ function Admin() {
           <button onClick={handleLogout}>Logout</button>
         </Link>
       </div>
+      <div style={{ marginTop: '20px' }}>
+        <Link to="/admin-appointment">
+          Appointment
+        </Link>
+      </div>
 
       <Modal
         title="Notifications"

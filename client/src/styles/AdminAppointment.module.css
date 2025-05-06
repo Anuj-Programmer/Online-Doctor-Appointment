@@ -1,0 +1,1397 @@
+*{
+    color: #272B41;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 120% */
+  }
+.div {
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    margin: 0 auto;
+  }
+  @media (max-width: 991px) {
+    .div {
+      max-width: 991px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div {
+      max-width: 640px;
+      flex-direction: column;
+    }
+  }
+
+  .div2 {
+    width: 310px;
+    background-color: #fff;
+    border-right: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  @media (max-width: 640px) {
+    .div2 {
+      display: none;
+    }
+  }
+  .div3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .profileImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+  .span {
+    color: #272b41;
+    font: 600 17px "Inter", sans-serif;
+  }
+  .div4 {
+    width: 100%;
+  }
+  .div5 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span2 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div6 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span3 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div7 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span4 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div8 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span5 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div9 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .search1{
+    display: flex;
+    width: 18px;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+  }
+  .span6 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div10 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span7 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div11 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span8 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: stretch;
+    flex-wrap: wrap;
+  }
+  .div12 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .div13 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+    height: 69px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    background-color: #fff;
+  }
+  @media (max-width: 991px) {
+    .div13 {
+      padding: 0 40px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div13 {
+      padding: 0 20px;
+    }
+  }
+  .logoImg {
+    width: 134px;
+    height: 41px;
+  }
+  .div14 {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  @media (max-width: 640px) {
+    .div14 {
+      display: none;
+    }
+  }
+  .span9 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span10 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span11 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span12 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .div15 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  @media (max-width: 640px) {
+    .div15 {
+      gap: 10px;
+    }
+  }
+  .div16 {
+    padding: 7px 15px;
+    border: 1px solid #0e82fd;
+    border-radius: 800px;
+    color: #0e82fd;
+    cursor: pointer;
+    font: 13px "Inter", sans-serif;
+  }
+  .div17 {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .div18 {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5Px;
+    right: 0;
+    top: 0;
+    background-color: #ff3c00;
+  }
+  .div19 {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .div20 {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5Px;
+    right: 0;
+    top: 0;
+    background-color: #04bd6c;
+  }
+  .userImg {
+    width: 31px;
+    height: 31px;
+    border-radius: 20px;
+  }
+  .div21 {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 70px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  @media (max-width: 991px) {
+    .div21 {
+      padding: 24px 40px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div21 {
+      padding: 24px 20px;
+    }
+  }
+  .div22 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .span13 {
+    color: #272b41;
+    font: 600 18px "Inter", sans-serif;
+  }
+  .div23 {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .div24 {
+    
+    display: flex;
+    padding: 8px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+    border-radius: 50px;
+    background: linear-gradient(92deg, #0D86F9 1.62%, #14C1E8 105.07%);
+  }
+  .div25 {
+    color: #272b41;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+  }
+  .div26 {
+    color: #272b41;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+  }
+  .div27 {
+    display: flex;
+  align-items: center;
+  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0 16px;
+    width: 308px;
+    display: flex;
+    width: 308px;
+    padding: 0px 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media (max-width: 991px) {
+    .div27 {
+      width: 250px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div27 {
+      width: 200px;
+    }
+  }
+  .input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 42px;
+    color: #adaebc;
+    font: 16px "Inter", sans-serif;
+  }
+  .div28 {
+    width: 100%;
+    border: 1px solid #e6e8ee;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .div29 {
+    display: flex;
+    background-color: #fff;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div30 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div31 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div32 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div33 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div34 {
+    margin-right: 100px;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div35 {
+    background-color: #fff;
+  }
+  .div36 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div37 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .patientImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 8px;
+  }
+  .div38 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span14 {
+    color: #0e82fd;
+  }
+  .div39 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div40 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div41 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .doctorImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 8px;
+  }
+  .div42 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div43 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span15 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div44 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div45 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div46 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span16 {
+    color: #0e82fd;
+  }
+  .div47 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div48 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div49 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div50 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div51 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span17 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div52 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div53 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div54 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span18 {
+    color: #0e82fd;
+  }
+  .div55 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div56 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div57 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div58 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div59 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span19 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div60 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div61 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div62 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span20 {
+    color: #0e82fd;
+  }
+  .div63 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div64 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div65 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div66 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div67 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span21 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div68 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div69 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div70 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span22 {
+    color: #0e82fd;
+  }
+  .div71 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div72 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div73 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div74 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div75 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span23 {
+    display: flex;
+  gap: 1rem;
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div76 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div77 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div78 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span24 {
+    color: #0e82fd;
+  }
+  .div79 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div80 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div81 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div82 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div83 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span25 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div84 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div85 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div86 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span26 {
+    color: #0e82fd;
+  }
+  .div87 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div88 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div89 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div90 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div91 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span27 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div92 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div93 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div94 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span28 {
+    color: #0e82fd;
+  }
+  .div95 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div96 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div97 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div98 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div99 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span29 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div100 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div101 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div102 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span30 {
+    color: #0e82fd;
+  }
+  .div103 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div104 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div105 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div106 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div107 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span31 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div108 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div109 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div110 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span32 {
+    color: #0e82fd;
+  }
+  .div111 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div112 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div113 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div114 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div115 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span33 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div116 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div117 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div118 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span34 {
+    color: #0e82fd;
+  }
+  .div119 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div120 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div121 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div122 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div123 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span35 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div124 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div125 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div126 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span36 {
+    color: #0e82fd;
+  }
+  .div127 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div128 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div129 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div130 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div131 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span37 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div132 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div133 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div134 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span38 {
+    color: #0e82fd;
+  }
+  .div135 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div136 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div137 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div138 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div139 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span39 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div140 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div141 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div142 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span40 {
+    color: #0e82fd;
+  }
+  .div143 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div144 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div145 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div146 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div147 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span41 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div148 {
+    height: 56px;
+    background-color: #f0f0f0;
+    border-top: 0.8Px solid #fff;
+    color: #465d7c;
+    font: 16px "Inter", sans-serif;
+  }
