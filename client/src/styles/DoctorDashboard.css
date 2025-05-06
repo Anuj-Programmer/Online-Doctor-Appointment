@@ -162,33 +162,39 @@
   }
   
   .table-header {
-    /* display: flex; */
     padding: 15px 12px;
     background-color: #f8f9fa;
     border-bottom: 1px solid #e6e8ee;
-    /* gap: 50px; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
   }
   
-  
+  .header-patient,
+  .header-email,
+  .header-date,
+  .header-time,
+  .header-amount,
+  .header-status,
+  .header-actions {
+    color: #272b41;
+    font-size: 14px;
+    font-weight: 600;
+  }
   
   .appointment-row {
-    /* display: flex; */
     padding: 18px 12px;
     border-bottom: 0.8px solid rgba(0, 0, 0, 0.05);
-    align-items: center;
-    /* gap: 0 50px; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 0.67fr 1fr;
+    gap: 10px;
+    align-items: center;
   }
   
   .patient-info {
     display: flex;
     align-items: center;
     gap: 8px;
-    /* width: 189px; */
   }
   
   .patient-image {
@@ -208,46 +214,35 @@
     font-size: 15px;
   }
   
-  .patient-id {
-    color: #888;
-    font-size: 12px;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .appointment-date {
-    width: 110px;
-    /* margin-left: 30px; */
-  }
-  
-  .date {
+  .patient-email {
     color: #272b41;
     font-size: 15px;
   }
   
-  .time {
+  .appointment-date {
+    color: #272b41;
+    font-size: 15px;
+  }
+  
+  .appointment-time {
     color: #0e82fd;
     font-size: 15px;
   }
   
-  .appointment-purpose {
-    width: 133px;
+  .appointment-amount {
     color: #272b41;
     font-size: 15px;
-    margin-left: 40px;
   }
   
-  .appointment-amount {
-    /* width: 60px; */
-    color: #272b41;
-    font-size: 15px;
-    /* text-align: center; */
-    /* margin-left: 30px; */
+  .appointment-status {
+    display: flex;
+    align-items: center;
   }
   
   .appointment-actions {
     display: flex;
-    gap: 14px;
-    /* margin-left: 40px; */
+    gap: 8px;
+    align-items: center;
   }
   
   /* Button styles */
@@ -259,26 +254,43 @@
     cursor: pointer;
     color: #1db9aa;
     background-color: rgba(2, 182, 179, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
   
   .btn-accept {
     padding: 4px 8px;
-    /* border-radius: 3.2px; */
     font-size: 14px;
     border: none;
     cursor: pointer;
     color: #26af48;
-    background-color: #ffffff;
+    background: rgba(15, 183, 107, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
   
   .btn-cancel {
     padding: 4px 8px;
-    /* border-radius: 3.2px; */
     font-size: 14px;
     border: none;
     cursor: pointer;
     color: #e63c3c;
-    background-color: #ffffff;
+    background-color: rgba(242, 17, 54, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .action-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .action-text {
+    font-size: 14px;
+    font-weight: 500;
   }
   
   /* Footer styles */

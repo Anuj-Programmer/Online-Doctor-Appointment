@@ -629,6 +629,62 @@ const changePassword = async (req, res) => {
     }
 };
 
+const updateProfile = async (req, res) => {
+    try {
+        const { userId, name, email, phoneNumber, address } = req.body;
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        // Check if email is being changed and if it's already in use
+        if (email !== user.email) {
+            const existingUser = await userModel.findOne({ email });
+            if (existingUser) {
+                return res.status(400).send({
+                    message: "Email already in use",
+                    success: false
+                });
+            }
+        }
+
+        // Update user profile
+        user.name = name;
+        user.email = email;
+        user.phoneNumber = phoneNumber;
+        user.address = address;
+
+        await user.save();
+
+        res.status(200).send({
+            message: "Profile updated successfully",
+            success: true,
+            data: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                address: user.address,
+                isAdmin: user.isAdmin,
+                isDoctor: user.isDoctor,
+                seenNotication: user.seenNotication,
+                notification: user.notification
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in updating profile",
+            success: false,
+            error: error.message
+        });
+    }
+};
+
 module.exports = { 
     loginController, 
     registerController, 
@@ -642,5 +698,6 @@ module.exports = {
     cancelAppointment, 
     getBookedSlots,
     changeEmail,
-    changePassword 
+    changePassword,
+    updateProfile
 };

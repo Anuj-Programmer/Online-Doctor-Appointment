@@ -237,11 +237,14 @@ const updateDoctor = async (req, res) => {
             });
         }
 
+        console.log("hewllo", updateData?.doctorId);
         const doctor = await Doctor.findOneAndUpdate(
-            { userId: req.user._id },
+            { userId: updateData?.doctorId},
             updateData,
             { new: true }
         );
+
+        console.log("hiiiii")
 
         if (!doctor) {
             return res.status(404).json({

@@ -99,13 +99,13 @@ function SidebarDoctor({ activeTab, setActiveTab }) {
               <img src={scheduleIcon} alt="Schedule Timings" className="nav-icon" />
               <span>Schedule Timings</span>
             </div>
-            <div 
+            {/* <div 
               className={`nav-item-doctor ${activeTab === 'reviews' ? 'active' : ''}`}
               onClick={() => handleTabClick('reviews')}
             >
               <img src={reviewIcon} alt="Reviews" className="nav-icon" />
               <span>Reviews</span>
-            </div>
+            </div> */}
             <div 
               className={`nav-item-doctor ${activeTab === 'settings' ? 'active' : ''}`}
               onClick={() => handleTabClick('settings')}
