@@ -140,7 +140,8 @@ function Nav() {
                   )}
                 </div>
               </Badge>
-              <div className="avatar-item">
+              {!user?.isDoctor && (
+                <div className="avatar-item">
                 <div className="avatar-link" onClick={toggleDropdown}>
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9b70f1560e6c8a4c34d55e323bff3606d32b860?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
@@ -160,6 +161,8 @@ function Nav() {
                   )}
                 </div>
               </div>
+              )}
+              
             </div>
           </div>
         </div>

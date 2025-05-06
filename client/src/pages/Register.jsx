@@ -7,7 +7,7 @@ import { Form, Input, Button, message } from "antd";
 import eyeIconShow from "../assets/Show.svg";
 import eyeIconHide from "../assets/Hide.svg";
 import axios from "axios";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Footer from "../Components/Footer";
@@ -20,13 +20,14 @@ function SignUpPage() {
   const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword(!showConfirmPassword);
 
   const onFinish = async (values) => {
     try {
-      dispatch(showLoading())
+      dispatch(showLoading());
       const res = await axios.post("/api/v1/user/register", values);
-      dispatch(hideLoading())
+      dispatch(hideLoading());
       if (res.data.success) {
         toast.success("Registered Successfully!");
         // alert("Registered Successfully!")
@@ -36,7 +37,7 @@ function SignUpPage() {
         // alert("User Already Exists!");
       }
     } catch (error) {
-      dispatch(hideLoading())
+      dispatch(hideLoading());
       console.log(error);
       message.error("Something went wrong.");
       toast.error("Something went wrong.");
@@ -45,7 +46,7 @@ function SignUpPage() {
 
   return (
     <div className="signup-page">
-      <Toaster position="top-center"/>
+      <Toaster position="top-center" />
       {/* Header */}
       {/* <div className="header">
         <div className="nav">
@@ -79,27 +80,46 @@ function SignUpPage() {
       <div className="form-container">
         <div className="form-title">Sign Up</div>
         <Form layout="vertical" onFinish={onFinish} className="form-content">
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter your name!' }]}> 
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: "Please enter your name!" }]}
+          >
             <Input placeholder="Enter your name" />
           </Form.Item>
 
-          <Form.Item 
-            label="Email" 
-            name="email" 
+          <Form.Item
+            label="Email"
+            name="email"
             rules={[
-              { required: true, message: 'Please enter your email!' },
-              { 
+              { required: true, message: "Please enter your email!" },
+              {
                 pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
-                message: 'Please enter a valid Gmail address!'
-              }
+                message: "Please enter a valid Gmail address! (demo@gmail.com)",
+              },
             ]}
-          > 
+          >
             <Input type="email" placeholder="Enter your email" />
           </Form.Item>
 
-          <Form.Item label="New Password" name="password" rules={[{ required: true, message: 'Please enter your password!' }]}> 
+          <Form.Item
+            label="New Password"
+            name="password"
+            rules={[
+              { required: true, message: "Please enter your password!" },
+              {
+                pattern:
+                  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                message:
+                  "Password must contain at least one letter, number, special character!",
+              },
+            ]}
+          >
             <div className="password-input-container">
-              <Input type={showPassword ? "text" : "password"} placeholder="Enter your password" />
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+              />
               <img
                 src={showPassword ? eyeIconHide : eyeIconShow}
                 className="password-toggle"
@@ -109,16 +129,27 @@ function SignUpPage() {
             </div>
           </Form.Item>
 
-          <Form.Item label="Confirm Password" name="confirmPassword" dependencies={["password"]} rules={[{ required: true, message: 'Please confirm your password!' }, ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error("Passwords do not match!"));
-            },
-          })]}> 
+          <Form.Item
+            label="Confirm Password"
+            name="confirmPassword"
+            dependencies={["password"]}
+            rules={[
+              { required: true, message: "Please confirm your password!" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error("Passwords do not match!"));
+                },
+              }),
+            ]}
+          >
             <div className="password-input-container">
-              <Input type={showConfirmPassword ? "text" : "password"} placeholder="Confirm your password" />
+              <Input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm your password"
+              />
               <img
                 src={showConfirmPassword ? eyeIconHide : eyeIconShow}
                 className="password-toggle"
@@ -129,16 +160,25 @@ function SignUpPage() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="create-account-button">Create Account</Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="create-account-button"
+            >
+              Create Account
+            </Button>
           </Form.Item>
         </Form>
         <div className="login-link">
-          Already have an account? <Link to="/login" className="login-text">Login</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="login-text">
+            Login
+          </Link>
         </div>
       </div>
 
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
