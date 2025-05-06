@@ -28,6 +28,9 @@ import SearchPage from "./pages/SearchPage";
 import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
+import LandingContact from "./pages/LandingPages/LandingContact";
+import LandingAboutPage from "./pages/LandingPages/LandingAbout";
+import LandingHelp from "./pages/LandingPages/LandingHelp";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -53,33 +56,33 @@ function App() {
             <Route
               path="/applydoctor"
               element={
-                <ProtectedRoute>
+                
                   <ApplyDoctor />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/contact"
               element={
-                <ProtectedRoute>
+               
                   <Contact />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/help"
               element={
-                <ProtectedRoute>
+                
                   <Help />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/about"
               element={
-                <ProtectedRoute>
+               
                   <AboutPage />
-                </ProtectedRoute>
+            
               }
             />
             <Route
@@ -152,6 +155,31 @@ function App() {
                 <DoctorSchedule />
               </ProtectedRoute>
             }/>
+            <Route
+              path="/LandingContact"
+              element={
+                
+                  <LandingContact/>
+               
+              }
+            />
+            <Route
+              path="/LandingAboutPage"
+              element={
+                
+                  <LandingAboutPage />
+               
+              }
+            />
+            <Route
+              path="/LandingHelp"
+              element={
+                
+                  <LandingHelp />
+               
+              }
+            />
+            
           </Routes>
         )}
       </BrowserRouter>

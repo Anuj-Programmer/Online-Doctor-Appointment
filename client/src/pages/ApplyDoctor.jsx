@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../redux/features/userSlice";
 import toast, { Toaster } from "react-hot-toast";
+import LandingPageNav from "../Components/LandingPageNav";
 const { Option } = Select;
 
 function ApplyDoctor() {
@@ -37,14 +38,14 @@ function ApplyDoctor() {
     getUserData();
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      alert("Please login first");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     alert("Please login first");
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 1000);
+  //   }
+  // }, [user, navigate]);
 
   const addTimeSlot = () => {
     const newSlot = { id: timeSlots.length + 1 };
@@ -60,17 +61,17 @@ function ApplyDoctor() {
   const onfinishHandler = async (values) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token || !user?._id) {
-        message.error("Please login first");
-        console.log(token);
-        console.log(user?._id);
+      // if (!token || !user?._id) {
+      //   message.error("Please login first");
+      //   console.log(token);
+      //   console.log(user?._id);
         
-        alert("Please token first");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
-        return;
-      }
+      //   alert("Please token first");
+      //   setTimeout(() => {
+      //     navigate("/login");
+      //   }, 1000);
+      //   return;
+      // }
 
       const doctorData = {
         userId: user._id,
@@ -115,7 +116,7 @@ function ApplyDoctor() {
 
   return (
     <>
-      <Nav />
+     <LandingPageNav/>
       <Toaster />
       <div className="doc-register-container">
         <main className="main-content-apply">

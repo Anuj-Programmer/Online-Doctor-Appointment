@@ -45,7 +45,7 @@ function Login() {
         
         // Navigate based on user type
         setTimeout(() => {
-          navigate(res.data.success === 'admin' ? '/admin' : '/');
+          navigate(res.data.success === 'admin' ? '/admin' : '/home');
         }, 1000);
       } else {
         toast.error("Invalid email or password");

@@ -27,13 +27,13 @@ function LandingPageNav() {
             <Link to="/" className={isActive("/")}>
               Home
             </Link>
-            <Link to="/contact" className={isActive("/contact")}>
+            <Link to="/LandingContact" className={isActive("/LandingContact")}>
               Contact
             </Link>
-            <Link to="/help" className={isActive("/help")}>
+            <Link to="/LandingHelp" className={isActive("/LandingHelp")}>
               Help
             </Link>
-            <Link to="/about" className={isActive("/about")}>
+            <Link to="/LandingAboutPage" className={isActive("/LandingAboutPage")}>
               About
             </Link>
           </div>
