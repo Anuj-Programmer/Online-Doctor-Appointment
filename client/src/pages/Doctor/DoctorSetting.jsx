@@ -133,8 +133,8 @@ function DoctorSetting() {
   return (
     <>
       <Toaster position="top-center" />
-      <div className="settings-content">
-        <div className="settings-container">
+      <div className="settings-content-doctor">
+        <div className="settings-container-doctor">
           <h1 className="settings-title">Doctor Settings</h1>
 
           <form onSubmit={handleSubmit}>
@@ -176,7 +176,7 @@ function DoctorSetting() {
                 </div>
                 <div className="form-group">
                   <label>Phone Number <span className="required">*</span></label>
-                  <div className="phone-input">
+                  <div className="phone-input-doctor">
                    
                     <input
                       type="tel"

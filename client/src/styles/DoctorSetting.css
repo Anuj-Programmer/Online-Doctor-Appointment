@@ -1,14 +1,14 @@
-.settings-content {
-    padding: 30px;
+.settings-content-doctor {
+    /* padding: 30px; */
     padding-bottom: 80px;
-    background: ffff
+    background: white
    
   }
   
-  .settings-container {
+  .settings-container-doctor {
     /* max-width: 900px; */
     margin: 0 auto;
-    border: solid 0.8px #f0f0f0;;
+    /* border: solid 0.8px #f0f0f0; */
     border-radius: 20px;
     padding: 20px;
   }
@@ -166,7 +166,7 @@
     min-height: 100px;
   }
   
-  .phone-input {
+  .phone-inpu-doctor {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 12px;
@@ -276,7 +276,7 @@
     padding: 10px 24px;
     background: #EEF0F4;
     border: none;
-    border-radius: 50px;
+    border-radius: 20%;
     color: #2E3842;
     font-size: 14px;
     font-weight: 500;

@@ -27,6 +27,7 @@ import SearchPage from "./pages/SearchPage";
 import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
+import DashboardContent from "./pages/Doctor/DashboardContent";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -131,6 +132,11 @@ function App() {
             <Route path="/doctor/appointment" element={
               <ProtectedRoute>
                 <DoctorAppointment/>
+              </ProtectedRoute>
+              } />
+            <Route path="/doctor/dashboard" element={
+              <ProtectedRoute>
+                <DashboardContent/>
               </ProtectedRoute>
               } />
             <Route path="/reschedule/:doctorId" element={

@@ -151,3 +151,40 @@
   background-color: #f8d7da;
   color: #721c24;
 } 
+
+.analytics-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between image and content */
+}
+
+.analyctics-img {
+  width: 90px; /* fixed width */
+  aspect-ratio: 1 / 1; /* ensures it's a square */
+  object-fit: cover;
+  border: 10px solid rgba(15, 183, 107, 0.12);
+  border-radius: 50%; /* makes it a circle */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.analytics-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.analytics-name {
+  font-size: 16px;
+}
+
+.analyctics{
+  display: flex;
+  gap: 10rem;
+  padding: 25px;
+  border: #e6e8ee solid 1px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  /* width: 40rem ; */
+}
