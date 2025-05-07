@@ -332,11 +332,20 @@
     color: #272b41;
     font: 600 18px "Inter", sans-serif;
   }
+  .buttonContainer {
+    display: flex;
+    gap: 16px; /* Space between each button */
+    justify-content: center; /* Center align buttons horizontally */
+    margin-bottom: 20px; /* Add space below the button container */
+  }
   .div23 {
     display: flex;
     align-items: center;
     gap: 24px;
+    padding: 8px 24px;
+    border-radius: 50px;
   }
+  
   .div24 {
     
     display: flex;
