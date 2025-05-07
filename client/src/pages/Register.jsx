@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Footer from "../Components/Footer";
 import toast, { Toaster } from "react-hot-toast";
+import LandingPageNav from "../Components/LandingPageNav";
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +47,7 @@ function SignUpPage() {
 
   return (
     <div className="signup-page">
+      <LandingPageNav/>
       <Toaster position="top-center" />
       {/* Header */}
       {/* <div className="header">

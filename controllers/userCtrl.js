@@ -90,6 +90,8 @@ const authController = async (req, res) => {
                     _id: user._id,
                     name: user.name,
                     email: user.email,
+                    phoneNumber: user.phoneNumber, 
+                    address: user.address,
                     isAdmin: user.isAdmin,
                     isDoctor: user.isDoctor,
                     seenNotication: user.seenNotication,

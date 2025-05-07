@@ -1,6 +1,6 @@
 .settings-content-doctor {
     /* padding: 30px; */
-    padding-bottom: 80px;
+    padding-bottom: 20px;
     background: white
    
   }
@@ -345,4 +345,43 @@
   .save-btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+  }
+
+  .password-change-section{
+    padding: 20px;
+  }
+
+  .passwordchange-form{
+    border: 0.8px solid #F0F0F0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    width: 450px
+  }
+
+  .password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem; /* space for the eye icon */
+    box-sizing: border-box;
+  }
+  
+  .password-input-wrapper i.fa {
+    position: absolute;
+    right: 0.75rem;
+    cursor: pointer;
+    color: #666;
+    font-size: 1.1rem;
+    user-select: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .password-input-wrapper i.fa:hover {
+    color: #000;
   }

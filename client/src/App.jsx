@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -28,6 +29,9 @@ import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DashboardContent from "./pages/Doctor/DashboardContent";
+import LandingContact from "./pages/LandingPages/LandingContact";
+import LandingAboutPage from "./pages/LandingPages/LandingAbout";
+import LandingHelp from "./pages/LandingPages/LandingHelp";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -39,8 +43,11 @@ function App() {
           <Spinner />
         ) : (
           <Routes>
+            {/* Landing page as the default route */}
+            <Route path="/" element={<LandingPage />} />
+            
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRoute>
                   <HomePage />
@@ -50,33 +57,33 @@ function App() {
             <Route
               path="/applydoctor"
               element={
-                <ProtectedRoute>
+                
                   <ApplyDoctor />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/contact"
               element={
-                <ProtectedRoute>
+               
                   <Contact />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/help"
               element={
-                <ProtectedRoute>
+                
                   <Help />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/about"
               element={
-                <ProtectedRoute>
+               
                   <AboutPage />
-                </ProtectedRoute>
+            
               }
             />
             <Route
@@ -154,6 +161,31 @@ function App() {
                 <DoctorSchedule />
               </ProtectedRoute>
             }/>
+            <Route
+              path="/LandingContact"
+              element={
+                
+                  <LandingContact/>
+               
+              }
+            />
+            <Route
+              path="/LandingAboutPage"
+              element={
+                
+                  <LandingAboutPage />
+               
+              }
+            />
+            <Route
+              path="/LandingHelp"
+              element={
+                
+                  <LandingHelp />
+               
+              }
+            />
+            
           </Routes>
         )}
       </BrowserRouter>

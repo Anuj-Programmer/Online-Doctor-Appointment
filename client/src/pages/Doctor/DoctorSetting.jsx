@@ -57,7 +57,6 @@ function DoctorSetting() {
     fetchDoctorData();
   }, [user?._id]);
 
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -98,8 +97,6 @@ function DoctorSetting() {
       });
     } catch (error) {}
   };
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -149,6 +146,50 @@ function DoctorSetting() {
     }
   };
 
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+
+    if (!token || !user?._id) {
+      toast.error("Authentication required");
+      return;
+    }
+
+    if (formData.newPassword !== formData.confirmPassword) {
+      toast.error("New password and confirm password do not match.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "/api/v1/user/change-password",
+        {
+          userId: user?._id,
+          currentPassword: formData.currentPassword,
+          newPassword: formData.newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        toast.success("Password changed successfully!");
+        setFormData({
+          ...formData,
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      toast.error(error.response?.data?.message || "Failed to change password");
+    }
+  };
+
   return (
     <>
       <Toaster position="top-center" />
@@ -166,9 +207,9 @@ function DoctorSetting() {
                   className="profile-photo"
                 />
                 <div className="upload-box">
-                  <div className="upload-middle ps-0" >
+                  <div className="upload-middle ps-0">
                     <label htmlFor="upload" className="edit-btn">
-                      <i class="fa-solid fa-pen-to-square"></i>
+                      <i className="fa-solid fa-pen-to-square"></i>
                     </label>
                     <input
                       type="file"
@@ -335,7 +376,96 @@ function DoctorSetting() {
             </div>
           </form>
         </div>
+         {/* Password Change Form */}
+      <div className="password-change-section">
+        <h2 className="section-label">Change Password</h2>
+        <form onSubmit={handlePasswordChange} >
+        <div className="passwordchange-form">
+          <div className="form-group password-input-group">
+            <label>Current Password</label>
+            <div className="password-input-wrapper">
+              <input
+                type={showCurrentPassword ? "text" : "password"}
+                name="currentPassword"
+                value={formData.currentPassword}
+                onChange={handleInputChange}
+                placeholder="Enter Current Password"
+                required
+              />
+              <i
+                className={`fa ${showCurrentPassword ? "fa-eye-slash" : "fa-eye"}`}
+                onClick={() => setShowCurrentPassword((prev) => !prev)}
+                style={{ cursor: "pointer" }}
+                aria-label="Toggle Current Password Visibility"
+              ></i>
+            </div>
+          </div>
+          <div className="form-group password-input-group">
+            <label>New Password</label>
+            <div className="password-input-wrapper">
+              <input
+                type={showNewPassword ? "text" : "password"}
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleInputChange}
+                placeholder="Enter New Password"
+                required
+                style={{
+                  borderColor:
+                    formData.newPassword && formData.confirmPassword && formData.newPassword !== formData.confirmPassword
+                      ? "red"
+                      : undefined,
+                }}
+              />
+              <i
+                className={`fa ${showNewPassword ? "fa-eye-slash" : "fa-eye"}`}
+                onClick={() => setShowNewPassword((prev) => !prev)}
+                style={{ cursor: "pointer" }}
+                aria-label="Toggle New Password Visibility"
+              ></i>
+            </div>
+            {formData.newPassword && formData.confirmPassword && formData.newPassword !== formData.confirmPassword && (
+              <p style={{ color: "red", fontSize: "0.8rem", marginTop: "0.25rem" }}>
+                New password and confirm password do not match.
+              </p>
+            )}
+          </div>
+          <div className="form-group password-input-group">
+            <label>Confirm New Password</label>
+            <div className="password-input-wrapper">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirm New Password"
+                required
+                style={{
+                  borderColor:
+                    formData.newPassword && formData.confirmPassword && formData.newPassword !== formData.confirmPassword
+                      ? "red"
+                      : undefined,
+                }}
+              />
+              <i
+                className={`fa ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`}
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                style={{ cursor: "pointer" }}
+                aria-label="Toggle Confirm Password Visibility"
+              ></i>
+            </div>
+          </div>
+          </div>
+          <div className="form-actions">
+          <button type="submit" className="save-btn" disabled={loading}>
+            {loading ? "Changing Password..." : "Change Password"}
+          </button>
+          </div>
+        </form>
       </div>
+      </div>
+
+     
     </>
   );
 }

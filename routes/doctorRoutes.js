@@ -2,6 +2,7 @@ const express = require('express');
 const {
     applyDoctor,
     getAllDoctors,
+    getPublicDoctors,
     getDoctorById,
     updateDoctor,
     changeDoctorStatus,
@@ -21,6 +22,9 @@ router.post('/apply', authMiddleware, applyDoctor);
 
 // Get all doctors || GET
 router.get('/get-all-doctors', authMiddleware, getAllDoctors);
+
+// Get public doctors (no auth) || GET
+router.get('/public', getPublicDoctors);
 
 // Get doctor by ID || GET
 router.get('/:id', authMiddleware, getDoctorById);

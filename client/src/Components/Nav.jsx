@@ -51,7 +51,7 @@ function Nav() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("author");
-    navigate("/login");
+    navigate("/");
   };
 
   const handleNotificationClick = () => {
@@ -66,7 +66,7 @@ function Nav() {
   return(
     <>
     <div className="nav">
-          <Link to="/" className="logo-container">
+          <Link to="/home" className="logo-container">
             <div className="logo">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/7effc2efc000e217d729b40f023095b493410f06?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
@@ -77,7 +77,7 @@ function Nav() {
           <div className="nav-items">
             <div className="nav-links">
               <div className="nav-list justify-content-md-end">
-                <Link to="/" className={isActive('/')}>Home</Link>
+                <Link to="/home" className={isActive('/home')}>Home</Link>
                 <Link to="/contact" className={isActive('/contact')}>Contact</Link>
                 <Link to="/help" className={isActive('/help')}>Help</Link>
                 <Link to="/about" className={isActive('/about')}>About</Link>

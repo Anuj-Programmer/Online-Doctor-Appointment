@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../redux/features/userSlice";
 import toast, { Toaster } from "react-hot-toast";
+import LandingPageNav from "../Components/LandingPageNav";
 const { Option } = Select;
 import { uploadToCloudinary } from "../lib/uploadToCloudinary";
 
 function ApplyDoctor() {
-
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -21,11 +21,15 @@ function ApplyDoctor() {
 
   const getUserData = async () => {
     try {
-      const res = await axios.post('/api/v1/user/getUserData', {}, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+      const res = await axios.post(
+        "/api/v1/user/getUserData",
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
-      });
+      );
       if (res.data.success) {
         dispatch(setUser(res.data.data));
       }
@@ -38,14 +42,14 @@ function ApplyDoctor() {
     getUserData();
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      alert("Please login first");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     alert("Please login first");
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 1000);
+  //   }
+  // }, [user, navigate]);
 
   const addTimeSlot = () => {
     const newSlot = { id: timeSlots.length + 1 };
@@ -61,37 +65,38 @@ function ApplyDoctor() {
   const onfinishHandler = async (values) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token || !user?._id) {
-        message.error("Please login first");
-        console.log(token);
-        console.log(user?._id);
-        
-        alert("Please token first");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
-        return;
-      }
+      // if (!token || !user?._id) {
+      //   message.error("Please login first");
+      //   console.log(token);
+      //   console.log(user?._id);
+
+      //   alert("Please token first");
+      //   setTimeout(() => {
+      //     navigate("/login");
+      //   }, 1000);
+      //   return;
+      // }
 
       const doctorData = {
         userId: user._id,
         firstName: values.firstName,
         lastName: values.lastName,
+        certificate: values.certificate,
         phoneNumber: values.phoneNumber,
         address: values.address,
         specialization: values.specialization,
         experience: Number(values.experience),
         fee: Number(values.fee),
-        timeSlots: timeSlots.map(slot => ({
+        timeSlots: timeSlots.map((slot) => ({
           startTime: values[`startTime${slot.id}`],
-          endTime: values[`endTime${slot.id}`]
-        }))
+          endTime: values[`endTime${slot.id}`],
+        })),
       };
 
       const response = await axios.post("/api/v1/doctor/apply", doctorData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
       });
 
@@ -100,7 +105,7 @@ function ApplyDoctor() {
         // message.success(response.data.message);
         // alert("You have successfully applied as a doctor");
         setTimeout(() => {
-          navigate("/");
+          navigate("/home");
         }, 1000);
       } else {
         toast.error("You have already applied as a doctor");
@@ -115,23 +120,25 @@ function ApplyDoctor() {
   };
 
   const handleImageUpload = async (e) => {
-      try {
-        const file = e.target.files[0];
-        console.log("File",file);
-  
-        const response = await uploadToCloudinary(file);
-        console.log(response);
-        setFormData({
-          ...formData,
-          profile: response.secure_url
-        });
-      } catch (error) {
-        
-      }
+    try {
+      const file = e.target.files[0];
+      console.log("File", file);
+
+      const response = await uploadToCloudinary(file);
+      console.log(response);
+      // Update the 'certificate' field in the form
+      form.setFieldsValue({
+        certificate: response.secure_url,
+      });
+    } catch (error) {
+      toast.error("Image upload failed");
+    console.error(error);
     }
+  };
 
   return (
     <>
+      {/* <LandingPageNav/> */}
       <Nav />
       <Toaster />
       <div className="doc-register-container">
@@ -190,6 +197,25 @@ function ApplyDoctor() {
                 ]}
               >
                 <Input addonBefore="+977" placeholder="Enter phone number" />
+              </Form.Item>
+
+              <Form.Item
+                label="Certificate Image"
+                name="certificate"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please upload your certificate!",
+                  },
+                ]}
+              >
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                  />
+                </div>
               </Form.Item>
 
               <Form.Item
