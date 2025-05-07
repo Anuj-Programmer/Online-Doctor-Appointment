@@ -33,7 +33,7 @@ function SearchPage() {
               <Doctorcard
                 key={doctor._id}
                 doctorId={doctor._id}
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
+                src={doctor.profile || "https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"}
                 speciality={doctor.specialization}
                 Avaibility="• Available"
                 fee={`$${doctor.fee}`}

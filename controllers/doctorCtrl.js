@@ -116,7 +116,8 @@ const applyDoctor = async (req, res) => {
             specialization: req.body.specialization,
             experience: Number(req.body.experience),
             fee: Number(req.body.fee),
-            timeSlots: timeSlots || [] 
+            timeSlots: timeSlots || [],
+            certificate: req.body.certificate
         });
 
         await newDoctor.save();

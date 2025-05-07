@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../redux/features/userSlice";
 import toast, { Toaster } from "react-hot-toast";
 const { Option } = Select;
+import { uploadToCloudinary } from "../lib/uploadToCloudinary";
 
 function ApplyDoctor() {
 
@@ -112,6 +113,22 @@ function ApplyDoctor() {
       // message.error(error.response?.data?.message || "Something went wrong");
     }
   };
+
+  const handleImageUpload = async (e) => {
+      try {
+        const file = e.target.files[0];
+        console.log("File",file);
+  
+        const response = await uploadToCloudinary(file);
+        console.log(response);
+        setFormData({
+          ...formData,
+          profile: response.secure_url
+        });
+      } catch (error) {
+        
+      }
+    }
 
   return (
     <>

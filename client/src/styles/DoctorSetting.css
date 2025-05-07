@@ -31,6 +31,19 @@
   }
   
   /* Profile Photo Section */
+  .profile-photo-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .profile-photo-wrapper .edit-btn{
+    border-left: 1px solid #ddd;
+    background: none;
+    border: 0px;
+    padding: 0px;
+    cursor: pointer;
+    color: #0D6EFD;
+  }
+
   .profile-photo-section {
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -38,14 +51,22 @@
     padding: 16px;
     margin-bottom: 24px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    max-width: 600px;
+    max-width: fit-content;
   }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;  /* Ensures the image fits nicely inside the circle */
+  }
+  
   
   .upload-box {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 24px;
+    /* gap: 24px; */
   }
   
   .photo-placeholder {
@@ -69,17 +90,16 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-left: 20px;
   }
   
-  .upload-btn {
-    color: #0D6EFD;
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 14px;
-    font-weight: 500;
+  .upload-btn-doctor {
+    padding: 0.75rem 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     cursor: pointer;
-    text-decoration: none;
+    color: #0D6EFD;
   }
   
   .remove-btn {

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../redux/features/userSlice';
-import { useNavigate } from 'react-router-dom';
-import { toast, Toaster } from 'react-hot-toast';
-import "../../styles/DoctorSetting.css"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
+import "../../styles/DoctorSetting.css";
+import { uploadToCloudinary } from "../../lib/uploadToCloudinary";
 
 function DoctorSetting() {
   const { user } = useSelector((state) => state.user);
@@ -19,14 +20,16 @@ function DoctorSetting() {
         const token = localStorage.getItem("token");
         if (!token || !user?._id) return;
 
-        const response = await axios.get('/api/v1/doctor/get-all-doctors', {
+        const response = await axios.get("/api/v1/doctor/get-all-doctors", {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (response.data.success) {
-          const doctor = response.data.data.find(doc => doc.userId._id === user._id);
+          const doctor = response.data.data.find(
+            (doc) => doc.userId._id === user._id
+          );
           if (doctor) {
             setDoctorData(doctor);
             // Set initial form data
@@ -46,16 +49,14 @@ function DoctorSetting() {
           }
         }
       } catch (error) {
-        console.error('Error fetching doctor data:', error);
-        toast.error('Failed to fetch doctor data');
+        console.error("Error fetching doctor data:", error);
+        toast.error("Failed to fetch doctor data");
       }
     };
 
     fetchDoctorData();
   }, [user?._id]);
 
-  console.log(doctorData);
-  
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -69,6 +70,7 @@ function DoctorSetting() {
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
+    profile: "",
   });
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -77,11 +79,27 @@ function DoctorSetting() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
+
+  const handleImageUpload = async (e) => {
+    try {
+      const file = e.target.files[0];
+      console.log("File", file);
+
+      const response = await uploadToCloudinary(file);
+      console.log(response);
+      setFormData({
+        ...formData,
+        profile: response.secure_url,
+      });
+    } catch (error) {}
+  };
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,16 +108,17 @@ function DoctorSetting() {
     try {
       const token = localStorage.getItem("token");
       if (!token || !doctorData?._id) {
-        throw new Error('Authentication required');
+        throw new Error("Authentication required");
       }
 
       // Update doctor profile
       const response = await axios.put(
-        '/api/v1/doctor/update-profile',
+        "/api/v1/doctor/update-profile",
         {
           doctorId: user?._id,
           firstName: formData.firstName,
           lastName: formData.lastName,
+          profile: formData.profile,
           email: formData.email,
           phoneNumber: formData.phoneNumber,
           specialization: formData.specialization,
@@ -109,22 +128,22 @@ function DoctorSetting() {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
       if (response.data.success) {
-        toast.success('Profile updated successfully');
+        toast.success("Profile updated successfully");
         // Update local state with new data
-        setDoctorData(prev => ({
+        setDoctorData((prev) => ({
           ...prev,
-          ...response.data.data
+          ...response.data.data,
         }));
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
-      toast.error(error.response?.data?.message || 'Failed to update profile');
+      console.error("Error updating profile:", error);
+      toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);
     }
@@ -137,12 +156,58 @@ function DoctorSetting() {
         <div className="settings-container-doctor">
           <h1 className="settings-title">Doctor Settings</h1>
 
+          <h2 className="section-label">Profile Photo</h2>
+          <div className="profile-photo-section">
+            {formData.profile || doctorData?.profile ? (
+              <div className="profile-photo-wrapper">
+                <img
+                  src={formData.profile || doctorData.profile}
+                  alt="Profile"
+                  className="profile-photo"
+                />
+                <div className="upload-box">
+                  <div className="upload-middle ps-0" >
+                    <label htmlFor="upload" className="edit-btn">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </label>
+                    <input
+                      type="file"
+                      id="upload"
+                      onChange={handleImageUpload}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="upload-box">
+                <div className="photo-placeholder">
+                  <i className="fas fa-upload upload-icon"></i>
+                </div>
+                <div className="upload-middle">
+                  <label htmlFor="upload" className="upload-btn-doctor">
+                    Upload New
+                  </label>
+                  <input
+                    type="file"
+                    id="upload"
+                    onChange={handleImageUpload}
+                    style={{ display: "none" }}
+                  />
+                  <p className="format-text">Format: jpg, png, svg</p>
+                </div>
+              </div>
+            )}
+          </div>
+
           <form onSubmit={handleSubmit}>
             <h2 className="section-label">Information</h2>
             <div className="form-section">
               <div className="form-grid">
                 <div className="form-group">
-                  <label>First Name <span className="required">*</span></label>
+                  <label>
+                    First Name <span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     name="firstName"
@@ -153,7 +218,9 @@ function DoctorSetting() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Last Name <span className="required">*</span></label>
+                  <label>
+                    Last Name <span className="required">*</span>
+                  </label>
                   <input
                     type="text"
                     name="lastName"
@@ -164,7 +231,9 @@ function DoctorSetting() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Email Address <span className="required">*</span></label>
+                  <label>
+                    Email Address <span className="required">*</span>
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -175,9 +244,10 @@ function DoctorSetting() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Phone Number <span className="required">*</span></label>
+                  <label>
+                    Phone Number <span className="required">*</span>
+                  </label>
                   <div className="phone-input-doctor">
-                   
                     <input
                       type="tel"
                       name="phoneNumber"
@@ -189,7 +259,9 @@ function DoctorSetting() {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>Specialization <span className="required">*</span></label>
+                  <label>
+                    Specialization <span className="required">*</span>
+                  </label>
                   <select
                     name="specialization"
                     value={formData.specialization}
@@ -197,15 +269,17 @@ function DoctorSetting() {
                     required
                   >
                     <option value="">Select Specialization</option>
-                    <option value="Cardiology">Cardiology</option>
+                    <option value="Cardiology">cardiology</option>
                     <option value="Dermatology">Dermatology</option>
                     <option value="Pediatrics">Pediatrics</option>
-                    <option value="Neurology">Neurology</option>
+                    <option value="Neurology">neurology</option>
                     <option value="Orthopedics">Orthopedics</option>
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>Years of Experience <span className="required">*</span></label>
+                  <label>
+                    Years of Experience <span className="required">*</span>
+                  </label>
                   <input
                     type="number"
                     name="experience"
@@ -216,7 +290,9 @@ function DoctorSetting() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Fee Per Consultation <span className="required">*</span></label>
+                  <label>
+                    Fee Per Consultation <span className="required">*</span>
+                  </label>
                   <div className="fee-input">
                     <span className="currency">$</span>
                     <input
@@ -230,7 +306,9 @@ function DoctorSetting() {
                   </div>
                 </div>
                 <div className="form-group full-width">
-                  <label>Address <span className="required">*</span></label>
+                  <label>
+                    Address <span className="required">*</span>
+                  </label>
                   <textarea
                     name="address"
                     value={formData.address}
@@ -244,9 +322,15 @@ function DoctorSetting() {
             </div>
 
             <div className="form-actions">
-              <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>Cancel</button>
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={() => navigate(-1)}
+              >
+                Cancel
+              </button>
               <button type="submit" className="save-btn" disabled={loading}>
-                {loading ? 'Saving...' : 'Save Changes'}
+                {loading ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </form>
