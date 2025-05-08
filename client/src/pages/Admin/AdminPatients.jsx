@@ -463,26 +463,6 @@ function AdminPatients() {
               </div>
 
               <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Status:</h3>
-                <div className={styles.appointmentStatus}>
-                  <div className={styles.calendar} />
-                  <span className={styles.upcoming}>
-                  <img src="https://i.imgur.com/2O7reDE.png" className={styles.calendarIcon}/>
-                    {selectedAppointment.status}</span>
-                </div>
-              </div>
-
-              <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Time:</h3>
-                <p className={styles.detailValue}>{selectedAppointment.time}</p>
-              </div>
-
-              <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Date:</h3>
-                <p className={styles.detailValue}>{selectedAppointment.date}</p>
-              </div>
-
-              <div className={styles.detailItem}>
                 <h3 className={styles.detailLabel}>Email:</h3>
                 <p className={styles.detailValue}>{selectedAppointment.email}</p>
               </div>
@@ -493,19 +473,10 @@ function AdminPatients() {
               </div>
 
               <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Doctor:</h3>
-                <p className={styles.detailValue}>{selectedAppointment.doctorName}</p>
+                <h3 className={styles.detailLabel}>Upcoming Appointment:</h3>
+                <p className={styles.detailValue}>{selectedAppointment.date}</p>
               </div>
 
-              <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Specialty:</h3>
-                <p className={styles.detailValue}>{selectedAppointment.department}</p>
-              </div>
-
-              <div className={styles.detailItem}>
-                <h3 className={styles.detailLabel}>Note:</h3>
-                <p className={styles.detailValue}>{selectedAppointment.note}</p>
-              </div>
 
               <div className={styles.actionSection}>
                 <div className={styles.divider} />

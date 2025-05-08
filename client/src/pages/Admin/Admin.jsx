@@ -4,8 +4,10 @@ import { Badge, Space, Modal, Button } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import AdminDashboard from "../../Components/AdminDashboard"
 import { selectUser } from '../../redux/features/userSlice';
 import { setUser } from '../../redux/features/userSlice';
+
 
 function Admin() {
   const [notificationCount, setNotificationCount] = useState(0);
@@ -110,9 +112,9 @@ function Admin() {
   };
 
   return (
+  
     <div style={{ padding: '20px' }}>
       <Space size="large">
-        <h1>Admin Dashboard</h1>
         <Badge count={notificationCount} style={{ backgroundColor: '#ff4d4f' }}>
           <BellOutlined 
             style={{ fontSize: '24px', cursor: 'pointer' }} 
@@ -120,17 +122,8 @@ function Admin() {
           />
         </Badge>
       </Space>
-
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/login">
-          <button onClick={handleLogout}>Logout</button>
-        </Link>
-      </div>
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/admin-patients">
-          Appointment
-        </Link>
-      </div>
+      <AdminDashboard/>
+      
 
       <Modal
         title="Notifications"

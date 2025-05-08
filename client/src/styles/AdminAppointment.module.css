@@ -428,7 +428,7 @@
     font: 700 15px "Inter", sans-serif;
   }
   .div32 {
-    flex: 0.5;
+    flex: 0.4;
     padding: 18px 12px;
     color: #272b41;
     font: 700 15px "Inter", sans-serif;
@@ -510,7 +510,7 @@
   }
   .div42 {
     display: flex;
-    flex: 1;
+    flex: 0.8;
     padding: 18px 12px;
     color: #272b41;
     align-items: center;
@@ -1446,6 +1446,7 @@
     justify-content: center;
     align-items: stretch;
     max-width: 766px;
+    transform: scale(0.85);
     padding: 40px;
     font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
     display: flex;
@@ -1491,7 +1492,6 @@
   }
   
   .detailItem {
-    display: flex;
     width: 326px;
     flex-direction: column;
     align-items: flex-start;
@@ -1503,6 +1503,7 @@
   }
   
   .detailLabel {
+    margin-top: 10px;
     font-weight: 700;
     font-size: 16px;
   }
@@ -1555,6 +1556,7 @@
   }
   
   .divider {
+    margin-top: 10px;
     background-color: #000;
     align-self: stretch;
     width: 100%;
@@ -1608,6 +1610,10 @@
     .appointmentDetailsPopup {
       padding-left: 20px;
       padding-right: 20px;
+      max-width: 500px; /* Reduce width */
+      width: 90%;       /* Responsive */
+      max-height: 70vh;
+      height: 90%;
     }
   
     .header {
@@ -1638,4 +1644,60 @@
       max-width: 100%;
     }
   }
+  .certificateIcon{
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .ViewCertificate{
+    all:unset;
+    cursor: pointer;
+    display: flex;
+    padding: 8px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: var(--Main-Palette-White, var(--color-white-solid, #FFF));
+    text-align: center;
+
+    /* Main Styles/Inter/Medium */
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: var(--font-size-13, 13px);
+    font-style: normal;
+    font-weight: var(--font-weight-500, 500);
+    line-height: var(--line-height-19_51, 19.51px); /* 150.077% */
+    right: 267px;
+    top: 23px;
+    border-radius: 5px;
+    background: var(--color-azure-52, #0E82FD);
+    width: 150px;
+  }
   
+/* certificate pop up */
+.ViewCertificate {
+  cursor: pointer;
+  width: 200px;
+  transition: transform 0.2s;
+}
+
+.ViewCertificate:hover {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.overlayImage {
+  max-width: 90%;
+  max-height: 90%;
+}

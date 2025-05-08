@@ -532,11 +532,13 @@ function AdminAppointment() {
                 <h3 className={styles.detailLabel}>Specialty:</h3>
                 <p className={styles.detailValue}>{selectedAppointment.department}</p>
               </div>
+              
 
               <div className={styles.detailItem}>
                 <h3 className={styles.detailLabel}>Note:</h3>
                 <p className={styles.detailValue}>{selectedAppointment.note}</p>
               </div>
+              
 
               <div className={styles.actionSection}>
                 <div className={styles.divider} />
