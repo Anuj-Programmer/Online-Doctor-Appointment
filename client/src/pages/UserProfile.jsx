@@ -248,7 +248,7 @@ function UserProfile() {
                     Phone Number <span className="required">*</span>
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}

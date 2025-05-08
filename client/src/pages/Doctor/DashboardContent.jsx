@@ -8,6 +8,7 @@ import cancelIcon from "../../assets/cancel.svg";
 import '../../styles/DoctorAppointment.css';
 import schedule from "../../assets/Schedule.jpg"
 import patient from "../../assets/Patient.png"
+import bed from "../../assets/Hospitalbed.svg"
 
 function DashboardContent() {
   const { user } = useSelector((state) => state.user);
@@ -180,7 +181,9 @@ function DashboardContent() {
           {/* <h1 className="doctor-page-title">Dashboard</h1> */}
           <div className='analyctics'>
             <div className="analytics-item">
-              <img src={schedule} alt="" className='analyctics-img'/>
+              <div className="analyctics-img">
+                <img src={schedule} alt=""/>
+              </div>
               <div className='analytics-content'>
               <h6 className='analytics-name'>Appointments</h6>
               <p className='mb-0'><b>{appointments.length}</b></p>
@@ -188,10 +191,31 @@ function DashboardContent() {
               </div>
             </div>
             <div className="analytics-item">
-              <img src={patient} alt="" className='analyctics-img'/>
+            <div className="analyctics-img">
+                <img src={patient} alt=""/>
+              </div>
               <div className='analytics-content'>
-              <h6 className='analytics-name'>Patients</h6>
+              <h6 className='analytics-name'>Total Patients</h6>
               <p className='mb-0'><b>{appointments.filter(apt => apt.status === 'approved').length}</b></p>
+              <p className='mb-0'>Till today</p>
+              </div>
+            </div>
+            <div className="analytics-item">
+            <div className="analyctics-img">
+                <img src={bed} alt=""/>
+              </div>
+              <div className='analytics-content'>
+              <h6 className='analytics-name'>Today Patients</h6>
+              <p className='mb-0'><b>{
+                appointments.filter(apt => {
+                  if (apt.status !== 'approved') return false;
+                  const aptDate = new Date(apt.date);
+                  const today = new Date();
+                  aptDate.setHours(0, 0, 0, 0);
+                  today.setHours(0, 0, 0, 0);
+                  return aptDate.getTime() === today.getTime();
+                }).length
+              }</b></p>
               <p className='mb-0'>Till today</p>
               </div>
             </div>
@@ -229,8 +253,7 @@ function DashboardContent() {
               <div className="header-date">Appt Date</div>
             <div className="header-time">Time Slot</div>
               <div className="header-amount">Amount</div>
-            <div className="header-status">Status</div>
-              <div className="header-actions">Actions</div>
+
             </div>
             <div className="table-body">
             {filteredAppointments.map((appointment) => (

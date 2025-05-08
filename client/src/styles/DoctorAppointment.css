@@ -159,7 +159,6 @@
 }
 
 .analyctics-img {
-  width: 90px; /* fixed width */
   aspect-ratio: 1 / 1; /* ensures it's a square */
   object-fit: cover;
   border: 10px solid rgba(15, 183, 107, 0.12);
@@ -181,10 +180,11 @@
 
 .analyctics{
   display: flex;
+  justify-content: space-around;
   gap: 10rem;
   padding: 25px;
   border: #e6e8ee solid 1px;
   border-radius: 20px;
   margin-bottom: 24px;
-  /* width: 40rem ; */
+  width: 100% ;
 }

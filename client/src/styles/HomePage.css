@@ -795,7 +795,6 @@
     overflow: hidden;
     overflow-x: auto;
     /* flex-direction: column; */
-    justify-content: center;
     align-items: flex-start;
     align-self: center;
     padding: 1px 0;

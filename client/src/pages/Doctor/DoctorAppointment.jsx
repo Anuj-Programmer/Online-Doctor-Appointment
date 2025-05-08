@@ -208,8 +208,7 @@ function DoctorAppointment() {
               <div className="header-date">Appt Date</div>
             <div className="header-time">Time Slot</div>
               <div className="header-amount">Amount</div>
-            <div className="header-status">Status</div>
-              <div className="header-actions">Actions</div>
+          
             </div>
             <div className="table-body">
             {filteredAppointments.map((appointment) => (

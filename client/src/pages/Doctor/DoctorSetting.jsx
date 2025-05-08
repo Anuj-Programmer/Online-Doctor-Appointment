@@ -290,7 +290,7 @@ function DoctorSetting() {
                   </label>
                   <div className="phone-input-doctor">
                     <input
-                      type="tel"
+                      type="number"
                       name="phoneNumber"
                       value={formData.phoneNumber}
                       onChange={handleInputChange}
