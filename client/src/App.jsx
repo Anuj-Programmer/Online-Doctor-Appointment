@@ -13,6 +13,7 @@ import PublicRoute from "./Components/PublicRoute";
 import ApplyDoctor from "./pages/ApplyDoctor";
 import Admin from "./pages/Admin/Admin";
 import AdminAppointment from "./pages/Admin/AdminAppointment";
+import AdminPatients from "./pages/Admin/AdminPatients";
 import AdminRoute from "./Components/AdminRoute";
 import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:8080";
@@ -109,6 +110,14 @@ function App() {
               element={
                 <AdminRoute>
                   <AdminAppointment />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin-patients"
+              element={
+                <AdminRoute>
+                  <AdminPatients />
                 </AdminRoute>
               }
             />

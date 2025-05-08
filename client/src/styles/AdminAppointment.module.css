@@ -414,7 +414,7 @@
     border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
   }
   .div30 {
-    flex: 1;
+    flex: 0.6;
     padding: 18px 12px;
     color: #272b41;
     font: 700 15px "Inter", sans-serif;
@@ -422,13 +422,13 @@
   .div31 {
     flex-direction: column;
     align-items: flex-start;
-    flex: 1;
+    flex: 0.4;
     padding: 18px 12px;
     color: #272b41;
     font: 700 15px "Inter", sans-serif;
   }
   .div32 {
-    flex: 1;
+    flex: 0.5;
     padding: 18px 12px;
     color: #272b41;
     font: 700 15px "Inter", sans-serif;

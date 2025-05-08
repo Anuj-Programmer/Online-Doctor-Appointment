@@ -127,7 +127,7 @@ function Admin() {
         </Link>
       </div>
       <div style={{ marginTop: '20px' }}>
-        <Link to="/admin-appointment">
+        <Link to="/admin-patients">
           Appointment
         </Link>
       </div>
