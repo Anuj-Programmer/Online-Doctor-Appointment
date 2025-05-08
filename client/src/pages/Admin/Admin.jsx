@@ -1,181 +1,200 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Badge, Space, Modal, Button } from 'antd';
-import { BellOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../../redux/features/userSlice';
-import { setUser } from '../../redux/features/userSlice';
+import React from "react";
+import "../../styles/AdminDashboard.css";
+import Nav from "../../Components/Nav";
+import Footer from "../../Components/Footer";
+import dashboardImage from "../../assets/dashboard.png";
+import appointmentsImage from "../../assets/appointments.png";
+import patientsImage from "../../assets/patients.png";
+import specialitiesImage from "../../assets/specialities.png";
+import settingsIcon from "../../assets/settings.svg?url";
+import logoutIcon from "../../assets/logout.svg?url";
+import doctorImage from "../../assets/doctor.png";
 
-function Admin() {
-  const [notificationCount, setNotificationCount] = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
 
-  const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/getUserData', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        dispatch(setUser(response.data.data));
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-  
-  useEffect(() => {
-    fetchUserData();
-    const interval = setInterval(fetchUserData, 30000);
-    
-    return () => clearInterval(interval);
-  }, []);
+const doctors = [
+  { name: "Dr. Richard Wilson", specialty: "Cardiologist" },
+  { name: "Dr. Jane Doe", specialty: "Neurologist" },
+  { name: "Dr. Emily Clark", specialty: "Pediatrician" },
+  { name: "Dr. Sarah Lee", specialty: "Orthopedist" },
+];
 
-  useEffect(() => {
-    if (user?.notification) {
-      setNotificationCount(user.notification.length);
-    }
-  }, [user]);
+const patients = [
+  { name: "Richard Wilson", date: "11 Nov 2025 10.00 AM", email: "richardwilson@gmail.com" },
+  { name: "John Doe", date: "12 Nov 2025 9.00 AM", email: "johndoe@gmail.com" },
+  { name: "Emily Clark", date: "13 Nov 2025 11.00 AM", email: "emilyclark@gmail.com" },
+  { name: "Sarah Lee", date: "14 Nov 2025 2.00 PM", email: "sarahlee@gmail.com" },
+];
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('author');
-  }
+const appointments = [
+  { patient: "Richard Wilson", date: "11 Nov 2025 10.00 AM", specialty: "Pediatrics", amount: "$150", doctor: "Dr. Richard Wilson" },
+  { patient: "John Doe", date: "12 Nov 2025 9.00 AM", specialty: "Neurology", amount: "$200", doctor: "Dr. Jane Doe" },
+  { patient: "Emily Clark", date: "13 Nov 2025 11.00 AM", specialty: "Cardiology", amount: "$180", doctor: "Dr. Emily Clark" },
+  { patient: "Sarah Lee", date: "14 Nov 2025 2.00 PM", specialty: "Orthopedics", amount: "$220", doctor: "Dr. Sarah Lee" },
+];
 
-  const showNotifications = () => {
-    setIsModalVisible(true);
-  }
-
-  const handleMarkAllRead = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/mark-all-notifications', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        // Refresh user data to update notification count
-        fetchUserData();
-        setIsModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error marking notifications as read:', error);
-    }
-  };
-
-  const handleDeleteAllNotifications = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/delete-all-notifications', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        // Refresh user data to update notification count
-        fetchUserData();
-        setIsModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error deleting notifications:', error);
-    }
-  };
-
-  const handleDoctorAction = async (doctorId, status) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        '/api/v1/doctor/change-status',
-        { doctorId, status },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      
-      if (response.data.success) {
-        fetchUserData();
-        setIsModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error updating doctor status:', error);
-    }
-  };
-
+export default function AdminDashboard() {
   return (
-    <div style={{ padding: '20px' }}>
-      <Space size="large">
-        <h1>Admin Dashboard</h1>
-        <Badge count={notificationCount} style={{ backgroundColor: '#ff4d4f' }}>
-          <BellOutlined 
-            style={{ fontSize: '24px', cursor: 'pointer' }} 
-            onClick={showNotifications}
-          />
-        </Badge>
-      </Space>
-
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/login">
-          <button onClick={handleLogout}>Logout</button>
-        </Link>
-      </div>
-
-      <Modal
-        title="Notifications"
-        open={isModalVisible}
-        onOk={() => setIsModalVisible(false)}
-        onCancel={() => setIsModalVisible(false)}
-        footer={[
-          <Button key="delete" type="primary" danger onClick={handleDeleteAllNotifications}>Delete All</Button>,
-          <Button key="close" onClick={() => setIsModalVisible(false)}>
-            Close
-          </Button>
-        ]}
-      >
-        {user?.notification?.map((notification, index) => (
-          <div 
-            key={index}
-            style={{ 
-              borderBottom: '1px solid #f0f0f0',
-              padding: '10px 0',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px'
-            }}
-          >
-            <div>{notification.message}</div>
-            {notification.type === "apply-doctor" && (
-              <Space>
-                <Button
-                  type="primary"
-                  onClick={() => handleDoctorAction(notification.data.doctorId, 'approved')}
-                >
-                  Accept
-                </Button>
-                <Button
-                  type="primary"
-                  danger
-                  onClick={() => handleDoctorAction(notification.data.doctorId, 'rejected')}
-                >
-                  Reject
-                </Button>
-              </Space>
-            )}
+    <div className="admin-dashboard">
+      <Nav />
+      <div className="dashboard-container">
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" className="profile-img" />
+          <div className="profile-name">Rajesh Maharjan</div>
+          <nav>
+            <ul>
+              <li className="active">
+                <img src={dashboardImage} alt="Dashboard" className="sidebar-icon" />
+                Dashboard
+              </li>
+              <li>
+                <img src={appointmentsImage} alt="Appointments" className="sidebar-icon" />
+                Appointments
+              </li>
+              <li>
+                <img src={doctorImage} alt="Doctors" className="sidebar-icon" />
+                Doctors
+              </li>
+              <li>
+                <img src={patientsImage} alt="Patients" className="sidebar-icon" />
+                Patients
+              </li>
+              <li>
+                <img src={specialitiesImage} alt="Specialties" className="sidebar-icon" />
+                Specialties
+              </li>
+              <li>
+                <img src={settingsIcon} alt="Profile Settings" className="sidebar-icon" />
+                Profile Settings
+              </li>
+            </ul>
+          </nav>
+          <div className="logout">
+            <img src={logoutIcon} alt="Logout" className="sidebar-icon" /> Logout
           </div>
-        ))}
-        {!user?.notification?.length && (
-          <div>No new notifications</div>
-        )}
-      </Modal>
+        </aside>
+
+        {/* Main Content */}
+        <div className="main-content">
+          {/* Stats Cards */}
+          <div className="stats-cards">
+            <div className="stats-card">
+              <div className="icon">
+                <img src={doctorImage} alt="Doctor Icon" />
+              </div>
+              <div className="count">1500</div>
+              <div className="label">Doctors<br />Till Today</div>
+            </div>
+            <div className="stats-card">
+              <div className="icon">
+                <img src={patientsImage} alt="Patients Icon" />
+              </div>
+              <div className="count">160</div>
+              <div className="label">Patients<br />Till Today</div>
+            </div>
+            <div className="stats-card">
+              <div className="icon">
+                <img src={appointmentsImage} alt="Appointments Icon" />
+              </div>
+              <div className="count">85</div>
+              <div className="label">Appointments<br />Till Today</div>
+            </div>
+          </div>
+
+          {/* Doctors & Patients List */}
+          <div className="dashboard-tables">
+            <div className="table-card">
+              <h3>Doctors List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Doctor Name</th>
+                    <th>Specialty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {doctors.map((doc, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Doctor" className="profile-thumb" />
+                        {doc.name}
+                      </td>
+                      <td>{doc.specialty}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="table-card">
+              <h3>Patients List</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>Appt Date</th>
+                    <th>Email Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {patients.map((pat, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Patient" className="profile-thumb" />
+                        {pat.name}
+                      </td>
+                      <td>
+                        <a href="#" className="appt-link">{pat.date}</a>
+                      </td>
+                      <td>{pat.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Appointments Table */}
+          <div className="table-card appt-table">
+            <h3>Appointments</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Patient Name</th>
+                  <th>Appt Date</th>
+                  <th>Specialty</th>
+                  <th>Amount</th>
+                  <th>Doctor Name</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointments.map((appt, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Patient" className="profile-thumb" />
+                      {appt.patient}
+                    </td>
+                    <td>
+                      <a href="#" className="appt-link">{appt.date}</a>
+                    </td>
+                    <td>{appt.specialty}</td>
+                    <td>{appt.amount}</td>
+                    <td>
+                      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Doctor" className="profile-thumb" />
+                      {appt.doctor}
+                    </td>
+                    <td>
+                      <button className="view-btn">View</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default Admin;
