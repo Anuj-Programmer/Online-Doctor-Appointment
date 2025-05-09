@@ -29,6 +29,7 @@ import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DashboardContent from "./pages/Doctor/DashboardContent";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 import LandingContact from "./pages/LandingPages/LandingContact";
 import LandingAboutPage from "./pages/LandingPages/LandingAbout";
 import LandingHelp from "./pages/LandingPages/LandingHelp";
@@ -161,6 +162,11 @@ function App() {
                 <DoctorSchedule />
               </ProtectedRoute>
             }/>
+            <Route path="/AdminDashboard" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute> 
+              } />  
             <Route
               path="/LandingContact"
               element={

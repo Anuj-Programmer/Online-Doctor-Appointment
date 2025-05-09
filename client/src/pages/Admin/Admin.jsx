@@ -1,181 +1,83 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Badge, Space, Modal, Button } from 'antd';
-import { BellOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react'
+import "../../styles/DoctorDashboard.css"
+import { useLocation } from 'react-router-dom';
+
+import Nav from '../../Components/Nav';
+
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../../redux/features/userSlice';
 import { setUser } from '../../redux/features/userSlice';
+// import DoctorSchedule from './DoctorSchedule';
+import Footer from '../../Components/Footer';
+// import DoctorSetting from './DoctorSetting';
+// import DashboardContent from './DashboardContent';
+import SidebarAdmin from '../../Components/SidebarAdmin';
+import AdminDashboard from './AdminDashboard';
 
-function Admin() {
-  const [notificationCount, setNotificationCount] = useState(0);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const user = useSelector(selectUser);
+function DoctorDashboard() {
+  const { user } = useSelector((state) => state.user);
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'dashboard');
   const dispatch = useDispatch();
 
-  const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/getUserData', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        dispatch(setUser(response.data.data));
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-  
+  // Add effect to handle location state changes
   useEffect(() => {
-    fetchUserData();
-    const interval = setInterval(fetchUserData, 30000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (user?.notification) {
-      setNotificationCount(user.notification.length);
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
     }
-  }, [user]);
+  }, [location.state]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('author');
-  }
-
-  const showNotifications = () => {
-    setIsModalVisible(true);
-  }
-
-  const handleMarkAllRead = async () => {
+  const getUserData = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/mark-all-notifications', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        // Refresh user data to update notification count
-        fetchUserData();
-        setIsModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error marking notifications as read:', error);
-    }
-  };
-
-  const handleDeleteAllNotifications = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('/api/v1/user/delete-all-notifications', {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.data.success) {
-        // Refresh user data to update notification count
-        fetchUserData();
-        setIsModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error deleting notifications:', error);
-    }
-  };
-
-  const handleDoctorAction = async (doctorId, status) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        '/api/v1/doctor/change-status',
-        { doctorId, status },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const res = await axios.post('/api/v1/user/getUserData', {}, {
+        headers:{
+          Authorization: "Bearer " + localStorage.getItem("token")
         }
-      );
-      
-      if (response.data.success) {
-        fetchUserData();
-        setIsModalVisible(false);
+        })
+      if(res.data.success) {
+        dispatch(setUser(res.data.data))
       }
     } catch (error) {
-      console.error('Error updating doctor status:', error);
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'appointments':
+        return "Doctor Appointments";
+      case 'dashboard':
+        return <AdminDashboard/>;
+      case 'settings':
+        return "Doctor Settings";
+      case 'patients':
+        return "Patients";
+      case 'doctors':
+        return "Doctors";
+      default:
+        return <div>Dashboard Content</div>;
     }
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <Space size="large">
-        <h1>Admin Dashboard</h1>
-        <Badge count={notificationCount} style={{ backgroundColor: '#ff4d4f' }}>
-          <BellOutlined 
-            style={{ fontSize: '24px', cursor: 'pointer' }} 
-            onClick={showNotifications}
-          />
-        </Badge>
-      </Space>
-
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/">
-          <button onClick={handleLogout}>Logout</button>
-        </Link>
+    <>
+     
+      <Nav/>
+      <div className="dashboard-container">
+        <div className="sidebar">
+          <SidebarAdmin activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
+        <div className="main-content-dashboard" style={{width: "100%"}}>
+          {renderContent()}
+        </div>
       </div>
-
-      <Modal
-        title="Notifications"
-        open={isModalVisible}
-        onOk={() => setIsModalVisible(false)}
-        onCancel={() => setIsModalVisible(false)}
-        footer={[
-          <Button key="delete" type="primary" danger onClick={handleDeleteAllNotifications}>Delete All</Button>,
-          <Button key="close" onClick={() => setIsModalVisible(false)}>
-            Close
-          </Button>
-        ]}
-      >
-        {user?.notification?.map((notification, index) => (
-          <div 
-            key={index}
-            style={{ 
-              borderBottom: '1px solid #f0f0f0',
-              padding: '10px 0',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px'
-            }}
-          >
-            <div>{notification.message}</div>
-            {notification.type === "apply-doctor" && (
-              <Space>
-                <Button
-                  type="primary"
-                  onClick={() => handleDoctorAction(notification.data.doctorId, 'approved')}
-                >
-                  Accept
-                </Button>
-                <Button
-                  type="primary"
-                  danger
-                  onClick={() => handleDoctorAction(notification.data.doctorId, 'rejected')}
-                >
-                  Reject
-                </Button>
-              </Space>
-            )}
-          </div>
-        ))}
-        {!user?.notification?.length && (
-          <div>No new notifications</div>
-        )}
-      </Modal>
-    </div>
+      <Footer/>
+    </>
   );
 }
 
-export default Admin;
+export default DoctorDashboard
