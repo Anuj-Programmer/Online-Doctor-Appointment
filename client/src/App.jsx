@@ -28,6 +28,7 @@ import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
 import DashboardContent from "./pages/Doctor/DashboardContent";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -154,6 +155,11 @@ function App() {
                 <DoctorSchedule />
               </ProtectedRoute>
             }/>
+            <Route path="/AdminDashboard" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute> 
+              } />  
           </Routes>
         )}
       </BrowserRouter>

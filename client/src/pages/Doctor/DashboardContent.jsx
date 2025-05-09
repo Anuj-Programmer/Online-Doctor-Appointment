@@ -7,7 +7,7 @@ import acceptIcon from "../../assets/accept.svg";
 import cancelIcon from "../../assets/cancel.svg";
 import '../../styles/DoctorAppointment.css';
 import schedule from "../../assets/Schedule.jpg"
-import patient from "../../assets/Patient.png"
+import patient from "../../assets/patients.png"
 
 function DashboardContent() {
   const { user } = useSelector((state) => state.user);
