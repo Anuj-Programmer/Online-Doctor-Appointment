@@ -282,7 +282,9 @@ function ApplyDoctor() {
                   </Form.Item>
                 </Col>
               </Row>
-
+              <div>
+              <span className="text-danger">*</span> Time Slots
+              </div>
               {timeSlots.map((slot) => (
                 <div
                   key={slot.id}
