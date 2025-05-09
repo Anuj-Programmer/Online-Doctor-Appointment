@@ -122,7 +122,7 @@ function Admin() {
       </Space>
 
       <div style={{ marginTop: '20px' }}>
-        <Link to="/login">
+        <Link to="/">
           <button onClick={handleLogout}>Logout</button>
         </Link>
       </div>

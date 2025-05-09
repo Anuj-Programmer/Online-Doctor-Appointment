@@ -35,7 +35,7 @@ const loginController = async (req, res) => {
             return res.status(200).send({message: "Invalid email or password", success:false})
         }
 
-        if (req.body.email === 'admin@gmail.com' && req.body.password === 'admin') {
+        if (user.isAdmin) {
             const token = jwt.sign({ id: user._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: '1d' })
             return res.status(200).send({ 
                 message: "Admin login successful", 
