@@ -111,12 +111,14 @@ const applyDoctor = async (req, res) => {
             userId: req.body.userId,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+            certificate: req.body.certificate,
             phoneNumber: req.body.phoneNumber,
             address: req.body.address,
             specialization: req.body.specialization,
             experience: Number(req.body.experience),
             fee: Number(req.body.fee),
-            timeSlots: timeSlots || [] 
+            timeSlots: timeSlots || [],
+            
         });
 
         await newDoctor.save();
@@ -237,11 +239,14 @@ const updateDoctor = async (req, res) => {
             });
         }
 
+        console.log("hewllo", updateData?.doctorId);
         const doctor = await Doctor.findOneAndUpdate(
-            { userId: req.user._id },
+            { userId: updateData?.doctorId},
             updateData,
             { new: true }
         );
+
+        console.log("hiiiii")
 
         if (!doctor) {
             return res.status(404).json({
@@ -539,9 +544,30 @@ const updateTimeSlots = async (req, res) => {
     }
 };
 
+const getPublicDoctors = async (req, res) => {
+    try {
+        const doctors = await Doctor.find({ status: 'approved' })
+            .populate('userId')
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            message: 'Public doctors data fetched successfully',
+            data: doctors
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error in getting public doctors data',
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     applyDoctor,
     getAllDoctors,
+    getPublicDoctors,
     getDoctorById,
     updateDoctor,
     changeDoctorStatus,

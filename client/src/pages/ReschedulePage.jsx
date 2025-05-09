@@ -146,7 +146,11 @@ function ReschedulePage() {
       if (response.data.success) {
         toast.success(
           "Appointment rescheduled successfully, waiting for doctor approval"
+          
         );
+        setTimeout(() => {
+          navigate("/appointment");
+        }, 1000);
         // Optionally navigate to appointments page or show success message
       } else {
         toast.error(response.data.message);

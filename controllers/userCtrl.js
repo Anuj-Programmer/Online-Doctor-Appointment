@@ -28,14 +28,20 @@ const loginController = async (req, res) => {
     try {
         const user = await userModel.findOne({email:req.body.email})
         if (!user) {
-            return res.status(200).send({message: "user not found", success:false})
+            return res.status(200).send({
+                message: "User not found. Please check your email or register.", 
+                success: false
+            })
         }
         const isMatch = await bcrypt.compare(req.body.password, user.password)
         if (!isMatch) {
-            return res.status(200).send({message: "Invalid email or password", success:false})
+            return res.status(200).send({
+                message: "Invalid email or password", 
+                success: false
+            })
         }
 
-        if (req.body.email === 'admin@gmail.com' && req.body.password === 'admin') {
+        if (user.isAdmin) {
             const token = jwt.sign({ id: user._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: '1d' })
             return res.status(200).send({ 
                 message: "Admin login successful", 
@@ -71,7 +77,10 @@ const loginController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({success:false, message: `Login Controller: ${error.message}`})
+        res.status(500).send({
+            success: false, 
+            message: `Login Controller: ${error.message}`
+        })
     }
 }
 
@@ -90,6 +99,8 @@ const authController = async (req, res) => {
                     _id: user._id,
                     name: user.name,
                     email: user.email,
+                    phoneNumber: user.phoneNumber, 
+                    address: user.address,
                     isAdmin: user.isAdmin,
                     isDoctor: user.isDoctor,
                     seenNotication: user.seenNotication,
@@ -271,8 +282,8 @@ const searchDoctor = async (req, res) => {
         const { name, location, specialization } = req.query;
         console.log(name, location, specialization);
         
-        // Initialize the filter object
-        let filter = {};
+        // Initialize the filter object with approved status
+        let filter = { status: 'approved' };
 
         // If 'name' is provided, search by first and last name
         if (name) {
@@ -305,7 +316,7 @@ const searchDoctor = async (req, res) => {
 
         res.status(200).send({
             success: true,
-            message: "Doctors found",
+            message: "Approved doctors found",
             data: doctors
         });
     } catch (error) {
@@ -629,6 +640,62 @@ const changePassword = async (req, res) => {
     }
 };
 
+const updateProfile = async (req, res) => {
+    try {
+        const { userId, name, email, phoneNumber, address } = req.body;
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return res.status(404).send({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        // Check if email is being changed and if it's already in use
+        if (email !== user.email) {
+            const existingUser = await userModel.findOne({ email });
+            if (existingUser) {
+                return res.status(400).send({
+                    message: "Email already in use",
+                    success: false
+                });
+            }
+        }
+
+        // Update user profile
+        user.name = name;
+        user.email = email;
+        user.phoneNumber = phoneNumber;
+        user.address = address;
+
+        await user.save();
+
+        res.status(200).send({
+            message: "Profile updated successfully",
+            success: true,
+            data: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                address: user.address,
+                isAdmin: user.isAdmin,
+                isDoctor: user.isDoctor,
+                seenNotication: user.seenNotication,
+                notification: user.notification
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error in updating profile",
+            success: false,
+            error: error.message
+        });
+    }
+};
+
 module.exports = { 
     loginController, 
     registerController, 
@@ -642,5 +709,6 @@ module.exports = {
     cancelAppointment, 
     getBookedSlots,
     changeEmail,
-    changePassword 
+    changePassword,
+    updateProfile
 };

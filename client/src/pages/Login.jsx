@@ -13,6 +13,7 @@ import showPasswordIcon from "../assets/Show.svg";
 import hidePasswordIcon from "../assets/Hide.svg";
 import Footer from "../Components/Footer";
 import toast, { Toaster } from "react-hot-toast";
+import LandingPageNav from "../Components/LandingPageNav";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,17 +46,21 @@ function Login() {
         
         // Navigate based on user type
         setTimeout(() => {
-          navigate(res.data.success === 'admin' ? '/admin' : '/');
+          navigate(res.data.success === 'admin' ? '/admin' : '/home');
         }, 1000);
       } else {
-        toast.error("Invalid email or password");
+        // Show the specific error message from the server
+        toast.error(res.data.message || "Login failed");
       }
     } catch (error) {
       dispatch(hideLoading());
-      toast.error("Invalid email or password");
+      // Show the error message from the server if available
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
     }
-};
+  };
   return (
+    <>
+    <LandingPageNav/>
     <div className="login-container">
       <Toaster position="top-center"/>
       {/* <header className="header">
@@ -126,6 +131,7 @@ function Login() {
       </main>
       <Footer/>
     </div>
+    </>
   );
 }
 

@@ -319,6 +319,22 @@ body {
   }
 }
 
+.password-strength {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.password-strength.weak {
+  color: red;
+}
+.password-strength.medium {
+  color: orange;
+}
+.password-strength.strong {
+  color: green;
+}
+
+
+
 /* @media (max-height: 600px) {
   .nav {
     height: 40px;

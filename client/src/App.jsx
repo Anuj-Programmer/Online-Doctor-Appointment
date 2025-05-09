@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,6 +13,9 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import PublicRoute from "./Components/PublicRoute";
 import ApplyDoctor from "./pages/ApplyDoctor";
 import Admin from "./pages/Admin/Admin";
+import AdminAppointment from "./pages/Admin/AdminAppointment";
+import AdminPatients from "./pages/Admin/AdminPatients";
+import AdminDoctor from "./pages/Admin/AdminDoctor";
 import AdminRoute from "./Components/AdminRoute";
 import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:8080";
@@ -27,6 +31,11 @@ import SearchPage from "./pages/SearchPage";
 import DoctorSchedule from "./pages/Doctor/DoctorSchedule";
 import UserProfile from "./pages/UserProfile";
 import DoctorAppointment from "./pages/Doctor/DoctorAppointment";
+import DashboardContent from "./pages/Doctor/DashboardContent";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import LandingContact from "./pages/LandingPages/LandingContact";
+import LandingAboutPage from "./pages/LandingPages/LandingAbout";
+import LandingHelp from "./pages/LandingPages/LandingHelp";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -38,8 +47,11 @@ function App() {
           <Spinner />
         ) : (
           <Routes>
+            {/* Landing page as the default route */}
+            <Route path="/" element={<LandingPage />} />
+            
             <Route
-              path="/"
+              path="/home"
               element={
                 <ProtectedRoute>
                   <HomePage />
@@ -49,33 +61,33 @@ function App() {
             <Route
               path="/applydoctor"
               element={
-                <ProtectedRoute>
+                
                   <ApplyDoctor />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/contact"
               element={
-                <ProtectedRoute>
+               
                   <Contact />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/help"
               element={
-                <ProtectedRoute>
+                
                   <Help />
-                </ProtectedRoute>
+               
               }
             />
             <Route
               path="/about"
               element={
-                <ProtectedRoute>
+               
                   <AboutPage />
-                </ProtectedRoute>
+            
               }
             />
             <Route
@@ -102,7 +114,30 @@ function App() {
                 </AdminRoute>
               }
             />
-
+            <Route
+              path="/admin-appointment"
+              element={
+                <AdminRoute>
+                  <AdminAppointment />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin-patients"
+              element={
+                <AdminRoute>
+                  <AdminPatients />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin-doctor"
+              element={
+                <AdminRoute>
+                  <AdminDoctor />
+                </AdminRoute>
+              }
+            />
             <Route path="/doctor/:doctorId" element={
               <ProtectedRoute>
                 <DoctorDetail />
@@ -133,6 +168,11 @@ function App() {
                 <DoctorAppointment/>
               </ProtectedRoute>
               } />
+            <Route path="/doctor/dashboard" element={
+              <ProtectedRoute>
+                <DashboardContent/>
+              </ProtectedRoute>
+              } />
             <Route path="/reschedule/:doctorId" element={
               <ProtectedRoute>
                 <ReschedulePage />
@@ -148,6 +188,36 @@ function App() {
                 <DoctorSchedule />
               </ProtectedRoute>
             }/>
+            <Route path="/AdminDashboard" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute> 
+              } />  
+            <Route
+              path="/LandingContact"
+              element={
+                
+                  <LandingContact/>
+               
+              }
+            />
+            <Route
+              path="/LandingAboutPage"
+              element={
+                
+                  <LandingAboutPage />
+               
+              }
+            />
+            <Route
+              path="/LandingHelp"
+              element={
+                
+                  <LandingHelp />
+               
+              }
+            />
+            
           </Routes>
         )}
       </BrowserRouter>

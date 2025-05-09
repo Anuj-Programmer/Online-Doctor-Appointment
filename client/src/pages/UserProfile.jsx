@@ -1,103 +1,188 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Nav from '../Components/Nav'
-import Footer from '../Components/Footer'
-import { setUser } from '../redux/features/userSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import toast from 'react-hot-toast'
-import { Toaster } from 'react-hot-toast'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Nav from "../Components/Nav";
+import Footer from "../Components/Footer";
+import { setUser } from "../redux/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import "../styles/UserProfile.css";
 
 function UserProfile() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(true);
-  const [emailForm, setEmailForm] = useState({
-    newEmail: '',
-    currentPassword: ''
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
   });
-  const [passwordForm, setPasswordForm] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
+  const [showPasswords, setShowPasswords] = useState({
+    current: false,
+    new: false,
+    confirm: false,
   });
-  const [showEmailForm, setShowEmailForm] = useState(false);
-  const [showPasswordForm, setShowPasswordForm] = useState(false);
 
-  const getUserData = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.post('/api/v1/user/getUserData', {}, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+  const [passwordMatchError, setPasswordMatchError] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post(
+          "/api/v1/user/getUserData",
+          {},
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        if (res.data.success) {
+          dispatch(setUser(res.data.data));
+          setFormData({
+            name: res.data.data.name || "",
+            email: res.data.data.email || "",
+            phoneNumber: res.data.data.phoneNumber || "",
+            address: res.data.data.address || "",
+            currentPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
         }
-      });
-      if (res.data.success) {
-        dispatch(setUser(res.data.data));
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        toast.error("Failed to fetch user data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "newPassword" || name === "confirmPassword") {
+      const newPassword = name === "newPassword" ? value : formData.newPassword;
+      const confirmPassword =
+        name === "confirmPassword" ? value : formData.confirmPassword;
+      if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+        setPasswordMatchError("New password and confirmation do not match");
+      } else {
+        setPasswordMatchError("");
+      }
+    }
+  };
+
+  const togglePasswordVisibility = (field) => {
+    setShowPasswords((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token || !user?._id) {
+        throw new Error("Authentication required");
+      }
+
+      // Update profile
+      const response = await axios.put(
+        "/api/v1/user/update-profile",
+        {
+          userId: user._id,
+          name: formData.name,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          address: formData.address,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        toast.success("Profile updated successfully");
+        dispatch(setUser(response.data.data));
+      }
+
+      // Change password if fields are filled
+      if (
+        formData.currentPassword &&
+        formData.newPassword &&
+        formData.confirmPassword
+      ) {
+        if (formData.newPassword !== formData.confirmPassword) {
+          toast.error("New passwords do not match");
+          setLoading(false);
+          return;
+        }
+
+        try {
+          const passwordRes = await axios.post(
+            "/api/v1/user/change-password",
+            {
+              userId: user._id,
+              currentPassword: formData.currentPassword,
+              newPassword: formData.newPassword,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (passwordRes.data.success) {
+            toast.success("Password changed successfully");
+            setFormData((prev) => ({
+              ...prev,
+              currentPassword: "",
+              newPassword: "",
+              confirmPassword: "",
+            }));
+          } else {
+            toast.error(
+              passwordRes.data.message || "Failed to change password"
+            );
+            console.error("Password change error:", passwordRes.data.message);
+          }
+        } catch (err) {
+          console.error("Error changing password:", err);
+          toast.error(err.response?.data?.message || "Error changing password");
+        }
       }
     } catch (error) {
-      console.log(error);
-      toast.error('Failed to fetch user data');
+      console.error("Error updating profile:", error);
+      toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleEmailChange = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('/api/v1/user/change-email', {
-        ...emailForm,
-        userId: user._id
-      }, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
-      });
-      if (res.data.success) {
-        toast.success('Email updated successfully!');
-        setShowEmailForm(false);
-        setEmailForm({ newEmail: '', currentPassword: '' });
-        getUserData();
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update email');
-    }
-  };
-
-  const handlePasswordChange = async (e) => {
-    e.preventDefault();
-    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      toast.error('New passwords do not match');
-      return;
-    }
-    try {
-      const res = await axios.post('/api/v1/user/change-password', {
-        currentPassword: passwordForm.currentPassword,
-        newPassword: passwordForm.newPassword,
-        userId: user._id
-      }, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
-      });
-      if (res.data.success) {
-        toast.success('Password updated successfully!');
-        setShowPasswordForm(false);
-        setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to update password');
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
   if (loading) {
     return (
       <>
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
         <Nav />
         <div className="min-h-screen flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -109,137 +194,160 @@ function UserProfile() {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <Nav />
-      <div className="min-h-screen bg-gray-100 py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h1 className="text-2xl font-bold mb-6">User Profile</h1>
-            
-            {user && (
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
-                    {/* <span className="text-3xl text-gray-500">
-                      {user.name?.charAt(0).toUpperCase()}
-                    </span> */}
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold">Name: {user.name}</h2>
-                    <p className="text-gray-600">Email: {user.email}</p>
+      <div className="contact-header">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e1edb01272473b09182df3664c04c400ee218d87?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-left-image"
+            alt="Decorative left element"
+          />
+          <h1 className="contact-title">Settings</h1>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/29ce334b1048cc85e046bf85f7135b7e959c4508?placeholderIfAbsent=true&apiKey=5a19d1033d5b42b78c02079161eeb8a9"
+            className="header-right-image"
+            alt="Decorative right element"
+          />
+        </div>
+      <div className="settings-content">
+        <div className="settings-container">
+          <h1 className="settings-title">User Profile</h1>
+
+          <form onSubmit={handleSubmit}>
+            <h2 className="section-label">Information</h2>
+            <div className="form-section">
+              <div className="form-grid">
+                <div className="form-group-user">
+                  <label>
+                    Full Name <span className="required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Enter Full Name"
+                    required
+                  />
+                </div>
+                <div className="form-group-user">
+                  <label>
+                    Email Address <span className="required">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter Email"
+                    required
+                  />
+                </div>
+                <div className="form-group-user">
+                  <label>
+                    Phone Number <span className="required">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    placeholder="Enter Phone Number"
+                  />
+                </div>
+                <div className="form-group-user full-width">
+                  <label>
+                    Address <span className="required">*</span>
+                  </label>
+                  <textarea
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    placeholder="Enter Address"
+                    rows="3"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h2 className="section-label">Change Password</h2>
+            <div className="form-section">
+              <div className="form-grid">
+                <div className="form-group-user">
+                  <label>Current Password</label>
+                  <div className="password-wrapper">
+                    <input
+                      type={showPasswords.current ? "text" : "password"}
+                      name="currentPassword"
+                      value={formData.currentPassword}
+                      onChange={handleInputChange}
+                      placeholder="Enter Current Password"
+                    />
+                    <i
+                      className={`fa-solid ${
+                        showPasswords.current ? "fa-eye-slash" : "fa-eye"
+                      } eye-icon`}
+                      onClick={() => togglePasswordVisibility("current")}
+                    ></i>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-700">Contact Information</h3>
-                    <p className="text-gray-600">{user.phone || 'Not provided'}</p>
-                  </div> */}
-                  
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-700">Account Type</h3>
-                    <p className="text-gray-600">{user.role || 'User'}</p>
+                <div className="form-group-user">
+                  <label>New Password</label>
+                  <div className="password-wrapper">
+                    <input
+                      type={showPasswords.new ? "text" : "password"}
+                      name="newPassword"
+                      value={formData.newPassword}
+                      onChange={handleInputChange}
+                      placeholder="Enter New Password"
+                    />
+                    <i
+                      className={`fa-solid ${
+                        showPasswords.new ? "fa-eye-slash" : "fa-eye"
+                      } eye-icon`}
+                      onClick={() => togglePasswordVisibility("new")}
+                    ></i>
                   </div>
                 </div>
 
-                {/* Email Change Form */}
-                <div className="border-t pt-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">Change Email</h3>
-                    <button
-                      onClick={() => setShowEmailForm(!showEmailForm)}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      {showEmailForm ? 'Cancel' : 'Change Email'}
-                    </button>
+                <div className="form-group-user">
+                  <label>Confirm New Password</label>
+                  <div className="password-wrapper">
+                    <input
+                      type={showPasswords.confirm ? "text" : "password"}
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      placeholder="Confirm New Password"
+                    />
+                    <i
+                      className={`fa-solid ${
+                        showPasswords.confirm ? "fa-eye-slash" : "fa-eye"
+                      } eye-icon`}
+                      onClick={() => togglePasswordVisibility("confirm")}
+                    ></i>
                   </div>
-                  {showEmailForm && (
-                    <form onSubmit={handleEmailChange} className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">New Email</label>
-                        <input
-                          type="email"
-                          value={emailForm.newEmail}
-                          onChange={(e) => setEmailForm({ ...emailForm, newEmail: e.target.value })}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                          required
-                        />
-                      </div>
-                      {/* <div>
-                        <label className="block text-sm font-medium text-gray-700">Current Password</label>
-                        <input
-                          type="password"
-                          value={emailForm.currentPassword}
-                          onChange={(e) => setEmailForm({ ...emailForm, currentPassword: e.target.value })}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                          required
-                        />
-                      </div> */}
-                      <button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        Update Email
-                      </button>
-                    </form>
-                  )}
-                </div>
-
-                {/* Password Change Form */}
-                <div className="border-t pt-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">Change Password</h3>
-                    <button
-                      onClick={() => setShowPasswordForm(!showPasswordForm)}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      {showPasswordForm ? 'Cancel' : 'Change Password'}
-                    </button>
-                  </div>
-                  {showPasswordForm && (
-                    <form onSubmit={handlePasswordChange} className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">Current Password</label>
-                        <input
-                          type="password"
-                          value={passwordForm.currentPassword}
-                          onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">New Password</label>
-                        <input
-                          type="password"
-                          value={passwordForm.newPassword}
-                          onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                        <input
-                          type="password"
-                          value={passwordForm.confirmPassword}
-                          onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                          required
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        Update Password
-                      </button>
-                    </form>
+                  {passwordMatchError && (
+                    <p className="error-text">{passwordMatchError}</p>
                   )}
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={() => navigate(-1)}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="save-btn" disabled={loading}>
+                {loading ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
       <Footer />

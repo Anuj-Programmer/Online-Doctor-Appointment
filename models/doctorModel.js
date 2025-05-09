@@ -14,6 +14,14 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profile: {
+        type: String,
+        default: ""
+    },
+    certificate: {
+        type: String,
+        default: ""
+    },
     phoneNumber: {
         type: String,
         required: true

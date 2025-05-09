@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../redux/features/userSlice';
 import DoctorSchedule from './DoctorSchedule';
 import Footer from '../../Components/Footer';
+import DoctorSetting from './DoctorSetting';
+import DashboardContent from './DashboardContent';
 
 function DoctorDashboard() {
   const { user } = useSelector((state) => state.user);
@@ -48,13 +50,11 @@ function DoctorDashboard() {
       case 'appointments':
         return <DoctorAppointment />;
       case 'dashboard':
-        return <div>Dashboard Content</div>;
+        return <DashboardContent/>;
       case 'schedule':
         return <DoctorSchedule />
-      case 'reviews':
-        return <div>Reviews Content</div>;
       case 'settings':
-        return <div>Settings Content</div>;
+        return <DoctorSetting/>
       default:
         return <div>Dashboard Content</div>;
     }

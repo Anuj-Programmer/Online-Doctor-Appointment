@@ -1,0 +1,1901 @@
+.div {
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    margin: 0 auto;
+  }
+  @media (max-width: 991px) {
+    .div {
+      max-width: 991px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div {
+      max-width: 640px;
+      flex-direction: column;
+    }
+  }
+
+  .div2 {
+    width: 310px;
+    background-color: #fff;
+    border-right: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  @media (max-width: 640px) {
+    .div2 {
+      display: none;
+    }
+  }
+  .div3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .profileImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+  .span {
+    color: #272b41;
+    font: 600 17px "Inter", sans-serif;
+  }
+  .div4 {
+    width: 100%;
+  }
+  .div5 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span2 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div6 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span3 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div7 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span4 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div8 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span5 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div9 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .search1{
+    display: flex;
+    width: 18px;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+  }
+  .span6 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div10 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span7 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .div11 {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    color: #757575;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span8 {
+    margin-right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    align-self: stretch;
+    flex-wrap: wrap;
+  }
+  .div12 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .div13 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+    height: 69px;
+    border-bottom: 0.8Px solid #f0f0f0;
+    background-color: #fff;
+  }
+  @media (max-width: 991px) {
+    .div13 {
+      padding: 0 40px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div13 {
+      padding: 0 20px;
+    }
+  }
+  .logoImg {
+    width: 134px;
+    height: 41px;
+  }
+  .div14 {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  @media (max-width: 640px) {
+    .div14 {
+      display: none;
+    }
+  }
+  .span9 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span10 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span11 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .span12 {
+    color: #000f28;
+    cursor: pointer;
+    font: 14px "Inter", sans-serif;
+  }
+  .div15 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  @media (max-width: 640px) {
+    .div15 {
+      gap: 10px;
+    }
+  }
+  .div16 {
+    padding: 7px 15px;
+    border: 1px solid #0e82fd;
+    border-radius: 800px;
+    color: #0e82fd;
+    cursor: pointer;
+    font: 13px "Inter", sans-serif;
+  }
+  .div17 {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .div18 {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5Px;
+    right: 0;
+    top: 0;
+    background-color: #ff3c00;
+  }
+  .div19 {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #e6e8ee;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .div20 {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5Px;
+    right: 0;
+    top: 0;
+    background-color: #04bd6c;
+  }
+  .userImg {
+    width: 31px;
+    height: 31px;
+    border-radius: 20px;
+  }
+  .div21 {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 70px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  @media (max-width: 991px) {
+    .div21 {
+      padding: 24px 40px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div21 {
+      padding: 24px 20px;
+    }
+  }
+  .div22 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .span13 {
+    color: #272b41;
+    font: 600 18px "Inter", sans-serif;
+  }
+  .buttonContainer {
+    display: flex;
+    gap: 16px; /* Space between each button */
+    justify-content: center; /* Center align buttons horizontally */
+    margin-bottom: 20px; /* Add space below the button container */
+  }
+  .div23 {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 24px;
+    border-radius: 50px;
+  }
+  
+  .div24 {
+    
+    display: flex;
+    padding: 8px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+    border-radius: 50px;
+    background: linear-gradient(92deg, #0D86F9 1.62%, #14C1E8 105.07%);
+  }
+  .div25 {
+    color: #272b41;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+  }
+  .div26 {
+    color: #272b41;
+    cursor: pointer;
+    font: 15px "Inter", sans-serif;
+  }
+  .div27 {
+    display: flex;
+  align-items: center;
+  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0 16px;
+    width: 308px;
+    display: flex;
+    width: 308px;
+    padding: 0px 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media (max-width: 991px) {
+    .div27 {
+      width: 250px;
+    }
+  }
+  @media (max-width: 640px) {
+    .div27 {
+      width: 200px;
+    }
+  }
+  .input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 42px;
+    color: #adaebc;
+    font: 16px "Inter", sans-serif;
+  }
+  .div28 {
+    width: 100%;
+    border: 1px solid #e6e8ee;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .div29 {
+    display: flex;
+    background-color: #fff;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div30 {
+    flex: 0.6;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div31 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0.4;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div32 {
+    flex: 0.4;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div33 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div34 {
+    /* margin-right: 50px; */
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div35 {
+    background-color: #fff;
+  }
+  .div36 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div37 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .patientImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 8px;
+  }
+  .div38 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span14 {
+    color: #0e82fd;
+  }
+  .div39 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div40 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div41 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .doctorImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 8px;
+  }
+  .div42 {
+    display: flex;
+    flex: 0.8;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div43 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span15 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div44 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div45 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div46 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span16 {
+    color: #0e82fd;
+  }
+  .div47 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div48 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div49 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div50 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div51 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span17 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div52 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div53 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div54 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span18 {
+    color: #0e82fd;
+  }
+  .div55 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div56 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div57 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div58 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div59 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span19 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div60 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div61 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div62 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span20 {
+    color: #0e82fd;
+  }
+  .div63 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div64 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div65 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div66 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div67 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span21 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div68 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div69 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div70 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span22 {
+    color: #0e82fd;
+  }
+  .div71 {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div72 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div73 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div74 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div75 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span23 {
+    display: flex;
+  gap: 1rem;
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div76 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div77 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div78 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span24 {
+    color: #0e82fd;
+  }
+  .div79 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div80 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div81 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div82 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div83 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span25 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div84 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div85 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div86 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span26 {
+    color: #0e82fd;
+  }
+  .div87 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div88 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div89 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div90 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div91 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span27 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div92 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div93 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div94 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span28 {
+    color: #0e82fd;
+  }
+  .div95 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div96 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div97 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div98 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div99 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span29 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div100 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div101 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div102 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span30 {
+    color: #0e82fd;
+  }
+  .div103 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div104 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div105 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div106 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div107 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span31 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div108 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div109 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div110 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span32 {
+    color: #0e82fd;
+  }
+  .div111 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div112 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div113 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div114 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div115 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span33 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div116 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div117 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div118 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span34 {
+    color: #0e82fd;
+  }
+  .div119 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div120 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div121 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div122 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div123 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span35 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div124 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div125 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div126 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span36 {
+    color: #0e82fd;
+  }
+  .div127 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div128 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div129 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div130 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div131 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span37 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div132 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div133 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div134 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span38 {
+    color: #0e82fd;
+  }
+  .div135 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div136 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div137 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div138 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div139 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span39 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div140 {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.8Px solid rgba(0, 0, 0, 0.05);
+  }
+  .div141 {
+    display: flex;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div142 {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .span40 {
+    color: #0e82fd;
+  }
+  .div143 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div144 {
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div145 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div146 {
+    display: flex;
+    flex: 1;
+    padding: 18px 12px;
+    color: #272b41;
+    align-items: center;
+    font: 700 15px "Inter", sans-serif;
+  }
+  .div147 {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 3.2Px;
+    cursor: pointer;
+    background-color: rgba(2, 182, 179, 0.12);
+  }
+  .span41 {
+    color: #1db9aa;
+    margin-right: 4px;
+    font: 14px "Font Awesome 5 Free";
+  }
+  .div148 {
+    height: 56px;
+    background-color: #f0f0f0;
+    border-top: 0.8Px solid #fff;
+    color: #465d7c;
+    font: 16px "Inter", sans-serif;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .closeBtn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+  /*pop up css*/
+  .appointmentDetailsPopup {
+    background-color: #fff;
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 766px;
+    transform: scale(0.85);
+    padding: 40px;
+    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+    display: flex;
+  }
+  
+  .header {
+    color: #272b41;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px 100px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+  }
+  
+  .title {
+    align-self: stretch;
+    margin: auto 0;
+  }
+  
+  .closeIcon {
+    aspect-ratio: 0.89;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 16px;
+    margin: auto 0;
+    cursor: pointer;
+  }
+  
+  .detailsGrid {
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    gap: 16px 24px;
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+  }
+  
+  .detailItem {
+    width: 326px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    color: #272b41;
+    width: 326px;
+    min-width: 240px;
+    font-size: 16px;
+  }
+  
+  .detailLabel {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  
+  .detailValue {
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  
+  .appointmentStatus {
+    display: flex;
+    padding: 4px 8px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    color: #1db9aa;
+    text-align: center;
+    background-color: #02b6b31f;
+    border-radius: 3px;
+    align-self: start;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+  }
+  
+  .calendarIcon {
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+  }
+  
+  .upcoming {
+    align-self: stretch;
+    margin: auto 0;
+  }
+  
+  .actionSection {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 686px;
+    min-width: 240px;
+    display: flex;
+  }
+  
+  .divider {
+    margin-top: 10px;
+    background-color: #000;
+    align-self: stretch;
+    width: 100%;
+    min-height: 1px;
+    display: flex;
+  }
+  
+  .actionButtons {
+    color: #e63c3c;
+    text-align: center;
+    justify-content: start;
+    align-items: center;
+    gap: 24px;
+    margin-top: 8px;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+  }
+  
+ 
+ .rejectButton{
+  background-color: #f211361f;
+  border-radius: 3px;
+  justify-content: end;
+  align-self: stretch;
+  align-items: center;
+ }
+  
+  .deleteIcon {
+    aspect-ratio: 0.87;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 14px;
+    margin: auto 0;
+  }
+  
+  .deleteText {
+    align-self: stretch;
+    margin: auto 0;
+    color: #e63c3c;
+  }
+  
+  @media (width <= 991px) {
+    .appointmentDetailsPopup {
+      padding-left: 20px;
+      padding-right: 20px;
+      max-width: 500px; /* Reduce width */
+      width: 90%;       /* Responsive */
+      max-height: 70vh;
+      height: 90%;
+    }
+  
+    .header {
+      max-width: 100%;
+    }
+  
+    .detailsGrid {
+      max-width: 100%;
+    }
+  
+    .appointmentStatus {
+      white-space: initial;
+    }
+  
+    .detailItem {
+      white-space: initial;
+    }
+  
+    .detailValue {
+      max-width: 100%;
+    }
+  
+    .actionSection {
+      max-width: 100%;
+    }
+  
+    .divider {
+      max-width: 100%;
+    }
+  }
+  .certificateIcon{
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .ViewCertificate{
+    all:unset;
+    cursor: pointer;
+    display: flex;
+    padding: 8px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: var(--Main-Palette-White, var(--color-white-solid, #FFF));
+    text-align: center;
+
+    /* Main Styles/Inter/Medium */
+    font-family: var(--font-family-Font-1, Inter);
+    font-size: var(--font-size-13, 13px);
+    font-style: normal;
+    font-weight: var(--font-weight-500, 500);
+    line-height: var(--line-height-19_51, 19.51px); /* 150.077% */
+    right: 267px;
+    top: 23px;
+    border-radius: 5px;
+    background: var(--color-azure-52, #0E82FD);
+    width: 150px;
+  }
+  
+/* certificate pop up */
+.ViewCertificate {
+  cursor: pointer;
+  width: 200px;
+  transition: transform 0.2s;
+}
+
+.ViewCertificate:hover {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.overlayImage {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.certificateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.certificateImage {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.certificateError {
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.noCertificate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+}
+
+.noCertificateIcon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.noCertificate p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.ViewCertificate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f0f7ff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  color: #007bff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ViewCertificate:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.certificateIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Certificate Modal Styles */
+.certificateModal {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.certificateModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+}
+
+.certificateModalTitle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.certificateModalContent {
+  padding: 1.5rem;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  min-height: 200px;
+}
+
+.certificateModalImage {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.deletebtn{
+  background-color: #f211361f;
+  border-radius: 3px;
+  border: none;
+  padding: 10px 20px;
+  color: #e63c3c;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+}
+
+.confirmModal {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmContent {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.confirmContent p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.warningText {
+  color: #dc3545 !important;
+  font-size: 14px !important;
+  margin-top: 5px !important;
+}
+
+.confirmButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cancelButton {
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background: #f5f5f5;
+}
+
+.confirmButton {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirmButton:hover {
+  background: #c82333;
+}
+
+.approveButton{
+  background-color: #02b6b31f;
+  border-radius: 20px;
+  justify-content: end;
+  align-self: stretch;
+  align-items: center;
+  border: none;
+  padding: 10px 20px;
+  color: #02b6b3;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.rejectButton{
+  background-color: #f211361f;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 20px;
+  color: #e63c3c;
+}
+

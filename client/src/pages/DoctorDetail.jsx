@@ -72,12 +72,17 @@ const DoctorDetail = () => {
           <div className="bannerContent">
             <div className="profileInfo">
               <div className="doctorProfile">
-                <div className="profileImage">
-                  <i
-                    className="fas fa-user-doctor"
-                    style={{ fontSize: "100px", color: "#4a90e2" }}
-                  ></i>
-                </div>
+                  {doctorData?.profile ? (
+                    <img  className="profileImage" src={doctorData.profile}></img>
+                  ) : (
+                    <div className="profileImage">
+                      <i
+                        className="fas fa-user-doctor"
+                        style={{ fontSize: "100px", color: "#4a90e2" }}
+                      ></i>
+                    </div>
+                  )}
+
                 <div className="profileDetailsColumn">
                   <div className="profileDetails">
                     <div className="availabilityBadge">
@@ -168,15 +173,17 @@ const DoctorDetail = () => {
           </div> */}
           </div>
           <p className="mt-3">
-            "Highly motivated and experienced doctor with over {doctorData?.experience} years of
-            clinical practice, Dr. {capitalizeFirstLetter(doctorData?.firstName)}{" "}
-            {capitalizeFirstLetter(doctorData?.lastName)} has a strong passion for providing
-            excellent care to patients. Specialized in {doctorData?.specialization} and
-            well-versed in a wide variety of medical settings, with expertise in
-            diagnostics, primary care, and emergency medicine. Skilled in
-            utilizing the latest medical technology to streamline and enhance
-            patient care. Committed to delivering compassionate, personalized
-            care to every child and family."
+            "Highly motivated and experienced doctor with over{" "}
+            {doctorData?.experience} years of clinical practice, Dr.{" "}
+            {capitalizeFirstLetter(doctorData?.firstName)}{" "}
+            {capitalizeFirstLetter(doctorData?.lastName)} has a strong passion
+            for providing excellent care to patients. Specialized in{" "}
+            {doctorData?.specialization} and well-versed in a wide variety of
+            medical settings, with expertise in diagnostics, primary care, and
+            emergency medicine. Skilled in utilizing the latest medical
+            technology to streamline and enhance patient care. Committed to
+            delivering compassionate, personalized care to every child and
+            family."
           </p>
         </div>
 

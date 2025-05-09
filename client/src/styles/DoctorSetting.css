@@ -1,0 +1,387 @@
+.settings-content-doctor {
+    /* padding: 30px; */
+    padding-bottom: 20px;
+    background: white
+   
+  }
+  
+  .settings-container-doctor {
+    /* max-width: 900px; */
+    margin: 0 auto;
+    /* border: solid 0.8px #f0f0f0; */
+    border-radius: 20px;
+    padding: 20px;
+  }
+  
+  .settings-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #272B41;
+    /* margin-bottom: 24px; */
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+  
+  .section-label {
+    color: #272B41;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  /* Profile Photo Section */
+  .profile-photo-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .profile-photo-wrapper .edit-btn{
+    border-left: 1px solid #ddd;
+    background: none;
+    border: 0px;
+    padding: 0px;
+    cursor: pointer;
+    color: #0D6EFD;
+  }
+
+  .profile-photo-section {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    max-width: fit-content;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;  /* Ensures the image fits nicely inside the circle */
+  }
+  
+  
+  .upload-box {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    /* gap: 24px; */
+  }
+  
+  .photo-placeholder {
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    border: 2px dashed #E6E9F4;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .upload-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.3;
+  }
+  
+  .upload-middle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 20px;
+  }
+  
+  .upload-btn-doctor {
+    padding: 0.75rem 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #0D6EFD;
+  }
+  
+  .remove-btn {
+    color: #DC3545;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .format-text {
+    color: #6C757D;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 400;
+  }
+  
+  /* Form Sections */
+  .settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-section {
+    /* background: #fff; */
+    border: 0.8px solid #F0F0F0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-group.full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .form-group label {
+    color: #272B41;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .required {
+    color: #DC3545;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 12px;
+    border: 1px solid #E6E6E6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #272B41;
+    background: #fff;
+    width: 100%;
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #ADB5BD;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .phone-inpu-doctor {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+  }
+  
+  .country-code {
+    padding: 8px 12px;
+    border: 1px solid #E6E6E6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #272B41;
+    background: #fff;
+    width: 100%;
+  }
+  
+  .fee-input {
+    position: relative;
+  }
+  
+  .currency {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #272B41;
+  }
+  
+  .fee-input input {
+    padding-left: 24px;
+  }
+  
+  .password-section {
+    background: #fff;
+    border: 1px solid #F0F0F0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+  }
+  
+  .password-section .form-group {
+    margin-bottom: 0;
+  }
+  
+  .password-section .password-input {
+    position: relative;
+  }
+  
+  .password-section input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #E6E6E6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #272B41;
+  }
+  
+  .password-section input::placeholder {
+    color: #ADB5BD;
+  }
+  
+  .password-section label {
+    color: #272B41;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .password-toggle-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  
+  .toggle-password:hover .password-toggle-icon {
+    opacity: 1;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  
+  .cancel-btn {
+    padding: 10px 24px;
+    background: #EEF0F4;
+    border: none;
+    border-radius: 20%;
+    color: #2E3842;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .cancel-btn:hover {
+    background: #E2E4E8;
+  }
+  
+  .save-btn {
+    padding: 10px 24px;
+    background: #00A3FF;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .save-btn:hover {
+    background: #0093E9;
+  }
+
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+  }
+  
+  .success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .save-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  .password-change-section{
+    padding: 20px;
+  }
+
+  .passwordchange-form{
+    border: 0.8px solid #F0F0F0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    width: 450px
+  }
+
+  .password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem; /* space for the eye icon */
+    box-sizing: border-box;
+  }
+  
+  .password-input-wrapper i.fa {
+    position: absolute;
+    right: 0.75rem;
+    cursor: pointer;
+    color: #666;
+    font-size: 1.1rem;
+    user-select: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .password-input-wrapper i.fa:hover {
+    color: #000;
+  }

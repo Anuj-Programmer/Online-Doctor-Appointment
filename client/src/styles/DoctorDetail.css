@@ -112,7 +112,6 @@
     box-shadow: 0px 4px 14px rgba(226, 237, 255, 0.25);
     background-color: #fff;
     width: 100%; /* Ensure the bannerCard fits within the parent container */
-    max-width: 1200px; /* You can still limit the max-width if needed */
     padding: 25px;
   }
   

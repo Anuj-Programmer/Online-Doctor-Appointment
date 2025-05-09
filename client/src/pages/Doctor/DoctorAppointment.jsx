@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import searchIcon from "../../assets/search.svg";
-// import viewIcon from "../../assets/view.svg";
+import viewIcon from "../../assets/view.svg";
 import acceptIcon from "../../assets/accept.svg";
 import cancelIcon from "../../assets/cancel.svg";
+import '../../styles/DoctorAppointment.css';
 
 function DoctorAppointment() {
   const { user } = useSelector((state) => state.user);
@@ -13,12 +14,24 @@ function DoctorAppointment() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeFilter, setActiveFilter] = useState('upcoming');
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token || !user?._id) return;
+        if (!token) {
+          setError('Please login to view appointments');
+          setLoading(false);
+          return;
+        }
+
+        if (!user || !user._id) {
+          setError('User data not available');
+          setLoading(false);
+          return;
+        }
 
         // First get the doctor's ID
         const doctorResponse = await axios.get('/api/v1/doctor/get-all-doctors', {
@@ -27,32 +40,53 @@ function DoctorAppointment() {
           }
         });
 
-        if (doctorResponse.data.success) {
-          const doctor = doctorResponse.data.data.find(doc => doc.userId._id === user._id);
-          if (doctor) {
-            // Then fetch the doctor's appointments
-            const appointmentsResponse = await axios.get(`/api/v1/doctor/get-doctor-appointments/${doctor._id}`, {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            });
+        if (!doctorResponse.data.success) {
+          setError('Failed to fetch doctor data');
+          setLoading(false);
+          return;
+        }
 
-            if (appointmentsResponse.data.success) {
-              setAppointments(appointmentsResponse.data.data);
-              filterAppointments(appointmentsResponse.data.data, activeFilter);
-            }
+        // Find the doctor that matches the current user's ID
+        const doctor = doctorResponse.data.data.find(doc => {
+          // Check if userId exists and has _id property
+          return doc.userId && doc.userId._id === user._id;
+        });
+
+        if (!doctor) {
+          setError('Doctor profile not found. Please complete your doctor profile setup.');
+          setLoading(false);
+          return;
+        }
+
+        // Then fetch the doctor's appointments
+        const appointmentsResponse = await axios.get(`/api/v1/doctor/get-doctor-appointments/${doctor._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
+        });
+
+        if (appointmentsResponse.data.success) {
+          setAppointments(appointmentsResponse.data.data);
+          filterAppointments(appointmentsResponse.data.data, activeFilter);
+        } else {
+          setError('Failed to fetch appointments');
         }
       } catch (error) {
         console.error('Error fetching appointments:', error);
-        setError('Failed to fetch appointments');
+        if (error.response?.status === 401) {
+          setError('Please login again to continue');
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        } else {
+          setError(error.response?.data?.message || 'Failed to fetch appointments');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchAppointments();
-  }, [user?._id]);
+  }, [user, activeFilter]);
 
   const filterAppointments = (appointmentsList, filter) => {
     const today = new Date();
@@ -90,10 +124,15 @@ function DoctorAppointment() {
     filterAppointments(appointments, filter);
   };
 
-//   const handleViewAppointment = (appointment) => {
-//     // Implement view appointment logic
-//     console.log('View appointment:', appointment);
-//   };
+  const handleViewAppointment = (appointment) => {
+    setSelectedAppointment(appointment);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedAppointment(null);
+  };
 
   const handleAcceptAppointment = async (appointment) => {
     try {
@@ -200,8 +239,7 @@ function DoctorAppointment() {
               <div className="header-date">Appt Date</div>
             <div className="header-time">Time Slot</div>
               <div className="header-amount">Amount</div>
-            <div className="header-status">Status</div>
-              {/* <div className="header-actions"></div> */}
+          
             </div>
             <div className="table-body">
             {filteredAppointments.map((appointment) => (
@@ -231,29 +269,29 @@ function DoctorAppointment() {
                   <span className={`status-badge ${appointment.status} user-status-badge `}>{appointment.status}</span>
                 </div>
                 <div className="appointment-actions">
-                  {/* <button 
+                  <button 
                     className="btn-view action-button"
                     onClick={() => handleViewAppointment(appointment)}
                   >
                     <img src={viewIcon} alt="View" className="action-icon" />
-                    <span className="action-text">View</span> 
-                  </button> */}
+                    {/* <span className="action-text">View</span> */}
+                  </button>
                   {appointment.status === 'pending' && (
                     <>
                       <button 
                         className="btn-accept action-button"
                         onClick={() => handleAcceptAppointment(appointment)}
                       >
-                    <img src={acceptIcon} alt="Accept" className="action-icon" />
-                    <span className="action-text">Accept</span>
-                  </button>
+                        <img src={acceptIcon} alt="Accept" className="action-icon" />
+                        {/* <span className="action-text">Accept</span> */}
+                      </button>
                       <button 
                         className="btn-cancel action-button"
                         onClick={() => handleCancelAppointment(appointment)}
                       >
-                    <img src={cancelIcon} alt="Cancel" className="action-icon" />
-                    <span className="action-text ">Cancel</span>
-                  </button>
+                        <img src={cancelIcon} alt="Cancel" className="action-icon" />
+                        {/* <span className="action-text">Cancel</span> */}
+                      </button>
                     </>
                   )}
                 </div>
@@ -261,6 +299,46 @@ function DoctorAppointment() {
             ))}
             </div>
           </section>
+
+          {/* Modal */}
+          {isModalOpen && selectedAppointment && (
+            <div className="modal-overlay" onClick={closeModal}>
+              <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <div className="modal-header">
+                  <h2>Patient Information</h2>
+                  <button className="modal-close" onClick={closeModal}>&times;</button>
+                </div>
+                <div className="modal-body">
+                  <div className="info-row">
+                    <span className="info-label">Name:</span>
+                    <span className="info-value">{selectedAppointment.userInfo?.name}</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Email:</span>
+                    <span className="info-value">{selectedAppointment.userInfo?.email}</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Date:</span>
+                    <span className="info-value">{selectedAppointment.date}</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Time Slot:</span>
+                    <span className="info-value">{selectedAppointment.timeSlot.startTime} - {selectedAppointment.timeSlot.endTime}</span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Status:</span>
+                    <span className={`info-value status-badge ${selectedAppointment.status}`}>
+                      {selectedAppointment.status}
+                    </span>
+                  </div>
+                  <div className="info-row">
+                    <span className="info-label">Amount:</span>
+                    <span className="info-value">${selectedAppointment.fee}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </main>
     </>
   )
