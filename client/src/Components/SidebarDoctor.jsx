@@ -35,7 +35,7 @@ function SidebarDoctor({ activeTab, setActiveTab }) {
         if (response.data.success) {
           // Find the doctor with matching userId
           const doctor = response.data.data.find(
-            (doc) => doc.userId._id === user._id
+            (doc) => doc.userId && doc.userId._id === user._id
           );
           if (doctor) {
             setDoctorData(doctor);

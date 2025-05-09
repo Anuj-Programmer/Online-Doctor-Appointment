@@ -1,69 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/AdminDashboard.css";
+import styles from "../../Styles/AdminAppointment.module.css";
 import schedule from "../../assets/Schedule.jpg";
 import patient from "../../assets/patients.png";
 import bed from "../../assets/Hospitalbed.svg";
 import viewIcon from "../../assets/view.svg";
-import doctor from "../../assets/Doctors.svg"
-
-const doctors = [
-  { name: "Dr. Richard Wilson", specialty: "Cardiologist" },
-  { name: "Dr. Jane Doe", specialty: "Neurologist" },
-  { name: "Dr. Emily Clark", specialty: "Pediatrician" },
-  { name: "Dr. Sarah Lee", specialty: "Orthopedist" },
-];
-
-const patients = [
-  {
-    name: "Richard Wilson",
-    date: "11 Nov 2025 10.00 AM",
-    email: "richardwilson@gmail.com",
-  },
-  { name: "John Doe", date: "12 Nov 2025 9.00 AM", email: "johndoe@gmail.com" },
-  {
-    name: "Emily Clark",
-    date: "13 Nov 2025 11.00 AM",
-    email: "emilyclark@gmail.com",
-  },
-  {
-    name: "Sarah Lee",
-    date: "14 Nov 2025 2.00 PM",
-    email: "sarahlee@gmail.com",
-  },
-];
-
-const appointments = [
-  {
-    patient: "Richard Wilson",
-    date: "11 Nov 2025 10.00 AM",
-    specialty: "Pediatrics",
-    amount: "$150",
-    doctor: "Dr. Richard Wilson",
-  },
-  {
-    patient: "John Doe",
-    date: "12 Nov 2025 9.00 AM",
-    specialty: "Neurology",
-    amount: "$200",
-    doctor: "Dr. Jane Doe",
-  },
-  {
-    patient: "Emily Clark",
-    date: "13 Nov 2025 11.00 AM",
-    specialty: "Cardiology",
-    amount: "$180",
-    doctor: "Dr. Emily Clark",
-  },
-  {
-    patient: "Sarah Lee",
-    date: "14 Nov 2025 2.00 PM",
-    specialty: "Orthopedics",
-    amount: "$220",
-    doctor: "Dr. Sarah Lee",
-  },
-];
+import doctor from "../../assets/Doctors.svg";
+import axios from "axios";
 
 export default function AdminDashboard() {
+  const [stats, setStats] = useState({
+    doctors: 0,
+    patients: 0,
+    appointments: 0
+  });
+  const [doctors, setDoctors] = useState([]);
+  const [patients, setPatients] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError('Please login to view dashboard');
+          setLoading(false);
+          return;
+        }
+
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        };
+
+        // Fetch all data in parallel
+        const [doctorsRes, patientsRes, appointmentsRes] = await Promise.all([
+          axios.get("/api/v1/admin/doctors", { headers }),
+          axios.get("/api/v1/admin/patients", { headers }),
+          axios.get("/api/v1/admin/appointments", { headers })
+        ]);
+
+        if (doctorsRes.data.success) {
+          setDoctors(doctorsRes.data.data);
+          setStats(prev => ({ ...prev, doctors: doctorsRes.data.data.length }));
+        }
+
+        if (patientsRes.data.success) {
+          setPatients(patientsRes.data.data);
+          setStats(prev => ({ ...prev, patients: patientsRes.data.data.length }));
+        }
+
+        if (appointmentsRes.data.success) {
+          setAppointments(appointmentsRes.data.data);
+          setStats(prev => ({ ...prev, appointments: appointmentsRes.data.data.length }));
+        }
+
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+        setError('Failed to fetch dashboard data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const openPopup = (appointment) => {
+    setSelectedAppointment(appointment);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedAppointment(null);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <>
       <div className="admin-dashboard">
@@ -74,14 +98,14 @@ export default function AdminDashboard() {
           <div className="main-content">
             {/* Stats Cards */}
             <div className="analyctics-dashboard">
-            <div className="analytics-item">
+              <div className="analytics-item">
                 <div className="analyctics-img">
                   <img src={doctor} alt="" />
                 </div>
                 <div className="analytics-content">
                   <h6 className="analytics-name">Doctors</h6>
                   <p className="mb-0">
-                    <b>12</b>
+                    <b>{stats.doctors}</b>
                   </p>
                   <p className="mb-0">Till today</p>
                 </div>
@@ -93,7 +117,7 @@ export default function AdminDashboard() {
                 <div className="analytics-content">
                   <h6 className="analytics-name">Patients</h6>
                   <p className="mb-0">
-                    <b>23</b>
+                    <b>{stats.patients}</b>
                   </p>
                   <p className="mb-0">Till today</p>
                 </div>
@@ -105,13 +129,11 @@ export default function AdminDashboard() {
                 <div className="analytics-content">
                   <h6 className="analytics-name">Appointments</h6>
                   <p className="mb-0">
-                    <b>12</b>
+                    <b>{stats.appointments}</b>
                   </p>
                   <p className="mb-0">Till today</p>
                 </div>
               </div>
-             
-            
             </div>
 
             {/* Doctors & Patients List */}
@@ -126,17 +148,17 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {doctors.map((doc, idx) => (
-                      <tr key={idx}>
+                    {doctors.slice(0, 4).map((doc) => (
+                      <tr key={doc._id}>
                         <td>
                           <img
-                            src="https://randomuser.me/api/portraits/men/45.jpg"
+                            src={doc?.profile || "https://ui-avatars.com/api/?name=+&background=ccc&color=fff"}
                             alt="Doctor"
                             className="profile-thumb"
                           />
-                          {doc.name}
+                          {`${doc.firstName} ${doc.lastName}`}
                         </td>
-                        <td>{doc.specialty}</td>
+                        <td>{doc.specialization}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -148,25 +170,19 @@ export default function AdminDashboard() {
                   <thead>
                     <tr>
                       <th>Patient Name</th>
-                      <th>Appt Date</th>
                       <th>Email Address</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {patients.map((pat, idx) => (
-                      <tr key={idx}>
+                    {patients.slice(0, 4).map((pat) => (
+                      <tr key={pat._id}>
                         <td>
-                          <img
-                            src="https://randomuser.me/api/portraits/men/45.jpg"
+                          {/* <img
+                            src={pat.profilePicture || "https://randomuser.me/api/portraits/men/45.jpg"}
                             alt="Patient"
                             className="profile-thumb"
-                          />
+                          /> */}
                           {pat.name}
-                        </td>
-                        <td>
-                          <a href="#" className="appt-link">
-                            {pat.date}
-                          </a>
                         </td>
                         <td>{pat.email}</td>
                       </tr>
@@ -178,7 +194,7 @@ export default function AdminDashboard() {
 
             {/* Appointments Table */}
             <div className="table-card appt-table">
-              <h3>Appointments</h3>
+              <h3>Recent Appointments</h3>
               <table>
                 <thead>
                   <tr>
@@ -191,34 +207,35 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {appointments.map((appt, idx) => (
-                    <tr key={idx}>
+                  {appointments.slice(0, 4).map((appt) => (
+                    <tr key={appt._id}>
                       <td>
-                        <img
-                          src="https://randomuser.me/api/portraits/men/45.jpg"
+                        {/* <img
+                          src={appt.userId?.profilePicture || "https://randomuser.me/api/portraits/men/45.jpg"}
                           alt="Patient"
                           className="profile-thumb"
-                        />
-                        {appt.patient}
+                        /> */}
+                        {appt.userId?.name || "Unknown"}
                       </td>
                       <td>
                         <a href="#" className="appt-link">
-                          {appt.date}
+                          {new Date(appt.date).toLocaleDateString()}
                         </a>
                       </td>
-                      <td>{appt.specialty}</td>
-                      <td>{appt.amount}</td>
+                      <td>{appt.doctorId?.specialization || "N/A"}</td>
+                      <td>${appt.fee || "N/A"}</td>
                       <td>
-                        <img
-                          src="https://randomuser.me/api/portraits/men/45.jpg"
+                        {/* <img
+                          src={appt.doctorId?.userId?.profilePicture || "https://randomuser.me/api/portraits/men/45.jpg"}
                           alt="Doctor"
                           className="profile-thumb"
-                        />
-                        {appt.doctor}
+                        /> */}
+                        {appt.doctorId ? `${appt.doctorId.firstName} ${appt.doctorId.lastName}` : "Unknown"}
                       </td>
                       <td>
-                        <button
+                        <button 
                           className="btn-view action-button"
+                          onClick={() => openPopup(appt)}
                         >
                           <img
                             src={viewIcon}
@@ -226,7 +243,6 @@ export default function AdminDashboard() {
                             className="action-icon"
                           />
                           View
-                          {/* <span className="action-text">View</span> */}
                         </button>
                       </td>
                     </tr>
@@ -237,6 +253,78 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {showPopup && selectedAppointment && (
+        <div className={styles.overlay}>
+          <div className={styles.appointmentDetailsPopup}>
+            <header className={styles.header}>
+              <h2 className={styles.title}>Appointment Details</h2>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/01fceeb1d9943be9be51c777194413f5e949cc9f"
+                className={styles.closeIcon}
+                alt="Close"
+                onClick={closePopup}
+              />
+            </header>
+
+            <div className={styles.detailsGrid}>
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Patient Name:</h3>
+                <p className={styles.detailValue}>{selectedAppointment.userId?.name || "Unknown"}</p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Doctor Name:</h3>
+                <p className={styles.detailValue}>
+                  {selectedAppointment.doctorId ? 
+                    `${selectedAppointment.doctorId.firstName} ${selectedAppointment.doctorId.lastName}` : 
+                    "Unknown"}
+                </p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Specialization:</h3>
+                <p className={styles.detailValue}>{selectedAppointment.doctorId?.specialization || "N/A"}</p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Appointment Date:</h3>
+                <p className={styles.detailValue}>{new Date(selectedAppointment.date).toLocaleDateString()}</p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Time Slot:</h3>
+                <p className={styles.detailValue}>
+                  {selectedAppointment.timeSlot ? 
+                    `${selectedAppointment.timeSlot.startTime} - ${selectedAppointment.timeSlot.endTime}` : 
+                    "N/A"}
+                </p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Fee:</h3>
+                <p className={styles.detailValue}>${selectedAppointment.fee || "N/A"}</p>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Status:</h3>
+                <div className={styles.appointmentStatus}>
+                  {/* <span className={styles.calendarIcon}>📅</span> */}
+                  <span className={styles.upcoming}>{selectedAppointment.status || "Pending"}</span>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <h3 className={styles.detailLabel}>Contact Information:</h3>
+                <p className={styles.detailValue}>
+                  Email: {selectedAppointment.userId?.email || "N/A"}<br />
+                  Phone: {selectedAppointment.userId?.phoneNumber || "N/A"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

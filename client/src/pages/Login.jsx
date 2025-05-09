@@ -49,13 +49,15 @@ function Login() {
           navigate(res.data.success === 'admin' ? '/admin' : '/home');
         }, 1000);
       } else {
-        toast.error("Invalid email or password");
+        // Show the specific error message from the server
+        toast.error(res.data.message || "Login failed");
       }
     } catch (error) {
       dispatch(hideLoading());
-      toast.error("Invalid email or password");
+      // Show the error message from the server if available
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
     }
-};
+  };
   return (
     <>
     <LandingPageNav/>

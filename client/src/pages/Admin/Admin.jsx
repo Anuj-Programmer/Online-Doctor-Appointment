@@ -13,6 +13,10 @@ import Footer from '../../Components/Footer';
 // import DashboardContent from './DashboardContent';
 import SidebarAdmin from '../../Components/SidebarAdmin';
 import AdminDashboard from './AdminDashboard';
+import AdminPatients from './AdminPatients';
+import AdminDoctor from './AdminDoctor';
+import AdminAppointment from './AdminAppointment';
+import AdminSetting from './AdminSetting';
 
 function DoctorDashboard() {
   const { user } = useSelector((state) => state.user);
@@ -49,15 +53,15 @@ function DoctorDashboard() {
   const renderContent = () => {
     switch (activeTab) {
       case 'appointments':
-        return "Doctor Appointments";
+        return <AdminAppointment/>;
       case 'dashboard':
         return <AdminDashboard/>;
       case 'settings':
-        return "Doctor Settings";
+        return <AdminSetting/>;
       case 'patients':
-        return "Patients";
+        return <AdminPatients/>;
       case 'doctors':
-        return "Doctors";
+        return <AdminDoctor/>;
       default:
         return <div>Dashboard Content</div>;
     }

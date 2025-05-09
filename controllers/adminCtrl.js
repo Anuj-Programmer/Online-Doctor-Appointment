@@ -117,22 +117,64 @@ const deletePatient = async (req, res) => {
 const deleteDoctor = async (req, res) => {
     try {
         const doctorId = req.params.id;
-        const deletedDoctor = await doctorModel.findByIdAndDelete(doctorId);
-        if (!deletedDoctor) {
+        
+        // First find the doctor to get their userId
+        const doctor = await doctorModel.findById(doctorId);
+        if (!doctor) {
             return res.status(404).json({
                 success: false,
                 message: 'Doctor not found'
             });
         }
+
+        // Store the userId before deleting the doctor
+        const userId = doctor.userId;
+
+        // Delete the doctor profile
+        const deletedDoctor = await doctorModel.findByIdAndDelete(doctorId);
+        
+        // Delete the associated user account
+        const deletedUser = await userModel.findByIdAndDelete(userId);
+        
+        if (!deletedUser) {
+            return res.status(404).json({
+                success: false,
+                message: 'Associated user account not found'
+            });
+        }
+
         res.status(200).json({
             success: true,
-            message: 'Doctor deleted successfully',
-            data: deletedDoctor
+            message: 'Doctor and associated user account deleted successfully',
+            data: {
+                doctor: deletedDoctor,
+                user: deletedUser
+            }
         });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: 'Error deleting doctor',
+            error: error.message
+        });
+    }
+};
+
+const getAllDoctorsList = async (req, res) => {
+    try {
+        const doctors = await doctorModel.find({})
+            .populate('userId')
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            message: 'Doctors data fetched successfully',
+            data: doctors
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error in getting doctors data',
             error: error.message
         });
     }
@@ -144,5 +186,6 @@ module.exports = {
     getAllPendingDoctor,
     getAllPatientList,
     deletePatient,
-    deleteDoctor
+    deleteDoctor,
+    getAllDoctorsList
 };

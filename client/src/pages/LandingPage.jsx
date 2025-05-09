@@ -15,7 +15,7 @@ import DoctorDashboard from './Doctor/DoctorDashboard';
 const { Option } = Select;
 import { Link } from 'react-router-dom';
 
-function HomePage() {
+function LandingPage() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [doctors, setDoctors] = useState([]);
@@ -435,4 +435,4 @@ function HomePage() {
   );
 }
 
-export default HomePage
+export default LandingPage;

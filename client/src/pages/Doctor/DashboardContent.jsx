@@ -34,7 +34,10 @@ function DashboardContent() {
         });
 
         if (doctorResponse.data.success) {
-          const doctor = doctorResponse.data.data.find(doc => doc.userId._id === user._id);
+          const doctor = doctorResponse.data.data.find(doc => {
+            // Check if userId exists and has _id property
+            return doc.userId && doc.userId._id === user._id;
+          });
           if (doctor) {
             // Then fetch the doctor's appointments
             const appointmentsResponse = await axios.get(`/api/v1/doctor/get-doctor-appointments/${doctor._id}`, {

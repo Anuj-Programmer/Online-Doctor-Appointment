@@ -87,7 +87,7 @@ body, .admin-dashboard {
   .table-card {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: #e6e8ee solid 1px;
     padding: 20px;
     flex: 1;
     width: 90%;
@@ -138,7 +138,7 @@ body, .admin-dashboard {
     color: #007bff;
     text-decoration: none;
   }
-  .footer {
+  /* .footer {
     text-align: center;
     color: #888;
     font-size: 15px;
@@ -146,7 +146,7 @@ body, .admin-dashboard {
     background: #fff;
     border-top: 1px solid #eee;
     margin-top: auto;
-  }
+  } */
   @media (max-width: 1100px) {
     .dashboard-tables {
       flex-direction: column;

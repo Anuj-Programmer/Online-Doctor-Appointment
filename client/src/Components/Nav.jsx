@@ -146,24 +146,23 @@ function Nav() {
               </Badge>
               {!user?.isDoctor && !user?.isAdmin && (
                 <div className="avatar-item">
-                <div className="avatar-link" onClick={toggleDropdown}>
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/b9b70f1560e6c8a4c34d55e323bff3606d32b860?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
-                    className="avatar-image"
-                  />  
-                  {isDropdownOpen && (
-                    <div className="dropdown">
-                      <div className="dropdown-arrow"></div>
-                      <Link to="/profile" className="dropdown-item">Edit Profile</Link>
+               <div className="avatar-link" onClick={toggleDropdown}>
+  <i className="fas fa-user avatar-icon"></i>
 
-                      {!user?.isDoctor && (
-                        <Link to="/appointment" className="dropdown-item">My Appointments</Link>
-                      )}
+  {isDropdownOpen && (
+    <div className="dropdown">
+      <div className="dropdown-arrow"></div>
+      <Link to="/profile" className="dropdown-item">Edit Profile</Link>
 
-                      <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
-                    </div>
-                  )}
-                </div>
+      {!user?.isDoctor && (
+        <Link to="/appointment" className="dropdown-item">My Appointments</Link>
+      )}
+
+      <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
+    </div>
+  )}
+</div>
+
               </div>
               )}
                {/* {!user?.isDoctor && (

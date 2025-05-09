@@ -18,7 +18,7 @@ function UserAppointment() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeFilter, setActiveFilter] = useState('upcoming');
-  const [doctor, setDoctor] = useState([]);
+  const [doctors, setDoctors] = useState([]);
 
   const getUserData = async () => {
     try {
@@ -27,7 +27,6 @@ function UserAppointment() {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       });
-      console.log('API Response:', response.data);
       if (response.data.success) {
         dispatch(setUser(response.data.data));
       }
@@ -43,11 +42,26 @@ function UserAppointment() {
     getUserData();
   }, []);
 
+  const fetchDoctors = async () => {
+    try {
+      const res = await axios.get(`/api/v1/doctor/get-all-doctors`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      if (res.data.success) {
+        setDoctors(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        console.log("User ID", user?._id);
-        
         const token = localStorage.getItem("token");
         if (!token || !user?._id) return;
 
@@ -60,8 +74,13 @@ function UserAppointment() {
         });
 
         if (response.data.success) {
-          setAppointments(response.data.data);
-          filterAppointments(response.data.data, activeFilter);
+          // Filter out appointments where the doctor no longer exists
+          const validAppointments = response.data.data.filter(appointment => {
+            return doctors.some(doctor => doctor._id === appointment.doctorId);
+          });
+          
+          setAppointments(validAppointments);
+          filterAppointments(validAppointments, activeFilter);
         }
       } catch (error) {
         console.error('Error fetching appointments:', error);
@@ -71,26 +90,10 @@ function UserAppointment() {
       }
     };
 
-    fetchAppointments();
-  }, [user?._id]);
-
-  const fetchDoctorData = async () => {
-    try {
-      const res = await axios.get(`/api/v1/doctor/get-all-doctors`, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      });
-      if (res.data.success) {
-        setDoctor(res.data.data);
-      }
-    } catch (error) {
-      console.log(error);
+    if (doctors.length > 0) {
+      fetchAppointments();
     }
-  };
-
-  useEffect(() => {
-    fetchDoctorData();
-  }, []);
-  
+  }, [user?._id, doctors]);
 
   const filterAppointments = (appointmentsList, filter) => {
     const today = new Date();
@@ -151,8 +154,6 @@ function UserAppointment() {
       setError('Failed to cancel appointment');
     }
   };
-
-
 
   return (
     <>

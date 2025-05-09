@@ -28,11 +28,17 @@ const loginController = async (req, res) => {
     try {
         const user = await userModel.findOne({email:req.body.email})
         if (!user) {
-            return res.status(200).send({message: "user not found", success:false})
+            return res.status(200).send({
+                message: "User not found. Please check your email or register.", 
+                success: false
+            })
         }
         const isMatch = await bcrypt.compare(req.body.password, user.password)
         if (!isMatch) {
-            return res.status(200).send({message: "Invalid email or password", success:false})
+            return res.status(200).send({
+                message: "Invalid email or password", 
+                success: false
+            })
         }
 
         if (user.isAdmin) {
@@ -71,7 +77,10 @@ const loginController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({success:false, message: `Login Controller: ${error.message}`})
+        res.status(500).send({
+            success: false, 
+            message: `Login Controller: ${error.message}`
+        })
     }
 }
 
@@ -273,8 +282,8 @@ const searchDoctor = async (req, res) => {
         const { name, location, specialization } = req.query;
         console.log(name, location, specialization);
         
-        // Initialize the filter object
-        let filter = {};
+        // Initialize the filter object with approved status
+        let filter = { status: 'approved' };
 
         // If 'name' is provided, search by first and last name
         if (name) {
@@ -307,7 +316,7 @@ const searchDoctor = async (req, res) => {
 
         res.status(200).send({
             success: true,
-            message: "Doctors found",
+            message: "Approved doctors found",
             data: doctors
         });
     } catch (error) {

@@ -21,7 +21,17 @@ function DoctorAppointment() {
     const fetchAppointments = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token || !user?._id) return;
+        if (!token) {
+          setError('Please login to view appointments');
+          setLoading(false);
+          return;
+        }
+
+        if (!user || !user._id) {
+          setError('User data not available');
+          setLoading(false);
+          return;
+        }
 
         // First get the doctor's ID
         const doctorResponse = await axios.get('/api/v1/doctor/get-all-doctors', {
@@ -30,32 +40,53 @@ function DoctorAppointment() {
           }
         });
 
-        if (doctorResponse.data.success) {
-          const doctor = doctorResponse.data.data.find(doc => doc.userId._id === user._id);
-          if (doctor) {
-            // Then fetch the doctor's appointments
-            const appointmentsResponse = await axios.get(`/api/v1/doctor/get-doctor-appointments/${doctor._id}`, {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            });
+        if (!doctorResponse.data.success) {
+          setError('Failed to fetch doctor data');
+          setLoading(false);
+          return;
+        }
 
-            if (appointmentsResponse.data.success) {
-              setAppointments(appointmentsResponse.data.data);
-              filterAppointments(appointmentsResponse.data.data, activeFilter);
-            }
+        // Find the doctor that matches the current user's ID
+        const doctor = doctorResponse.data.data.find(doc => {
+          // Check if userId exists and has _id property
+          return doc.userId && doc.userId._id === user._id;
+        });
+
+        if (!doctor) {
+          setError('Doctor profile not found. Please complete your doctor profile setup.');
+          setLoading(false);
+          return;
+        }
+
+        // Then fetch the doctor's appointments
+        const appointmentsResponse = await axios.get(`/api/v1/doctor/get-doctor-appointments/${doctor._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
+        });
+
+        if (appointmentsResponse.data.success) {
+          setAppointments(appointmentsResponse.data.data);
+          filterAppointments(appointmentsResponse.data.data, activeFilter);
+        } else {
+          setError('Failed to fetch appointments');
         }
       } catch (error) {
         console.error('Error fetching appointments:', error);
-        setError('Failed to fetch appointments');
+        if (error.response?.status === 401) {
+          setError('Please login again to continue');
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        } else {
+          setError(error.response?.data?.message || 'Failed to fetch appointments');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchAppointments();
-  }, [user?._id]);
+  }, [user, activeFilter]);
 
   const filterAppointments = (appointmentsList, filter) => {
     const today = new Date();

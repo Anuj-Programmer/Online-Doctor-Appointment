@@ -152,6 +152,11 @@
   color: #721c24;
 } 
 
+.status-badge.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
 .analytics-item {
   display: flex;
   align-items: center;

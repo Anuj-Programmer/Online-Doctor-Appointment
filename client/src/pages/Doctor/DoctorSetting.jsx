@@ -28,7 +28,7 @@ function DoctorSetting() {
 
         if (response.data.success) {
           const doctor = response.data.data.find(
-            (doc) => doc.userId._id === user._id
+            (doc) => doc.userId && doc.userId._id === user._id
           );
           if (doctor) {
             setDoctorData(doctor);
@@ -310,11 +310,11 @@ function DoctorSetting() {
                     required
                   >
                     <option value="">Select Specialization</option>
-                    <option value="Cardiology">cardiology</option>
-                    <option value="Dermatology">Dermatology</option>
-                    <option value="Pediatrics">Pediatrics</option>
-                    <option value="Neurology">neurology</option>
-                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="cardiology">cardiology</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="neurology">neurology</option>
+                    <option value="orthopedics">Orthopedics</option>
                   </select>
                 </div>
                 <div className="form-group">
