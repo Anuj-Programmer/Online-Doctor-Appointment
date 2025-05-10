@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
@@ -5,8 +6,6 @@ const dotenv = require("dotenv");
 const cors = require("cors"); 
 const connectDB = require("./config/db");
 
-//dotenv.config
-dotenv.config();
 
 //mongodb connection
 connectDB();
@@ -24,12 +23,10 @@ app.use('/api/v1/doctor', require("./routes/doctorRoutes"))
 // app.use('/api/v1/bookings', require("./routes/bookingRoute")) 
 
 //port 
-const port = process.env.PORT || 8080
+const port = 8081;
 
 //listen port
 app.listen(port, () => {
     console.log(`Server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`.bgCyan.white
     );
 });
-
-
