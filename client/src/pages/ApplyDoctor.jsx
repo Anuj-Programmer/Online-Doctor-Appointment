@@ -132,7 +132,7 @@ function ApplyDoctor() {
       });
     } catch (error) {
       toast.error("Image upload failed");
-    console.error(error);
+      console.error(error);
     }
   };
 
@@ -257,9 +257,31 @@ function ApplyDoctor() {
                         required: true,
                         message: "Please enter your experience!",
                       },
+                      {
+                        type: "number",
+                        min: 0,
+                        message: "Experience cannot be negative!",
+                      },
+                      {
+                        validator: (_, value) => {
+                          if (value < 0) {
+                            return Promise.reject('Experience cannot be negative!');
+                          }
+                          return Promise.resolve();
+                        }
+                      }
                     ]}
                   >
-                    <Input type="number" min="0" placeholder="Enter years" />
+                    <Input 
+                      type="number" 
+                      min="0" 
+                      placeholder="Enter years"
+                      onKeyPress={(e) => {
+                        if (e.key === '-') {
+                          e.preventDefault();
+                        }
+                      }}
+                    />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -271,6 +293,19 @@ function ApplyDoctor() {
                         required: true,
                         message: "Please enter consultation fee!",
                       },
+                      {
+                        type: "number",
+                        min: 0,
+                        message: "Fee cannot be negative!",
+                      },
+                      {
+                        validator: (_, value) => {
+                          if (value < 0) {
+                            return Promise.reject('Fee cannot be negative!');
+                          }
+                          return Promise.resolve();
+                        }
+                      }
                     ]}
                   >
                     <Input
@@ -278,12 +313,17 @@ function ApplyDoctor() {
                       type="number"
                       min="0"
                       placeholder="Enter amount"
+                      onKeyPress={(e) => {
+                        if (e.key === '-') {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </Form.Item>
                 </Col>
               </Row>
               <div>
-              <span className="text-danger">*</span> Time Slots
+                <span className="text-danger">*</span> Time Slots
               </div>
               {timeSlots.map((slot) => (
                 <div
