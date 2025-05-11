@@ -244,6 +244,7 @@ function ApplyDoctor() {
                   <Option value="neurology">Neurology</Option>
                   <Option value="orthopedics">Orthopedics</Option>
                   <Option value="pediatrics">Pediatrics</Option>
+                  <Option value="general">General</Option>
                 </Select>
               </Form.Item>
 
@@ -257,11 +258,11 @@ function ApplyDoctor() {
                         required: true,
                         message: "Please enter your experience!",
                       },
-                      {
-                        type: "number",
-                        min: 0,
-                        message: "Experience cannot be negative!",
-                      },
+                      // {
+                      //   type: "number",
+                      //   min: 0,
+                      //   message: "Experience cannot be negative!",
+                      // },
                       {
                         validator: (_, value) => {
                           if (value < 0) {
@@ -293,11 +294,11 @@ function ApplyDoctor() {
                         required: true,
                         message: "Please enter consultation fee!",
                       },
-                      {
-                        type: "number",
-                        min: 0,
-                        message: "Fee cannot be negative!",
-                      },
+                      // {
+                      //   type: "number",
+                      //   min: 0,
+                      //   message: "Fee cannot be negative!",
+                      // },
                       {
                         validator: (_, value) => {
                           if (value < 0) {

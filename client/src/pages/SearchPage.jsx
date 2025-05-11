@@ -35,8 +35,8 @@ function SearchPage() {
                 doctorId={doctor._id}
                 src={doctor.profile || "https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"}
                 speciality={doctor.specialization}
-                Avaibility="• Available"
-                fee={`$${doctor.fee}`}
+                experience={`${doctor.experience} years`}
+                fee={`Rs ${doctor.fee}`}
                 name={`Dr. ${doctor.firstName} ${doctor.lastName}`}
                 location={doctor.address}
                 time={`${doctor.timeSlots[0]?.startTime || '30'} am`}

@@ -96,7 +96,7 @@ const DoctorDetail = () => {
                       </h2>
                     </div>
                     <p className="qualification">
-                      {doctorData?.specialization}
+                      {capitalizeFirstLetter(doctorData?.specialization)}
                     </p>
                     {/* <div className="ratingSection">
                     <div className="stars">

@@ -38,7 +38,7 @@ const bookingSchema = new mongoose.Schema({
     speciality: {
         type: String,
         required: true,
-        enum: ['cardiology', 'dermatology', 'neurology', 'orthopedics', 'pediatrics']
+        enum: ['cardiology', 'dermatology', 'neurology', 'orthopedics', 'pediatrics','general']
     },
     status: {
         type: String,

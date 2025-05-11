@@ -265,6 +265,7 @@ function HomePage() {
                   <Option value="neurology">Neurology</Option>
                   <Option value="orthopedics">Orthopedics</Option>
                   <Option value="pediatrics">Pediatrics</Option>
+                  <Option value="general">General</Option>
                 </Select>
               </Form.Item>
                       </div>
@@ -363,7 +364,7 @@ function HomePage() {
                   doctorId={doctor._id}
                   src={doctor.profile || "https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"}
                   speciality={doctor.specialization}
-                  Avaibility="• Available"
+                  experience={`${doctor.experience} years`}
                   fee={`$${doctor.fee}`}
                   name={`Dr. ${capitalizeFirstLetter(doctor.firstName)} ${capitalizeFirstLetter(doctor.lastName)}`}
                   location={doctor.address}

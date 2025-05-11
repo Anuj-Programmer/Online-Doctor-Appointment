@@ -5,6 +5,13 @@ import booking from "../assets/calender.png";
 import { Link } from "react-router-dom";
 
 function Doctorcard(props) {
+
+  const capitalizeFirstLetter = (string) => {
+    return (
+      string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || ""
+    );
+  };
+
   return (
   
     <div className="doctor-card">
@@ -31,12 +38,12 @@ function Doctorcard(props) {
           <div className="doctor-info">
             <div className="doctor-specialty-row">
               <div className="doctor-specialty pediatrician">
-                {props.speciality}
+              {capitalizeFirstLetter(props.speciality)}
               </div>
               <div className="doctor-availability">
                 <div className="availability-icon"></div>
                 <div className="availability-text">
-                  {props.Avaibility || "• Available"}
+                  {props.experience || "N/A"}
                 </div>
               </div>
               <div className="specialty-indicator pediatrician-indicator"></div>

@@ -20,6 +20,12 @@ function AdminDoctor() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const capitalizeFirstLetter = (string) => {
+    return (
+      string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || ""
+    );
+  };
+
   useEffect(() => {
     fetchDoctors();
   }, []);
@@ -251,7 +257,7 @@ function AdminDoctor() {
                         />
                         {`${doctor.firstName} ${doctor.lastName}`}
                       </td>
-                      <td>{doctor.specialization}</td>
+                      <td>{capitalizeFirstLetter(doctor.specialization)}</td>
                       <td>{`${doctor.experience} years`}</td>
                       <td>
                         <span className={`status-badge ${doctor.status.toLowerCase()}`}>
