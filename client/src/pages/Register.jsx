@@ -96,8 +96,8 @@ function SignUpPage() {
             rules={[
               { required: true, message: "Please enter your email!" },
               {
-                pattern: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
-                message: "Please enter a valid Gmail address! (demo@gmail.com)",
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Please enter a valid email address! (e.g., demo@example.com)",
               },
             ]}
           >

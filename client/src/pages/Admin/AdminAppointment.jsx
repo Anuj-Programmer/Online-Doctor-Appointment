@@ -16,6 +16,12 @@ function AdminAppointment() {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const capitalizeFirstLetter = (string) => {
+    return (
+      string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || ""
+    );
+  };
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -172,7 +178,7 @@ function AdminAppointment() {
                       </td>
                       <td>{app.date}</td>
                       <td>{app.time}</td>
-                      <td>{app.department}</td>
+                      <td>{capitalizeFirstLetter(app.department)}</td>
                       <td>{app.amount}</td>
                       <td>
                         {/* <img

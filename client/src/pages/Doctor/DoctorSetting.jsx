@@ -315,6 +315,7 @@ function DoctorSetting() {
                     <option value="pediatrics">Pediatrics</option>
                     <option value="neurology">neurology</option>
                     <option value="orthopedics">Orthopedics</option>
+                    <option value="general">General</option>
                   </select>
                 </div>
                 <div className="form-group">

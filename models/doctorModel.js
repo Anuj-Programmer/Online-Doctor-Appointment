@@ -33,7 +33,7 @@ const doctorSchema = new mongoose.Schema({
     specialization: {
         type: String,
         required: true,
-        enum: ['cardiology', 'dermatology', 'neurology', 'orthopedics', 'pediatrics']
+        enum: ['cardiology', 'dermatology', 'neurology', 'orthopedics', 'pediatrics','general']
     },
     experience: {
         type: Number,

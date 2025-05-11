@@ -22,6 +22,12 @@ export default function AdminDashboard() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
+  const capitalizeFirstLetter = (string) => {
+    return (
+      string?.charAt(0)?.toUpperCase() + string?.slice(1)?.toLowerCase() || ""
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -158,7 +164,7 @@ export default function AdminDashboard() {
                           />
                           {`${doc.firstName} ${doc.lastName}`}
                         </td>
-                        <td>{doc.specialization}</td>
+                        <td>{capitalizeFirstLetter(doc.specialization)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -174,7 +180,7 @@ export default function AdminDashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {patients.slice(0, 4).map((pat) => (
+                    {patients.slice(0, 5).map((pat) => (
                       <tr key={pat._id}>
                         <td>
                           {/* <img

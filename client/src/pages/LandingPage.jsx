@@ -14,6 +14,7 @@ import Neurology from "../assets/Neurology.png"
 import DoctorDashboard from './Doctor/DoctorDashboard';
 const { Option } = Select;
 import { Link } from 'react-router-dom';
+import toast, {Toaster} from 'react-hot-toast';
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -81,7 +82,8 @@ function LandingPage() {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert('Please login to search for doctors');
+        // alert('Please login to search for doctors');
+        toast.error("Please login to search for doctors")
         return;
       }
 
@@ -138,6 +140,7 @@ function LandingPage() {
   // Regular homepage content for non-doctor users
   return (
     <div className="homepage">
+       <Toaster position="top-center"/>
       <div className="header">
         <Nav/>
       </div>
@@ -255,11 +258,12 @@ function LandingPage() {
                   <Option value="neurology">Neurology</Option>
                   <Option value="orthopedics">Orthopedics</Option>
                   <Option value="pediatrics">Pediatrics</Option>
+                  <Option value="general">General</Option>
                 </Select>
               </Form.Item>
                       </div>
                      
-                      <button 
+                      <Link to="/login" 
                         className="search-button-container"
                         disabled={!localStorage.getItem("token")}
                         onClick={handleSearch}
@@ -273,7 +277,7 @@ function LandingPage() {
                           </div>
                           <div className="search-button-text">Search</div>
                         </div>
-                      </button>
+                      </Link>
                      
                     </div>
                   </div>
@@ -354,7 +358,7 @@ function LandingPage() {
                   doctorId={doctor._id}
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/a087871af596bf026ffe5318827a05f466776a7d?placeholderIfAbsent=true&apiKey=2f1c0a1e76134ca289b0c716bd5bbe44"
                   speciality={doctor.specialization}
-                  Avaibility="• Available"
+                  experience={`${doctor.experience} years`}
                   fee={`$${doctor.fee}`}
                   name={`Dr. ${capitalizeFirstLetter(doctor.firstName)} ${capitalizeFirstLetter(doctor.lastName)}`}
                   location={doctor.address}
