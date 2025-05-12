@@ -120,7 +120,7 @@ function DoctorSetting() {
           phoneNumber: formData.phoneNumber,
           specialization: formData.specialization,
           experience: formData.experience,
-          feePerConsultation: formData.feePerConsultation,
+          fee: formData.feePerConsultation,
           address: formData.address,
         },
         {
