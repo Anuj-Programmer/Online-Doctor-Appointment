@@ -64,26 +64,29 @@ const onFinish = async (values) => {
       setUserData(dataToSend); // first
       setOtpSent(true); // second
       console.log("📌 setOtpSent(true) called");
-
+      toast.success("OTP sent!");
     } else {
       toast.error("Error sending OTP.");
     }
   } catch (error) {
-    dispatch(hideLoading());
     console.error(error.response ? error.response.data : error.message);
-    toast.error("Something went wrong.");
+
+    const serverMessage = error.response?.data?.message || "Something went wrong.";
+    toast.error(serverMessage);
   }
+  
 };
 
 
   // Handle OTP verification
   const verifyOtp = async (values) => {
+    console.log("OTP entered by user:", values.otp);
     try {
       const res = await axios.post(`${BASE_URL}/api/v1/user/verify-otp`, {
         name: userData.name,
         email: userData.email,
         password: userData.password,
-        otp: values.otp,
+        otp: otp,
       });
 
       if (res.data.success) {

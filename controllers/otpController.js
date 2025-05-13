@@ -2,9 +2,10 @@ const otpGenerator = require("otp-generator");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModels");
+const otpStore = require('./otpStore');
 
 // In-memory OTP store: { [email]: { otp, name, password, createdAt } }
-let otpStore = {};
+
 
 // Helper: Check if OTP is expired (5 minutes = 300000 ms)
 const isOtpExpired = (createdAt) => Date.now() - createdAt > 5 * 60 * 1000;
@@ -30,7 +31,7 @@ exports.sendOtpController = async (req, res) => {
     const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
     otpStore[email] = { otp, name, password, createdAt: Date.now() };
 
-    console.log("Otp store", otpStore)
+    
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -55,38 +56,38 @@ exports.sendOtpController = async (req, res) => {
 };
 
 exports.verifyOtpController = async (req, res) => {
+  console.log("Inside verifyOtpController");
   try {
     const { name, email, password, otp } = req.body;
+    console.log("Received data:", req.body);
 
-    // if (!email || !otp) {
-    //   return res.status(400).json({ success: false, message: "Email and OTP are required" });
-    // }
-    
-    // const record = otpStore[email];
-    // console.log("Record", otpStore)
-    // if (!record) {
-    //   return res.status(400).json({ success: false, message: "OTP not found. Please request again." });
-    // }
+    const record = otpStore[email];
+    if (!record) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP not found. It may have expired or the server restarted.",
+      });
+    }
+    // Log OTP values and their types for debugging
+    console.log("Record OTP Type:", typeof record.otp);
+    console.log("Received OTP Type:", typeof otp);
+    console.log("Record OTP Value:", record.otp);
+    console.log("Received OTP Value:", otp);
 
-    // if (isOtpExpired(record.createdAt)) {
-    //   delete otpStore[email];
-    //   return res.status(400).json({ success: false, message: "OTP has expired. Please request a new one." });
-    // }
-
-    // if (record.otp !== otp) {
-    //   return res.status(400).json({ success: false, message: "Invalid OTP" });
-    // }
+    if (String(record.otp) !== String(otp)) {
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new userModel({
-      name: name,
+      name,
       email,
       password: hashedPassword,
     });
 
     await newUser.save();
-    delete otpStore[email]; // Clean up used OTP
+    delete otpStore[email];  // Clean up OTP after successful registration
 
     return res.status(201).json({ success: true, message: "User registered successfully" });
   } catch (error) {
@@ -94,3 +95,4 @@ exports.verifyOtpController = async (req, res) => {
     return res.status(500).json({ success: false, message: "Failed to verify OTP." });
   }
 };
+

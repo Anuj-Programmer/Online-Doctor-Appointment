@@ -3,21 +3,23 @@ const otpGenerator = require('otp-generator');
 const nodemailer = require('nodemailer');
 const User = require('../models/userModels');
 const { verifyOtpController } = require('../controllers/otpController');
+const otpStore = require('../controllers/otpStore');
 
 const router = express.Router();
 
 // In-memory OTP store
-let otpStore = {};
 
 // Email sender
 const sendOtp = async (email) => {
   const otp = otpGenerator.generate(6, {
     digits: true,
+    lowerCaseAlphabets: false,  
     upperCaseAlphabets: false,
     specialChars: false,
   });
 
   otpStore[email] = { otp, createdAt: Date.now() };
+  console.log('OTP Stored:', otpStore); 
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -44,8 +46,8 @@ router.post('/request-otp', async (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: 'Email is required' });
 
-    // const user = await User.findOne({ email });
-    // if (!user) return res.status(404).json({ message: 'User not found' });
+    const user = await User.findOne({ email });
+    if (user) return res.status(409).json({ message: 'User already exists' });
 
     await sendOtp(email);
     res.status(200).json({ message: 'OTP sent successfully', success: true });
