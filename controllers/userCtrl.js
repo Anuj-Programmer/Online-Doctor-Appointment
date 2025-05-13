@@ -8,7 +8,7 @@ const registerController = async (req, res) => {
     try {
         const existingUser = await userModel.findOne({email:req.body.email})
         if (existingUser) {
-            return res.status(200).send({message:"user already", success:false})
+            return res.status(200).send({message:"user already exists", success:false})
         }
 
         const password = req.body.password;

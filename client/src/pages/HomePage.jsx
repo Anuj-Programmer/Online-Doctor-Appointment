@@ -172,31 +172,31 @@ function HomePage() {
                         <div className="stars-container">
                           <div className="star">
                             <img
-                              src="https://cdn.discordapp.com/attachments/841652770389884930/1352917684597293067/Symbol_2.png?ex=67dfc248&is=67de70c8&hm=9294af633aad9973cd1818cbdd79efef3c038f8b81454d6ad5af9193f3c06ec6&"
+                              src="https://i.imgur.com/ZF6WvwE.png"
                               className="star-img"
                             />
                           </div>
                           <div className="star">
                             <img
-                              src="https://cdn.discordapp.com/attachments/841652770389884930/1352917684597293067/Symbol_2.png?ex=67dfc248&is=67de70c8&hm=9294af633aad9973cd1818cbdd79efef3c038f8b81454d6ad5af9193f3c06ec6&"
+                              src="https://i.imgur.com/ZF6WvwE.png"
                               className="star-img"
                             />
                           </div>
                           <div className="star">
                             <img
-                              src="https://cdn.discordapp.com/attachments/841652770389884930/1352917684597293067/Symbol_2.png?ex=67dfc248&is=67de70c8&hm=9294af633aad9973cd1818cbdd79efef3c038f8b81454d6ad5af9193f3c06ec6&"
+                              src="https://i.imgur.com/ZF6WvwE.png"
                               className="star-img"
                             />
                           </div>
                           <div className="star">
                             <img
-                              src="https://cdn.discordapp.com/attachments/841652770389884930/1352917684597293067/Symbol_2.png?ex=67dfc248&is=67de70c8&hm=9294af633aad9973cd1818cbdd79efef3c038f8b81454d6ad5af9193f3c06ec6&"
+                              src="https://i.imgur.com/ZF6WvwE.png"
                               className="star-img"
                             />
                           </div>
                           <div className="star">
                             <img
-                              src="https://cdn.discordapp.com/attachments/841652770389884930/1352917684597293067/Symbol_2.png?ex=67dfc248&is=67de70c8&hm=9294af633aad9973cd1818cbdd79efef3c038f8b81454d6ad5af9193f3c06ec6&"
+                              src="https://i.imgur.com/ZF6WvwE.png"
                               className="star-img"
                             />
                           </div>
