@@ -1,3 +1,5 @@
+require("dotenv").config(); // ✅ Load environment variables from .env
+
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
@@ -7,6 +9,10 @@ const connectDB = require("./config/db");
 const otpRoutes = require('./routes/otpRoutes');
 
 
+// 🔍 Debug to ensure env variables are loaded
+console.log("Loaded ENV - MONGO_URI:", process.env.MONGO_URI);
+console.log("Loaded ENV - PORT:", process.env.PORT);
+console.log("Loaded ENV - NODE_ENV:", process.env.NODE_ENV);
 
 // Load environment variables
 dotenv.config();
