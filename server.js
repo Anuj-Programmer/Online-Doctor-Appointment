@@ -1,38 +1,50 @@
+require("dotenv").config(); // ✅ Load environment variables from .env
+
 const express = require("express");
 const colors = require("colors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const cors = require("cors"); 
+const cors = require("cors");
 const connectDB = require("./config/db");
-require('dotenv').config();
+const otpRoutes = require('./routes/otpRoutes');
 
 
-//dotenv.config
+// 🔍 Debug to ensure env variables are loaded
+console.log("Loaded ENV - MONGO_URI:", process.env.MONGO_URI);
+console.log("Loaded ENV - PORT:", process.env.PORT);
+console.log("Loaded ENV - NODE_ENV:", process.env.NODE_ENV);
+
+// Load environment variables
 dotenv.config();
 
-//mongodb connection
+// MongoDB connection
 connectDB();
 
-//rest object
+// Initialize Express app
 const app = express();
 
-//middlewares
-app.use(cors())
+// Middlewares
+app.use(cors()); // You can customize the CORS options here if needed
 app.use(express.json());
 app.use(morgan('dev'));
-    
-app.use('/api/v1/user', require("./routes/userRoutes"))
-app.use('/api/v1/doctor', require("./routes/doctorRoutes"))
-app.use('/api/v1/admin', require("./routes/adminRoutes"))
-// app.use('/api/v1/bookings', require("./routes/bookingRoute")) 
 
-//port 
-const port = process.env.PORT || 5000
+// Import routes
+app.use('/api/v1/user', require("./routes/userRoutes"));
+app.use('/api/v1/doctor', require("./routes/doctorRoutes"));
+app.use('/api/v1/admin', require("./routes/adminRoutes"));
+app.use('/api/v1/user',require("./routes/otpRoutes"));
+// app.use('/api/v1/bookings', require("./routes/bookingRoute"));
 
-//listen port
-app.listen(port, () => {
-    console.log(`Server Running in ${process.env.NODE_ENV} Mode on port ${process.env.PORT}`.bgCyan.white
-    );
+// Error Handling Middleware (Optional but recommended)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, message: 'Something went wrong!', error: err.message });
 });
 
+// Port configuration
+const port = process.env.PORT || 5000;
 
+// Start the server
+app.listen(port, () => {
+  console.log(`Server Running in ${process.env.NODE_ENV} Mode on port ${port}`.bgCyan.white);
+});

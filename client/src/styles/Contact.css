@@ -220,52 +220,24 @@
   
   /* Map Container */
   .map-container {
-    display: flex;
-    margin-top: 60px;
-    min-height: 450px;
-    width: 100%;
-    flex-direction: column;
-    overflow: hidden;
-    align-items: stretch;
-    justify-content: center;
+  width: 100%;
+  margin: 60px 0 0 0;
+  padding: 0;
+  overflow: hidden;
   }
   
   .map-image {
-    aspect-ratio: 3.19;
-    object-fit: contain;
-    object-position: center;
-    width: 100%;
-    max-width: 100%; /* Ensure image doesn't overflow */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  min-height: 300px;
+  max-height: 500px;
+  display: block;
   }
-  
-  /* Footer */
-  /* .contact-footer {
-    background-color: #15558d;
-    width: 100%;
-    font-family:
-      Inter,
-      -apple-system,
-      Roboto,
-      Helvetica,
-      sans-serif;
-    font-size: 16px;
-    color: #465d7c;
-    font-weight: 400;
-  } */
-  
-  /* .footer-copyright {
-    line-height: 24px;
-    border-top: 0.8px solid #fff;
-    background-color: #f0f0f0;
-    width: 100%;
-    padding: 16px;
-    text-align: center;
-    box-sizing: border-box; 
-  } */
+  .contact-content {
+  max-width: 100%;
+}
 
-  /* Include padding in width calculation */
-  
-  /* Responsive Styles */
   @media (max-width: 1400px) {
     .footer-copyright {
       padding: 16px 100px;
