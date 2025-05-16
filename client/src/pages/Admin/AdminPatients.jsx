@@ -30,7 +30,7 @@ function AdminPatients() {
         return;
       }
 
-      const response = await axios.get('/api/v1/admin/patients', {
+      const response = await axios.get('/api/v1/admin/get-all-user', {
         headers: {
           Authorization: `Bearer ${token}`,
           'Cache-Control': 'no-cache',

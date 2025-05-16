@@ -1,6 +1,7 @@
 const userModel = require("../models/userModels")
 const doctorModel = require("../models/doctorModel")
 const appointmentModel = require("../models/appointmentModel")
+const User = require("../models/userModels")
 
 const getAllAppointments = async (req, res) => {
     try {
@@ -180,6 +181,26 @@ const getAllDoctorsList = async (req, res) => {
     }
 };
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({
+            isDoctor: false,
+            isAdmin: false
+        }).select('-password'); // Exclude password from the response
+
+        res.status(200).json({
+            success: true,
+            data: users
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error in fetching users',
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
     getAllAppointments,
     getAllApprovedDoctor,
@@ -187,5 +208,6 @@ module.exports = {
     getAllPatientList,
     deletePatient,
     deleteDoctor,
-    getAllDoctorsList
+    getAllDoctorsList,
+    getAllUsers
 };

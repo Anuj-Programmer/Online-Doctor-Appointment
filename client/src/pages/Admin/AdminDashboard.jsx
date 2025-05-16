@@ -7,8 +7,10 @@ import bed from "../../assets/Hospitalbed.svg";
 import viewIcon from "../../assets/view.svg";
 import doctor from "../../assets/Doctors.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     doctors: 0,
     patients: 0,
@@ -47,7 +49,7 @@ export default function AdminDashboard() {
         // Fetch all data in parallel
         const [doctorsRes, patientsRes, appointmentsRes] = await Promise.all([
           axios.get("/api/v1/admin/doctors", { headers }),
-          axios.get("/api/v1/admin/patients", { headers }),
+          axios.get("/api/v1/admin/get-all-user", { headers }),
           axios.get("/api/v1/admin/appointments", { headers })
         ]);
 
@@ -91,6 +93,10 @@ export default function AdminDashboard() {
     setSelectedAppointment(null);
   };
 
+  const handleAnalyticsClick = (tab) => {
+    navigate('/admin', { state: { activeTab: tab } });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -104,7 +110,7 @@ export default function AdminDashboard() {
           <div className="main-content">
             {/* Stats Cards */}
             <div className="analyctics-dashboard">
-              <div className="analytics-item">
+              <div className="analytics-item" onClick={() => handleAnalyticsClick('doctors')} style={{ cursor: 'pointer' }}>
                 <div className="analyctics-img">
                   <img src={doctor} alt="" />
                 </div>
@@ -116,7 +122,7 @@ export default function AdminDashboard() {
                   <p className="mb-0">Till today</p>
                 </div>
               </div>
-              <div className="analytics-item">
+              <div className="analytics-item" onClick={() => handleAnalyticsClick('patients')} style={{ cursor: 'pointer' }}>
                 <div className="analyctics-img">
                   <img src={bed} alt="" />
                 </div>
@@ -128,7 +134,7 @@ export default function AdminDashboard() {
                   <p className="mb-0">Till today</p>
                 </div>
               </div>
-              <div className="analytics-item">
+              <div className="analytics-item" onClick={() => handleAnalyticsClick('appointments')} style={{ cursor: 'pointer' }}>
                 <div className="analyctics-img">
                   <img src={schedule} alt="" />
                 </div>

@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/authMiddleware');
-const { getAllAppointments, getAllApprovedDoctor, getAllPendingDoctor, getAllPatientList, deletePatient, deleteDoctor, getAllDoctorsList } = require('../controllers/adminCtrl');
+const { getAllAppointments, getAllApprovedDoctor, getAllPendingDoctor, getAllPatientList, deletePatient, deleteDoctor, getAllDoctorsList,getAllUsers } = require('../controllers/adminCtrl');
 
 const router = express.Router();
 
@@ -11,5 +11,6 @@ router.get('/patients', authMiddleware, getAllPatientList);
 router.delete('/doctors/:id', authMiddleware, deleteDoctor);
 router.get('/doctors', authMiddleware, getAllDoctorsList);
 router.delete('/patients/:id', authMiddleware, deletePatient);
+router.get('/get-all-user', authMiddleware, getAllUsers)
 
 module.exports = router; 
