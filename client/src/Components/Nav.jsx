@@ -7,7 +7,7 @@ import { Badge } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { setUser } from "../redux/features/userSlice";
-
+//nav for logged iin 
 function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
