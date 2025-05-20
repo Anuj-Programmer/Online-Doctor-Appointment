@@ -281,7 +281,7 @@ function DashboardContent() {
                   <div className="time">{appointment.timeSlot.startTime} - {appointment.timeSlot.endTime}</div>
                 </div>
                 {/* <div className="appointment-purpose">{appointment.doctorInfo?.specialization}</div> */}
-                <div className="appointment-amount">${appointment.fee}</div>
+                <div className="appointment-amount">Rs{appointment.fee}</div>
                 <div className="appointment-status">
                   <span className={`status-badge ${appointment.status} user-status-badge `}>{appointment.status}</span>
                 </div>
@@ -350,7 +350,7 @@ function DashboardContent() {
                   </div>
                   <div className="info-row">
                     <span className="info-label">Amount:</span>
-                    <span className="info-value">${selectedAppointment.fee}</span>
+                    <span className="info-value">Rs{selectedAppointment.fee}</span>
                   </div>
                 </div>
               </div>

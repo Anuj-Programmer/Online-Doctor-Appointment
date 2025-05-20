@@ -215,7 +215,7 @@ function UserAppointment() {
         <div className="user-appointment-date">{appointment.date}</div>
         <div className="user-appointment-time">{appointment.timeSlot.startTime} - {appointment.timeSlot.endTime}</div>
         <div className="user-doctor-specialization">{appointment.doctorInfo?.specialization}</div>
-        <div className="user-appointment-amount">${appointment.fee}</div>
+        <div className="user-appointment-amount">Rs.{appointment.fee}</div>
         <div className="user-appointment-status">
           <span className={`user-status-badge ${appointment.status}`}>{appointment.status}</span>
         </div>

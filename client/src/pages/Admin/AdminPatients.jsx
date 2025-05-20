@@ -196,7 +196,6 @@ function AdminPatients() {
               </table>
             </div>
           </div>
-          <Footer/>
         </div>
       </div>
 

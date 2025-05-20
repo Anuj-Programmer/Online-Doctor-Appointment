@@ -336,7 +336,7 @@ function DoctorSetting() {
                     Fee Per Consultation <span className="required">*</span>
                   </label>
                   <div className="fee-input">
-                    <span className="currency">$</span>
+                    <span className="currency">Rs</span>
                     <input
                       type="number"
                       name="feePerConsultation"

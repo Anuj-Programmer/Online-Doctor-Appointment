@@ -49,7 +49,7 @@ function AdminAppointment() {
               ? `${app.timeSlot.startTime} - ${app.timeSlot.endTime}`
               : "N/A",
             department: app.doctorInfo?.specialization || "N/A",
-            amount: app.fee ? `$${app.fee}` : "N/A",
+            amount: app.fee ? `Rs${app.fee}` : "N/A",
             doctorName: app.doctorInfo
               ? `${app.doctorInfo.firstName} ${app.doctorInfo.lastName}`
               : "Unknown",
