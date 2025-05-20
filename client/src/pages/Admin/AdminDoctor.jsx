@@ -327,7 +327,7 @@ function AdminDoctor() {
 
               <div className={styles.detailItem}>
                 <h3 className={styles.detailLabel}>Fee per Consultation:</h3>
-                <p className={styles.detailValue}>{`$${selectedDoctor.fee}`}</p>
+                <p className={styles.detailValue}>{`Rs${selectedDoctor.fee}`}</p>
               </div>
 
               <div className={styles.detailItem}>

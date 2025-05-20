@@ -151,7 +151,7 @@ const DoctorDetail = () => {
 
             <div className="appointmentSection">
               <p className="priceInfo">
-                <span className="priceLabel">Price : $ {doctorData?.fee} </span>
+                <span className="priceLabel">Price : Rs {doctorData?.fee} </span>
                 <span className="sessionLabel">for a Session</span>
               </p>
               <Link to={`/booking/${doctorData?._id}`} className="bookButton">

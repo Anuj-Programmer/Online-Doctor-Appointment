@@ -235,7 +235,7 @@ export default function AdminDashboard() {
                         </a>
                       </td>
                       <td>{appt.doctorId?.specialization || "N/A"}</td>
-                      <td>${appt.fee || "N/A"}</td>
+                      <td>Rs{appt.fee || "N/A"}</td>
                       <td>
                         {/* <img
                           src={appt.doctorId?.userId?.profilePicture || "https://randomuser.me/api/portraits/men/45.jpg"}
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
 
               <div className={styles.detailItem}>
                 <h3 className={styles.detailLabel}>Fee:</h3>
-                <p className={styles.detailValue}>${selectedAppointment.fee || "N/A"}</p>
+                <p className={styles.detailValue}>Rs{selectedAppointment.fee || "N/A"}</p>
               </div>
 
               <div className={styles.detailItem}>

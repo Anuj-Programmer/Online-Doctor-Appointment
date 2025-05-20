@@ -228,7 +228,7 @@ function ReschedulePage() {
               <p className="doctor-details-booking">
                 Address: {doctor.address}
               </p>
-              <p className="doctor-fee-booking">Fee: ${doctor.fee}</p>
+              <p className="doctor-fee-booking">Fee: Rs{doctor.fee}</p>
             </div>
 
             <div className="booking-form">
